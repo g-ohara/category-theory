@@ -3,7 +3,7 @@ on:
   push:
     tags:
       - '*'
-permission:
+permissions:
   contents: write
 jobs:
   build_latex:
