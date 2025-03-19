@@ -170,6 +170,122 @@
 <h1 class="title">圏論ノート</h1>
 <p class="author">大原玄嗣</p>
 </header>
+<h1 id="圏関手自然変換">圏・関手・自然変換</h1>
+<h2 id="圏">圏</h2>
+<p>射は，圏という世界における関係を表す矢印であり，．
+圏論において対象は矢印の始まりと終わりにつけられる名称に過ぎず，
+対象のもつ性質は射によってのみ特徴づけられる．</p>
+<div id="def:category" class="definition">
+<p><strong>定義 1</strong> (圏). <em>圏 (category) は，対象 (object)
+と射 (arrow, morphism) の集まりからなり， 以下を満たす．</em></p>
+<ul>
+<li><p><em>任意の射は，域 (domain) と余域 (codomain)
+と呼ばれる対象をもつ． 射 <span class="math inline"><em>f</em></span>
+の域を<span class="math inline">dom (<em>f</em>)</span>，余域を <span
+class="math inline">cod (<em>f</em>)</span> と表記する． また，<span
+class="math inline">dom (<em>f</em>) = <em>A</em></span>，<span
+class="math inline">cod (<em>f</em>) = <em>B</em></span> であるとき
+<span class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span>
+と表記する．</em></p></li>
+<li><p><em>任意の射 <span
+class="math inline"><em>f</em>, <em>g</em></span> について，<span
+class="math inline">cod (<em>f</em>) = dom (<em>g</em>)</span> ならば，
+<span class="math inline"><em>f</em>, <em>g</em></span> の合成
+(composition) <span class="math inline"><em>g</em> ∘ <em>f</em></span>
+が一意に存在する．</em></p></li>
+<li><p><em>任意の射 <span
+class="math inline"><em>f</em>, <em>g</em>, <em>h</em></span> について，
+<span class="math inline">cod (<em>f</em>) = dom (<em>g</em>)</span>
+かつ <span
+class="math inline">cod (<em>g</em>) = dom (<em>h</em>)</span> ならば，
+<span
+class="math inline"><em>h</em> ∘ (<em>g</em>∘<em>f</em>) = (<em>h</em>∘<em>g</em>) ∘ <em>f</em></span>
+が成り立つ．</em></p></li>
+<li><p><em>任意の対象 <span class="math inline"><em>A</em></span>
+について恒等射 (identity) <span
+class="math inline">1<sub><em>A</em></sub> : <em>A</em> → <em>A</em></span>
+が一意に存在し， 任意の射 <span
+class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span> について
+<span
+class="math inline"><em>f</em> ∘ 1<sub><em>A</em></sub> = 1<sub><em>B</em></sub> ∘ <em>f</em> = <em>f</em></span>
+が成り立つ．</em></p></li>
+</ul>
+<p><em>また，圏 <span class="math inline">𝒞</span> の対象の集まりを
+<span class="math inline">|𝒞|</span>， 射 <span
+class="math inline"><em>A</em> → <em>B</em></span> の集まりを <span
+class="math inline">𝒞(<em>A</em>,<em>B</em>)</span>
+と表記する．</em></p>
+</div>
+<figure>
 
+<figcaption>圏の例</figcaption>
+</figure>
+<p>対象は性質をもたないため，
+対象どうしの「本質的な等しさ」なるものも射によって定められる．</p>
+<div class="definition">
+<p><strong>定義 2</strong> (同型). <em>圏 <span
+class="math inline">𝒞</span> の対象 <span
+class="math inline"><em>A</em>, <em>B</em></span> について <span
+class="math display">∃<em>f</em> ∈ 𝒞(<em>A</em>,<em>B</em>); ∃<em>g</em> ∈ 𝒞(<em>B</em>,<em>A</em>); <em>g</em> ∘ <em>f</em> = 1<sub><em>A</em></sub> ∧ <em>f</em> ∘ <em>g</em> = 1<sub><em>B</em></sub></span>
+が成り立つとき， <span class="math inline"><em>A</em></span> と <span
+class="math inline"><em>B</em></span> は同型 (isomorphic)
+であるといい，<span class="math inline"><em>A</em> ≃ <em>B</em></span>
+と表記する．</em></p>
+</div>
+<h3 id="集合圏">集合圏</h3>
+<p>前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
+むしろ対象の「性質」とは他の対象との関係性によって初めて問題にできるものだ．</p>
+<p>素朴な集合論においては，
+まず集合が要素をもち，それらの対応づけとして集合間の写像が定義される．
+圏論はその逆をいく．「集合」という何かの間に写像を定めてしまい，
+それによって初めて集合の要素を定義する．</p>
+<div class="definition">
+<p><strong>定義 3</strong> (集合圏).
+<em>集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．</em></p>
+</div>
+<h2 id="関手">関手</h2>
+<p>2つの世界 (圏)
+を比較したときに，世界を構成する要素は全く違っていても，
+それらの関係性に着目するとなんとなく似ている気がしてくることがある．
+関手はそのようなアナロジーを表現する矢印である．</p>
+<div class="definition">
+<p><strong>定義 4</strong> (関手). <em>2つの圏 <span
+class="math inline">𝒞, 𝒟</span>
+の対象から対象へ，射から射へ対応づける写像 <span
+class="math inline"><em>F</em> : 𝒞 → 𝒟</span> が以下の条件を満たすとき，
+<span class="math inline"><em>F</em></span> を関手 (functor)
+という．</em></p>
+<ul>
+<li><p><em><span
+class="math inline"><em>F</em>(<em>A</em>→<em>B</em>) = <em>F</em>(<em>A</em>) → <em>F</em>(<em>B</em>)</span>,</em></p></li>
+<li><p><em><span
+class="math inline"><em>F</em>(1<sub><em>A</em></sub>) = 1<sub><em>F</em>(<em>A</em>)</sub></span>,</em></p></li>
+<li><p><em><span
+class="math inline"><em>F</em>(<em>g</em>∘<em>f</em>) = <em>F</em>(<em>g</em>) ∘ <em>F</em>(<em>f</em>)</span>.</em></p></li>
+</ul>
+</div>
+<p>すなわち関手は域と余域，恒等射と射の合成を保存する写像である．
+のちに「圏の圏」なるものを考えるが，
+そこでは圏が対象として，関手が射として扱われることになる (これが<a
+href="#def:category" data-reference-type="ref"
+data-reference="def:category">1</a>を満たすことは容易に確認できる)．</p>
+<h2 id="自然変換">自然変換</h2>
+<p>2つの世界 (圏) について異なるアナロジーを考えることもできる．
+すると，異なるアナロジーの間にも何らかのアナロジーが見えてくることがある．
+この高次のアナロジーが自然変換である．</p>
+<div class="definition">
+<p><strong>定義 5</strong> (自然変換). <em>2つの関手 <span
+class="math inline"><em>F</em> : 𝒞 → 𝒟, <em>G</em> : 𝒞 → 𝒟</span>
+について， <span class="math inline">𝒞</span> の対象 <span
+class="math inline"><em>X</em></span> を <span
+class="math inline">𝒟</span> の射 <span
+class="math inline"><em>t</em><sub><em>X</em></sub> : <em>F</em>(<em>X</em>) → <em>G</em>(<em>X</em>)</span>
+に対応づける 写像 <span class="math inline"><em>t</em></span> が <span
+class="math display">∀<em>X</em>, <em>Y</em> ∀<em>f</em> : <em>X</em> → <em>Y</em> <em>G</em>(<em>f</em>) ∘ <em>t</em><sub><em>X</em></sub> = <em>t</em><sub><em>Y</em></sub> ∘ <em>F</em>(<em>f</em>)</span>
+を満たすとき，<span class="math inline"><em>t</em></span> を自然変換
+(natural transformation) といい， <span
+class="math inline"><em>t</em> : <em>F</em> ⇒ <em>G</em></span>
+と表記する．</em></p>
+</div>
 </body>
 </html>

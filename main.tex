@@ -1,8 +1,137 @@
-\documentclass{ltjsarticle}
+\documentclass[titlepage]{ltjsarticle}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+
+\newcommand{\cat}[1]{\mathscr{#1}}
+\newcommand{\obj}[1]{|#1|}
+\newcommand{\mrp}[3]{#1(#2,#3)}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{definition}{定義}[section]
+
+\usepackage{cleveref}
+\crefname{definition}{定義}{定義}
 
 \title{圏論ノート}
 \author{大原玄嗣}
 
 \begin{document}
 \maketitle
+
+\section{圏・関手・自然変換}
+
+\subsection{圏}
+
+射は，圏という世界における関係を表す矢印であり，．
+圏論において対象は矢印の始まりと終わりにつけられる名称に過ぎず，
+対象のもつ性質は射によってのみ特徴づけられる．
+
+\begin{definition}[圏]\label{def:category}
+  圏 (category) は，対象 (object) と射 (arrow, morphism) の集まりからなり，
+  以下を満たす．
+  \begin{itemize}
+    \item 任意の射は，域 (domain) と余域 (codomain) と呼ばれる対象をもつ．
+          射 $f$ の域を$\dom(f)$，余域を $\cod(f)$ と表記する．
+          また，$\dom(f)=A$，$\cod(f)=B$ であるとき $f:A\to B$ と表記する．
+    \item 任意の射 $f,g$ について，$\cod(f)=\dom(g)$ ならば，
+          $f,g$ の合成 (composition) $g\circ f$ が一意に存在する．
+    \item 任意の射 $f,g,h$ について，
+          $\cod(f)=\dom(g)$ かつ $\cod(g)=\dom(h)$ ならば，
+          $h\circ(g\circ f)=(h\circ g)\circ f$ が成り立つ．
+    \item 任意の対象 $A$ について恒等射 (identity) $1_A:A\to A$ が一意に存在し，
+          任意の射 $f:A\to B$ について $f\circ 1_A=1_B\circ f=f$ が成り立つ．
+  \end{itemize}
+  また，圏 $\cat{C}$ の対象の集まりを $\obj{\cat{C}}$，
+  射 $A\to B$ の集まりを $\mrp{\cat{C}}{A}{B}$ と表記する．
+\end{definition}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \node (A) {$A$};
+    \node [right=1cm of A] (B) {$B$};
+    \node [right=1cm of B] (C) {$C$};
+    \node [above=1.5cm of B] (catc) {$\cat{C}$};
+    \draw [->] (A) to [edge label=$f$] (B);
+    \draw [->] (B) to [edge label=$g$] (C);
+    \draw [->, bend right] (A) to node [below] {$g\circ f$} (C);
+    \draw [->, loop above] (A) to node [above] {$1_A$} (A);
+    \draw [->, loop above] (B) to node [above] {$1_B$} (B);
+    \draw [->, loop above] (C) to node [above] {$1_C$} (C);
+  \end{tikzpicture}
+  \caption{圏の例}
+\end{figure}
+
+対象は性質をもたないため，
+対象どうしの「本質的な等しさ」なるものも射によって定められる．
+
+\begin{definition}[同型]
+  圏 $\cat{C}$ の対象 $A,B$ について
+  \begin{equation}
+    \exists f\in\mrp{\cat{C}}{A}{B};
+    \ \exists g\in\mrp{\cat{C}}{B}{A};
+    \ g\circ f=1_A\wedge f\circ g=1_B
+  \end{equation}
+  が成り立つとき，
+  $A$ と $B$ は同型 (isomorphic) であるといい，$A\simeq B$ と表記する．
+\end{definition}
+
+\subsubsection{集合圏}
+
+前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
+むしろ対象の「性質」とは他の対象との関係性によって初めて問題にできるものだ．
+
+素朴な集合論においては，
+まず集合が要素をもち，それらの対応づけとして集合間の写像が定義される．
+圏論はその逆をいく．「集合」という何かの間に写像を定めてしまい，
+それによって初めて集合の要素を定義する．
+
+\begin{definition}[集合圏]
+  集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．
+\end{definition}
+
+\subsection{関手}
+
+2つの世界 (圏) を比較したときに，世界を構成する要素は全く違っていても，
+それらの関係性に着目するとなんとなく似ている気がしてくることがある．
+関手はそのようなアナロジーを表現する矢印である．
+\begin{definition}[関手]
+  2つの圏 $\cat{C},\cat{D}$ の対象から対象へ，射から射へ対応づける写像
+  $F:\cat{C}\to\cat{D}$ が以下の条件を満たすとき，
+  $F$ を関手 (functor) という．
+  \begin{itemize}
+    \item $F(A\to B)=F(A)\to F(B)$,
+    \item $F(1_A)=1_{F(A)}$,
+    \item $F(g\circ f)=F(g)\circ F(f)$.
+  \end{itemize}
+\end{definition}
+すなわち関手は域と余域，恒等射と射の合成を保存する写像である．
+のちに「圏の圏」なるものを考えるが，
+そこでは圏が対象として，関手が射として扱われることになる
+(これが\cref{def:category}を満たすことは容易に確認できる)．
+
+\subsection{自然変換}
+
+2つの世界 (圏) について異なるアナロジーを考えることもできる．
+すると，異なるアナロジーの間にも何らかのアナロジーが見えてくることがある．
+この高次のアナロジーが自然変換である．
+
+\begin{definition}[自然変換]
+  2つの関手 $F:\cat{C}\to\cat{D},G:\cat{C}\to\cat{D}$ について，
+  $\cat{C}$ の対象 $X$ を $\cat{D}$ の射 $t_X:F(X)\to G(X)$ に対応づける
+  写像 $t$ が
+  \begin{equation}
+    \forall X,Y\ \forall f:X\to Y\ G(f)\circ t_X=t_Y\circ F(f)
+  \end{equation}
+  を満たすとき，$t$ を自然変換 (natural transformation) といい，
+  $t:F\Rightarrow G$ と表記する．
+\end{definition}
+
 \end{document}
