@@ -1,0 +1,5 @@
+maxNumberOfBackUps: 0
+defaultIndent: "  "
+
+lookForAlignDelims:
+  tabbing: 1

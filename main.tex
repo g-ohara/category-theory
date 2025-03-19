@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage{listings}
+
+\title{\texttt{tex-template}}
+\author{Genji Ohara}
+
+\begin{document}
+\maketitle
+
+\section{What is \texttt{tex-template}?}
+
+When you write a \LaTeX{} document,
+you need to compile the source code to a PDF to see how the document looks.
+But the generated PDF file is not only large but also redundant
+(contains information equivalent to the source code)
+and should not be included in your repo.
+But you may need to read it on the go or share it with someone.
+Upload it to Google Drive?
+No, use \verb|tex-template|.
+
+You can easily compile your \LaTeX{} code to a PDF file locally,
+and do not need to neither include it in your remote repository
+nor upload it to Google Drive.
+All you need to do is to tag your commit.
+GitHub Actions will compile the source code to a PDF file
+and add it to your release.
+
+\section{Usage}
+
+\subsection{Prerequisites}
+
+\begin{itemize}
+  \item \TeX{} compiler
+  \item latexmk
+  \item (optional) Chk\TeX{}
+  \item (optional) latexindent
+\end{itemize}
+
+\subsection{How to compile locally}
+
+\begin{enumerate}
+  \item Create your repository from \verb|tex-template|
+  \item Edit \verb|main.tex|
+  \item Run: \verb|latexmk main.tex|
+\end{enumerate}
+
+\subsection{How to compile on GitHub}
+
+\begin{enumerate}
+  \item Tag your commit.
+  \item Push the tag.
+  \item Wait a few minutes.
+\end{enumerate}
+
+\section{Contributing}
+
+Pull requests are welcome.
+For major changes,
+please open an issue first to discuss what you would like to change.
+
+\section{License}
+
+\lstinputlisting[
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fixed,
+  basewidth=0.46em,
+]{LICENSE}
+
+\end{document}
+
