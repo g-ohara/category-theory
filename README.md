@@ -21,15 +21,6 @@ The book of category theory written in Japanese.
 1. Tag your commit.
 1. Push the tag.
 
-## Example of Versioning Rule
-
-```
-+------- major changes (eg. adding a new chapter)
-| +----- minor changes (eg. adding a new section)
-| | +--- small changes (eg. adding a new example)
-0.0.0
-```
-
 ## Contributing
 
 Pull requests are welcome.
