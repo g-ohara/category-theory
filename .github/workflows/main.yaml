@@ -18,4 +18,5 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           file: main.pdf
+          overwrite: true
 
