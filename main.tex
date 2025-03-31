@@ -1,18 +1,7 @@
 \documentclass[titlepage]{ltjsreport}
 
-\usepackage{amsmath}
-\usepackage{mathrsfs}
+\input{src/macro.tex}
 \usepackage{epigraph}
-
-\newcommand{\cat}[1]{\mathscr{#1}}
-\newcommand{\obj}[1]{|#1|}
-\newcommand{\mrp}[3]{#1(#2,#3)}
-\newcommand{\id}[1]{\mathrm{id}_{#1}}
-\DeclareMathOperator{\dom}{dom}
-\DeclareMathOperator{\cod}{cod}
-\DeclareMathOperator{\colim}{Colim}
-\DeclareMathOperator{\lan}{Lan}
-\DeclareMathOperator{\ran}{Ran}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -28,6 +17,8 @@
 \usepackage{cleveref}
 \crefname{definition}{定義}{定義}
 \crefname{theorem}{定理}{定理}
+
+\graphicspath{{docs/}}
 
 \title{圏論ノート}
 \author{大原玄嗣}
@@ -64,18 +55,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \begin{tikzpicture}
-    \node (A) {$A$};
-    \node [right=1cm of A] (B) {$B$};
-    \node [right=1cm of B] (C) {$C$};
-    \node [above=1.5cm of B] (catc) {$\cat{C}$};
-    \draw [->] (A) to [edge label=$f$] (B);
-    \draw [->] (B) to [edge label=$g$] (C);
-    \draw [->, bend right] (A) to node [below] {$g\circ f$} (C);
-    \draw [->, loop above] (A) to node [above] {$\id{A}$} (A);
-    \draw [->, loop above] (B) to node [above] {$\id{B}$} (B);
-    \draw [->, loop above] (C) to node [above] {$\id{C}$} (C);
-  \end{tikzpicture}
+  \includegraphics{../src/category}
   \caption{圏の例}
 \end{figure}
 
@@ -156,7 +136,8 @@
   関手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
   \begin{itemize}
     \item $T$ が極限をもつ，
-    \item $T$ が (一意的な) 関手 $K_1:\cat{M}\to\mathbf{1}$ に沿った右カン拡張をもつ．
+    \item $T$ が (一意的な) 関手 $K_1:\cat{M}\to\mathbf{1}$
+          に沿った右カン拡張をもつ．
   \end{itemize}
   またこれらが成り立つとき $\lim T\simeq\ran_{K_1}T$．
 \end{theorem}
@@ -171,38 +152,10 @@
 
 \begin{center}
   \begin{minipage}[b]{0.4\linewidth}
-    \begin{tikzpicture}
-      \node (1) {$\mathbf{1}$};
-      \node [below=2cm of 1] (M) {$\cat{M}$};
-      \node [right=2cm of M] (A) {$\cat{A}$};
-      \draw [->] (M) to node [left]         {$K_1$}      (1);
-      \draw [->] (M) to node [below]        {$T$}        (A);
-      \draw [->] (1) to node [right]  {$\ran_{K_1}T$} (A);
-      \node [above right=0.9cm of 1] (astart) {};
-      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
-      \draw [->] (astart) to node [above right] {$A$} (aend);
-      \node [below right=1cm of 1] (estart) {};
-      \node [below=1.2cm of estart] (eend) {};
-      \draw [->,double] (estart) to node [left] {$\epsilon$} (eend);
-      \node [above right=1.1cm and 0.6cm of M] (send) {};
-      \node [above right=1.0cm of send] (sstart) {};
-      \draw [->,double] (sstart) to node [above left] {$\sigma$} (send);
-    \end{tikzpicture}
+    \includegraphics{../src/lim-right-kan-1}
   \end{minipage}
   \begin{minipage}[b]{0.4\linewidth}
-    \begin{tikzpicture}
-      \node (catA) {$\cat{A}$};
-      \node [below left=0.6cm and 0.3cm of catA] (ran) {$\ran_{K_1}T$};
-      \node [below right=2.0cm and -0.5cm of ran] (Ti) {$T_i$};
-      \node [right=1.0cm of Ti] (Tj) {$T_j$};
-      \draw [->] (Ti) to node [above] {} (Tj);
-      \draw [->] (ran) to node [left] {$\epsilon_i$} (Ti);
-      \draw [->] (ran) to node [left] {$\epsilon_j$} (Tj);
-      \node [right=1.5cm of ran] (A) {$A$};
-      \draw [->,dashed] (A) to node [above] {$\sigma$} (ran);
-      \draw [->] (A) to node [right] {$\alpha_i$} (Ti);
-      \draw [->] (A) to node [right] {$\alpha_j$} (Tj);
-    \end{tikzpicture}
+    \includegraphics{../src/lim-right-kan-2}
   \end{minipage}
 \end{center}
 
@@ -210,7 +163,8 @@
   関手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
   \begin{itemize}
     \item $T$ が余極限をもつ，
-    \item $T$ が (一意的な) 関手 $K_1:\cat{M}\to\mathbf{1}$ に沿った左カン拡張をもつ．
+    \item $T$ が (一意的な) 関手 $K_1:\cat{M}\to\mathbf{1}$
+          に沿った左カン拡張をもつ．
   \end{itemize}
   またこれらが成り立つとき $\colim T\simeq\lan_{K_1}T$．
 \end{theorem}
@@ -221,38 +175,10 @@
 
 \begin{center}
   \begin{minipage}[b]{0.4\linewidth}
-    \begin{tikzpicture}
-      \node (1) {$\mathbf{1}$};
-      \node [below=2cm of 1] (M) {$\cat{M}$};
-      \node [right=2cm of M] (A) {$\cat{A}$};
-      \draw [->] (M) to node [left]         {$K_1$}      (1);
-      \draw [->] (M) to node [below]        {$T$}        (A);
-      \draw [->] (1) to node [right]  {$\lan_{K_1}T$} (A);
-      \node [above right=0.9cm of 1] (astart) {};
-      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
-      \draw [->] (astart) to node [above right] {$A$} (aend);
-      \node [below right=1cm of 1] (estart) {};
-      \node [below=1.2cm of estart] (eend) {};
-      \draw [->,double] (eend) to node [left] {$\mu$} (estart);
-      \node [above right=1.1cm and 0.6cm of M] (send) {};
-      \node [above right=1.0cm of send] (sstart) {};
-      \draw [->,double] (send) to node [above left] {$\tau$} (sstart);
-    \end{tikzpicture}
+    \includegraphics{../src/colim-left-kan-1}
   \end{minipage}
   \begin{minipage}[b]{0.4\linewidth}
-    \begin{tikzpicture}
-      \node (catA) {$\cat{A}$};
-      \node [below left=0.6cm and 0.3cm of catA] (ran) {$\lan_{K_1}T$};
-      \node [below right=2.0cm and -0.5cm of ran] (Ti) {$T_i$};
-      \node [right=1.0cm of Ti] (Tj) {$T_j$};
-      \draw [->] (Ti) to node [above] {} (Tj);
-      \draw [->] (Ti) to node [left] {$\mu_i$} (ran);
-      \draw [->] (Tj) to node [left] {$\mu_j$} (ran);
-      \node [right=1.5cm of ran] (A) {$A$};
-      \draw [->,dashed] (ran) to node [above] {$\tau$} (A);
-      \draw [->] (Ti) to node [right] {$\beta_i$} (A);
-      \draw [->] (Tj) to node [right] {$\beta_j$} (A);
-    \end{tikzpicture}
+    \includegraphics{../src/colim-left-kan-2}
   \end{minipage}
 \end{center}
 

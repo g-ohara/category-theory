@@ -1,0 +1,19 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{positioning}
+\input{macro.tex}
+
+\begin{document}
+\begin{tikzpicture}
+	\node (catA) {$\cat{A}$};
+	\node [below left=0.6cm and 0.3cm of catA] (ran) {$\ran_{K_1}T$};
+	\node [below right=2.0cm and -0.5cm of ran] (Ti) {$T_i$};
+	\node [right=1.0cm of Ti] (Tj) {$T_j$};
+	\draw [->] (Ti) to node [above] {} (Tj);
+	\draw [->] (ran) to node [left] {$\epsilon_i$} (Ti);
+	\draw [->] (ran) to node [left] {$\epsilon_j$} (Tj);
+	\node [right=1.5cm of ran] (A) {$A$};
+	\draw [->,dashed] (A) to node [above] {$\sigma$} (ran);
+	\draw [->] (A) to node [right] {$\alpha_i$} (Ti);
+	\draw [->] (A) to node [right] {$\alpha_j$} (Tj);
+\end{tikzpicture}
+\end{document}
