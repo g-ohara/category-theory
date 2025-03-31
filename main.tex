@@ -7,6 +7,7 @@
 \newcommand{\cat}[1]{\mathscr{#1}}
 \newcommand{\obj}[1]{|#1|}
 \newcommand{\mrp}[3]{#1(#2,#3)}
+\newcommand{\id}[1]{\mathrm{id}_{#1}}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\cod}{cod}
 \DeclareMathOperator{\colim}{Colim}
@@ -54,8 +55,8 @@
     \item 任意の射 $f,g,h$ について，
           $\cod(f)=\dom(g)$ かつ $\cod(g)=\dom(h)$ ならば，
           $h\circ(g\circ f)=(h\circ g)\circ f$ が成り立つ．
-    \item 任意の対象 $A$ について恒等射 (identity) $1_A:A\to A$ が一意に存在し，
-          任意の射 $f:A\to B$ について $f\circ 1_A=1_B\circ f=f$ が成り立つ．
+    \item 任意の対象 $A$ について恒等射 (identity) $\id{A}:A\to A$ が一意に存在し，
+          任意の射 $f:A\to B$ について $f\circ \id{A}=\id{B}\circ f=f$ が成り立つ．
   \end{itemize}
   また，圏 $\cat{C}$ の対象の集まりを $\obj{\cat{C}}$，
   射 $A\to B$ の集まりを $\mrp{\cat{C}}{A}{B}$ と表記する．
@@ -71,9 +72,9 @@
     \draw [->] (A) to [edge label=$f$] (B);
     \draw [->] (B) to [edge label=$g$] (C);
     \draw [->, bend right] (A) to node [below] {$g\circ f$} (C);
-    \draw [->, loop above] (A) to node [above] {$1_A$} (A);
-    \draw [->, loop above] (B) to node [above] {$1_B$} (B);
-    \draw [->, loop above] (C) to node [above] {$1_C$} (C);
+    \draw [->, loop above] (A) to node [above] {$\id{A}$} (A);
+    \draw [->, loop above] (B) to node [above] {$\id{B}$} (B);
+    \draw [->, loop above] (C) to node [above] {$\id{C}$} (C);
   \end{tikzpicture}
   \caption{圏の例}
 \end{figure}
@@ -86,7 +87,7 @@
   \begin{equation}
     \exists f\in\mrp{\cat{C}}{A}{B};
     \ \exists g\in\mrp{\cat{C}}{B}{A};
-    \ g\circ f=1_A\wedge f\circ g=1_B
+    \ g\circ f=\id{A}\wedge f\circ g=\id{B}
   \end{equation}
   が成り立つとき，
   $A$ と $B$ は同型 (isomorphic) であるといい，$A\simeq B$ と表記する．
@@ -117,7 +118,7 @@
   $F$ を関手 (functor) という．
   \begin{itemize}
     \item $F(A\to B)=F(A)\to F(B)$,
-    \item $F(1_A)=1_{F(A)}$,
+    \item $F(\id{A})=\id{F(A)}$,
     \item $F(g\circ f)=F(g)\circ F(f)$.
   \end{itemize}
 \end{definition}
