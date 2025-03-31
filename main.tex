@@ -1,4 +1,4 @@
-\documentclass[titlepage]{ltjsarticle}
+\documentclass[titlepage]{ltjsreport}
 
 \usepackage{amsmath}
 \usepackage{mathrsfs}
@@ -25,9 +25,9 @@
 \begin{document}
 \maketitle
 
-\section{圏・関手・自然変換}
+\chapter{圏・関手・自然変換}
 
-\subsection{圏}
+\section{圏}
 
 射は，圏という世界における関係を表す矢印であり，．
 圏論において対象は矢印の始まりと終わりにつけられる名称に過ぎず，
@@ -83,7 +83,7 @@
   $A$ と $B$ は同型 (isomorphic) であるといい，$A\simeq B$ と表記する．
 \end{definition}
 
-\subsubsection{集合圏}
+\subsection{集合圏}
 
 前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
 むしろ対象の「性質」とは他の対象との関係性によって初めて問題にできるものだ．
@@ -97,7 +97,7 @@
   集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．
 \end{definition}
 
-\subsection{関手}
+\section{関手}
 
 2つの世界 (圏) を比較したときに，世界を構成する要素は全く違っていても，
 それらの関係性に着目するとなんとなく似ている気がしてくることがある．
@@ -117,7 +117,7 @@
 そこでは圏が対象として，関手が射として扱われることになる
 (これが\cref{def:category}を満たすことは容易に確認できる)．
 
-\subsection{自然変換}
+\section{自然変換}
 
 2つの世界 (圏) について異なるアナロジーを考えることもできる．
 すると，異なるアナロジーの間にも何らかのアナロジーが見えてくることがある．
