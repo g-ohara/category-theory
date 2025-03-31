@@ -1,3 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="大原玄嗣" />
+  <title>圏論ノート</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">圏論ノート</h1>
+<p class="author">大原玄嗣</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#圏関手自然変換"
+id="toc-圏関手自然変換">圏・関手・自然変換</a>
+<ul>
+<li><a href="#圏" id="toc-圏">圏</a>
+<ul>
+<li><a href="#集合圏" id="toc-集合圏">集合圏</a></li>
+</ul></li>
+<li><a href="#関手" id="toc-関手">関手</a></li>
+<li><a href="#自然変換" id="toc-自然変換">自然変換</a></li>
+</ul></li>
+<li><a href="#カン拡張" id="toc-カン拡張">カン拡張</a>
+<ul>
+<li><a href="#すべての概念はカン拡張である"
+id="toc-すべての概念はカン拡張である">すべての概念はカン拡張である</a></li>
+</ul></li>
+</ul>
+</nav>
 <h1 id="圏関手自然変換">圏・関手・自然変換</h1>
 <h2 id="圏">圏</h2>
 <p>射は，圏という世界における関係を表す矢印であり，．
@@ -8,40 +61,35 @@
 (arrow, morphism) の集まりからなり， 以下を満たす．</p>
 <ul>
 <li><p>任意の射は，域 (domain) と余域 (codomain) と呼ばれる対象をもつ．
-射 <span class="math inline"><em>f</em></span> の域を<span
-class="math inline">dom (<em>f</em>)</span>，余域を <span
-class="math inline">cod (<em>f</em>)</span> と表記する． また，<span
-class="math inline">dom (<em>f</em>) = <em>A</em></span>，<span
-class="math inline">cod (<em>f</em>) = <em>B</em></span> であるとき
-<span class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span>
-と表記する．</p></li>
-<li><p>任意の射 <span class="math inline"><em>f</em>, <em>g</em></span>
-について，<span
-class="math inline">cod (<em>f</em>) = dom (<em>g</em>)</span> ならば，
-<span class="math inline"><em>f</em>, <em>g</em></span> の合成
-(composition) <span class="math inline"><em>g</em> ∘ <em>f</em></span>
+射 <span class="math inline">\(f\)</span> の域を<span
+class="math inline">\(\mathop{\mathrm{dom}}(f)\)</span>，余域を <span
+class="math inline">\(\mathop{\mathrm{cod}}(f)\)</span> と表記する．
+また，<span
+class="math inline">\(\mathop{\mathrm{dom}}(f)=A\)</span>，<span
+class="math inline">\(\mathop{\mathrm{cod}}(f)=B\)</span> であるとき
+<span class="math inline">\(f:A\to B\)</span> と表記する．</p></li>
+<li><p>任意の射 <span class="math inline">\(f,g\)</span> について，<span
+class="math inline">\(\mathop{\mathrm{cod}}(f)=\mathop{\mathrm{dom}}(g)\)</span>
+ならば， <span class="math inline">\(f,g\)</span> の合成 (composition)
+<span class="math inline">\(g\circ f\)</span>
 が一意に存在する．</p></li>
-<li><p>任意の射 <span
-class="math inline"><em>f</em>, <em>g</em>, <em>h</em></span> について，
-<span class="math inline">cod (<em>f</em>) = dom (<em>g</em>)</span>
+<li><p>任意の射 <span class="math inline">\(f,g,h\)</span> について，
+<span
+class="math inline">\(\mathop{\mathrm{cod}}(f)=\mathop{\mathrm{dom}}(g)\)</span>
 かつ <span
-class="math inline">cod (<em>g</em>) = dom (<em>h</em>)</span> ならば，
-<span
-class="math inline"><em>h</em> ∘ (<em>g</em>∘<em>f</em>) = (<em>h</em>∘<em>g</em>) ∘ <em>f</em></span>
-が成り立つ．</p></li>
-<li><p>任意の対象 <span class="math inline"><em>A</em></span>
-について恒等射 (identity) <span
-class="math inline">1<sub><em>A</em></sub> : <em>A</em> → <em>A</em></span>
-が一意に存在し， 任意の射 <span
-class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span> について
-<span
-class="math inline"><em>f</em> ∘ 1<sub><em>A</em></sub> = 1<sub><em>B</em></sub> ∘ <em>f</em> = <em>f</em></span>
+class="math inline">\(\mathop{\mathrm{cod}}(g)=\mathop{\mathrm{dom}}(h)\)</span>
+ならば， <span class="math inline">\(h\circ(g\circ f)=(h\circ g)\circ
+f\)</span> が成り立つ．</p></li>
+<li><p>任意の対象 <span class="math inline">\(A\)</span> について恒等射
+(identity) <span class="math inline">\(1_A:A\to A\)</span>
+が一意に存在し， 任意の射 <span class="math inline">\(f:A\to B\)</span>
+について <span class="math inline">\(f\circ 1_A=1_B\circ f=f\)</span>
 が成り立つ．</p></li>
 </ul>
-<p>また，圏 <span class="math inline">𝒞</span> の対象の集まりを <span
-class="math inline">|𝒞|</span>， 射 <span
-class="math inline"><em>A</em> → <em>B</em></span> の集まりを <span
-class="math inline">𝒞(<em>A</em>,<em>B</em>)</span> と表記する．</p>
+<p>また，圏 <span class="math inline">\(\mathscr{C}\)</span>
+の対象の集まりを <span class="math inline">\(|\mathscr{C}|\)</span>， 射
+<span class="math inline">\(A\to B\)</span> の集まりを <span
+class="math inline">\(\mathscr{C}(A,B)\)</span> と表記する．</p>
 </div>
 <figure>
 
@@ -51,13 +99,14 @@ class="math inline">𝒞(<em>A</em>,<em>B</em>)</span> と表記する．</p>
 対象どうしの「本質的な等しさ」なるものも射によって定められる．</p>
 <div class="definition">
 <p><strong>定義 1.2</strong> (同型). 圏 <span
-class="math inline">𝒞</span> の対象 <span
-class="math inline"><em>A</em>, <em>B</em></span> について <span
-class="math display">∃<em>f</em> ∈ 𝒞(<em>A</em>,<em>B</em>); ∃<em>g</em> ∈ 𝒞(<em>B</em>,<em>A</em>); <em>g</em> ∘ <em>f</em> = 1<sub><em>A</em></sub> ∧ <em>f</em> ∘ <em>g</em> = 1<sub><em>B</em></sub></span>
-が成り立つとき， <span class="math inline"><em>A</em></span> と <span
-class="math inline"><em>B</em></span> は同型 (isomorphic)
-であるといい，<span class="math inline"><em>A</em> ≃ <em>B</em></span>
-と表記する．</p>
+class="math inline">\(\mathscr{C}\)</span> の対象 <span
+class="math inline">\(A,B\)</span> について <span
+class="math display">\[\exists f\in\mathscr{C}(A,B);
+    \ \exists g\in\mathscr{C}(B,A);
+    \ g\circ f=1_A\wedge f\circ g=1_B\]</span> が成り立つとき， <span
+class="math inline">\(A\)</span> と <span
+class="math inline">\(B\)</span> は同型 (isomorphic) であるといい，<span
+class="math inline">\(A\simeq B\)</span> と表記する．</p>
 </div>
 <h3 id="集合圏">集合圏</h3>
 <p>前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
@@ -77,18 +126,17 @@ class="math inline"><em>B</em></span> は同型 (isomorphic)
 関手はそのようなアナロジーを表現する矢印である．</p>
 <div class="definition">
 <p><strong>定義 1.4</strong> (関手). 2つの圏 <span
-class="math inline">𝒞, 𝒟</span>
+class="math inline">\(\mathscr{C},\mathscr{D}\)</span>
 の対象から対象へ，射から射へ対応づける写像 <span
-class="math inline"><em>F</em> : 𝒞 → 𝒟</span> が以下の条件を満たすとき，
-<span class="math inline"><em>F</em></span> を関手 (functor)
-という．</p>
+class="math inline">\(F:\mathscr{C}\to\mathscr{D}\)</span>
+が以下の条件を満たすとき， <span class="math inline">\(F\)</span> を関手
+(functor) という．</p>
 <ul>
-<li><p><span
-class="math inline"><em>F</em>(<em>A</em>→<em>B</em>) = <em>F</em>(<em>A</em>) → <em>F</em>(<em>B</em>)</span>,</p></li>
-<li><p><span
-class="math inline"><em>F</em>(1<sub><em>A</em></sub>) = 1<sub><em>F</em>(<em>A</em>)</sub></span>,</p></li>
-<li><p><span
-class="math inline"><em>F</em>(<em>g</em>∘<em>f</em>) = <em>F</em>(<em>g</em>) ∘ <em>F</em>(<em>f</em>)</span>.</p></li>
+<li><p><span class="math inline">\(F(A\to B)=F(A)\to
+F(B)\)</span>,</p></li>
+<li><p><span class="math inline">\(F(1_A)=1_{F(A)}\)</span>,</p></li>
+<li><p><span class="math inline">\(F(g\circ f)=F(g)\circ
+F(f)\)</span>.</p></li>
 </ul>
 </div>
 <p>すなわち関手は域と余域，恒等射と射の合成を保存する写像である．
@@ -102,17 +150,16 @@ data-reference="def:category">1.1</a>を満たすことは容易に確認でき�
 この高次のアナロジーが自然変換である．</p>
 <div class="definition">
 <p><strong>定義 1.5</strong> (自然変換). 2つの関手 <span
-class="math inline"><em>F</em> : 𝒞 → 𝒟, <em>G</em> : 𝒞 → 𝒟</span>
-について， <span class="math inline">𝒞</span> の対象 <span
-class="math inline"><em>X</em></span> を <span
-class="math inline">𝒟</span> の射 <span
-class="math inline"><em>t</em><sub><em>X</em></sub> : <em>F</em>(<em>X</em>) → <em>G</em>(<em>X</em>)</span>
-に対応づける 写像 <span class="math inline"><em>t</em></span> が <span
-class="math display">∀<em>X</em>, <em>Y</em> ∀<em>f</em> : <em>X</em> → <em>Y</em> <em>G</em>(<em>f</em>) ∘ <em>t</em><sub><em>X</em></sub> = <em>t</em><sub><em>Y</em></sub> ∘ <em>F</em>(<em>f</em>)</span>
-を満たすとき，<span class="math inline"><em>t</em></span> を自然変換
-(natural transformation) といい， <span
-class="math inline"><em>t</em> : <em>F</em> ⇒ <em>G</em></span>
-と表記する．</p>
+class="math inline">\(F:\mathscr{C}\to\mathscr{D},G:\mathscr{C}\to\mathscr{D}\)</span>
+について， <span class="math inline">\(\mathscr{C}\)</span> の対象 <span
+class="math inline">\(X\)</span> を <span
+class="math inline">\(\mathscr{D}\)</span> の射 <span
+class="math inline">\(t_X:F(X)\to G(X)\)</span> に対応づける 写像 <span
+class="math inline">\(t\)</span> が <span class="math display">\[\forall
+X,Y\ \forall f:X\to Y\ G(f)\circ t_X=t_Y\circ F(f)\]</span>
+を満たすとき，<span class="math inline">\(t\)</span> を自然変換 (natural
+transformation) といい， <span class="math inline">\(t:F\Rightarrow
+G\)</span> と表記する．</p>
 </div>
 <h1 id="カン拡張">カン拡張</h1>
 <div class="epigraph">
@@ -123,31 +170,27 @@ class="math inline"><em>t</em> : <em>F</em> ⇒ <em>G</em></span>
 <p>本節では，極限や随伴がカン拡張として表現されることを確認する．</p>
 <div id="thm:limit-is-right-kan-extension" class="theorem">
 <p><strong>定理 2.1</strong> (極限は右カン拡張である). 関手 <span
-class="math inline"><em>T</em> : ℳ → 𝒜</span>
+class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
 について以下の2つは同値である:</p>
 <ul>
-<li><p><span class="math inline"><em>T</em></span>
-が極限をもつ，</p></li>
-<li><p><span class="math inline"><em>T</em></span> が (一意的な) 関手
-<span
-class="math inline"><em>K</em><sub>1</sub> : ℳ → <strong>1</strong></span>
+<li><p><span class="math inline">\(T\)</span> が極限をもつ，</p></li>
+<li><p><span class="math inline">\(T\)</span> が (一意的な) 関手 <span
+class="math inline">\(K_1:\mathscr{M}\to\mathbf{1}\)</span>
 に沿った右カン拡張をもつ．</p></li>
 </ul>
-<p>またこれらが成り立つとき <span
-class="math inline">lim <em>T</em> ≃ Ran<sub><em>K</em><sub>1</sub></sub><em>T</em></span>．</p>
+<p>またこれらが成り立つとき <span class="math inline">\(\lim
+T\simeq\mathop{\mathrm{Ran}}_{K_1}T\)</span>．</p>
 </div>
 <div class="proof">
 <p><em>Proof.</em> 関手 <span
-class="math inline"><em>A</em> : <strong>1</strong> → 𝒜</span> は <span
-class="math inline">𝒜</span> の対象であり， <span
-class="math inline"><em>A</em> ∘ <em>K</em><sub>1</sub> = <em>Δ</em>(<em>A</em>)</span>
-である． よって自然変換 <span
-class="math inline"><em>α</em> : <em>A</em> ∘ <em>K</em><sub>1</sub> → <em>T</em></span>
-は <span class="math inline"><em>T</em></span> への錐 <span
-class="math inline">(<em>A</em>,<em>α</em>)</span> をなす． 右カン拡張
-<span
-class="math inline">(Ran<sub><em>K</em><sub>1</sub></sub><em>T</em>,<em>ϵ</em>)</span>
-も同様に <span class="math inline"><em>T</em></span> への錐であり，
+class="math inline">\(A:\mathbf{1}\to\mathscr{A}\)</span> は <span
+class="math inline">\(\mathscr{A}\)</span> の対象であり， <span
+class="math inline">\(A\circ K_1=\Delta(A)\)</span> である．
+よって自然変換 <span class="math inline">\(\alpha:A\circ K_1\to
+T\)</span> は <span class="math inline">\(T\)</span> への錐 <span
+class="math inline">\((A,\alpha)\)</span> をなす． 右カン拡張 <span
+class="math inline">\((\mathop{\mathrm{Ran}}_{K_1}T,\epsilon)\)</span>
+も同様に <span class="math inline">\(T\)</span> への錐であり，
 その定義より極限錐に同型である． ◻</p>
 </div>
 <div class="center">
@@ -155,18 +198,16 @@ class="math inline">(Ran<sub><em>K</em><sub>1</sub></sub><em>T</em>,<em>ϵ</em>)
 </div>
 <div class="theorem">
 <p><strong>定理 2.2</strong> (余極限は左カン拡張である). 関手 <span
-class="math inline"><em>T</em> : ℳ → 𝒜</span>
+class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
 について以下の2つは同値である:</p>
 <ul>
-<li><p><span class="math inline"><em>T</em></span>
-が余極限をもつ，</p></li>
-<li><p><span class="math inline"><em>T</em></span> が (一意的な) 関手
-<span
-class="math inline"><em>K</em><sub>1</sub> : ℳ → <strong>1</strong></span>
+<li><p><span class="math inline">\(T\)</span> が余極限をもつ，</p></li>
+<li><p><span class="math inline">\(T\)</span> が (一意的な) 関手 <span
+class="math inline">\(K_1:\mathscr{M}\to\mathbf{1}\)</span>
 に沿った左カン拡張をもつ．</p></li>
 </ul>
 <p>またこれらが成り立つとき <span
-class="math inline">Colim <em>T</em> ≃ Lan<sub><em>K</em><sub>1</sub></sub><em>T</em></span>．</p>
+class="math inline">\(\mathop{\mathrm{Colim}}T\simeq\mathop{\mathrm{Lan}}_{K_1}T\)</span>．</p>
 </div>
 <div class="proof">
 <p><em>Proof.</em> <a href="#thm:limit-is-right-kan-extension"
@@ -177,3 +218,5 @@ data-reference="thm:limit-is-right-kan-extension">2.1</a>
 <div class="center">
 
 </div>
+</body>
+</html>

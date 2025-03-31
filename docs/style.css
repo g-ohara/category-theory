@@ -1,0 +1,70 @@
+html {
+    overflow-y: scroll;
+    height: 100%;
+    font-family: "Hiragino Maru Gothic ProN W4", sans-serif;
+    word-wrap: break-word;
+    margin: 0 auto;
+    padding: 1.5em;
+ }
+
+@media (min-width: 768px) {
+    html {
+        font-size: 125%;
+        max-width: 42em;
+ } }
+
+h1, h2, h3, h4 {
+    margin: 2.5rem 0 1.5rem 0;
+    line-height: 1.25;
+    color: #333;
+ }
+
+.epigraph{
+    position:relative;
+    border-left:3px solid #DA8596;
+    padding:5px;
+    padding-left:10px;
+    background-color:#EEE;
+}
+.epigraph p{
+    position:relative;
+    padding-left:30px;
+}
+.epigraph cite{
+    display: block;
+    font-size:0.8rem;
+    color:#F8C8B2;
+    text-align:right;
+}
+
+.definition,.theorem,.proof {
+  position: relative;
+  margin: 30px;
+  padding: 1em calc(1.5em + 9px);
+  border-top: 1px solid #cdab8f;
+  border-bottom: 1px solid #cdab8f;
+  color: #333;
+}
+.proof {
+  border-top: 1px solid #99c1f1;
+  border-bottom: 1px solid #99c1f1;
+}
+.definition::before,.theorem::before,.proof::before,
+.definition::after,.theorem::after,.proof::after {
+  position: absolute;
+  width: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% + 20px);
+  background-color: #cdab8f;
+  content: '';
+}
+.proof::before,.proof::after {
+  background-color: #99c1f1;
+}
+.definition::before,.theorem::before,.proof::before {
+  left: 9px;
+}
+.definition::after,.theorem::after,.proof::after {
+  right: 9px;
+}
