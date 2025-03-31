@@ -7,3 +7,4 @@ toc: true
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+default-image-extension: png
