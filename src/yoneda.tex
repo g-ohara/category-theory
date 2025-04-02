@@ -1,0 +1,13 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{cd}
+\input{macro.tex}
+
+\begin{document}
+\begin{tikzcd}
+	\mrp{\cat{D}}{r}{r}\arrow[r,"\mrp{\cat{D}}{r}{f}"]\arrow[d,"\alpha_r"]
+	& \mrp{\cat{D}}{r}{d}
+	\arrow[d,"\alpha_d"] \\
+	K(r)\arrow[r,"K(f)"] & K(d)
+\end{tikzcd}
+\end{document}

@@ -44,6 +44,10 @@ id="toc-圏関手自然変換">圏・関手・自然変換</a>
 <li><a href="#関手" id="toc-関手">関手</a></li>
 <li><a href="#自然変換" id="toc-自然変換">自然変換</a></li>
 </ul></li>
+<li><a href="#普遍性" id="toc-普遍性">普遍性</a>
+<ul>
+<li><a href="#米田の補題" id="toc-米田の補題">米田の補題</a></li>
+</ul></li>
 <li><a href="#カン拡張" id="toc-カン拡張">カン拡張</a>
 <ul>
 <li><a href="#すべての概念はカン拡張である"
@@ -162,6 +166,69 @@ X,Y\ \forall f:X\to Y\ G(f)\circ t_X=t_Y\circ F(f)\]</span>
 transformation) といい， <span class="math inline">\(t:F\Rightarrow
 G\)</span> と表記する．</p>
 </div>
+<h1 id="普遍性">普遍性</h1>
+<h2 id="米田の補題">米田の補題</h2>
+<p>所与の集合値関手 <span
+class="math inline">\(K:\mathscr{D}\to\mathbf{Set}\)</span> に対して
+表現可能関手 <span class="math inline">\(\mathscr{D}(r,-)\)</span>
+からの自然変換 <span class="math inline">\(\alpha\)</span>
+を与えることは， コンポーネント <span
+class="math inline">\(\alpha_r\)</span> が恒等射 <span
+class="math inline">\(\mathrm{id}_{r}\)</span>
+をどこに写すかを決めることと等価である．
+以下で紹介する米田の補題はその事実を主張しており， <span
+class="math inline">\(\alpha_r(\mathrm{id}_{r})\)</span>
+の値ひとつから自然変換 <span class="math inline">\(\alpha\)</span>
+を構成する方法を提供する．</p>
+<div class="theorem">
+<p><strong>定理 2.1</strong> (米田の補題). <span
+class="math inline">\(\mathscr{D}\)</span> を局所小圏とする． 任意の
+<span class="math inline">\(K:\mathscr{D}\to\mathbf{Set}\)</span> と
+<span class="math inline">\(d\in|\mathscr{D}|\)</span> について <span
+class="math display">\[y:\mathbf{Set}^\mathscr{D}(\mathscr{D}(r,-),K)\ni\alpha\mapsto\alpha_r(\mathrm{id}_{r})\in
+K(r)\]</span> は全単射である．</p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <span
+class="math inline">\(x:K(r)\to\mathbf{Set}^\mathscr{D}(\mathscr{D}(r,-),K)\)</span>
+を考え， <span class="math inline">\(x\)</span> が <span
+class="math inline">\(\mathbf{Set}\)</span> における <span
+class="math inline">\(y\)</span> の逆射であることを示す． ただし <span
+class="math inline">\(x\)</span> は任意の <span
+class="math inline">\(a\in K(r)\)</span>
+を以下のコンポーネントで構成される自然変換 <span
+class="math inline">\(x(a)\)</span> に写す: <span
+class="math display">\[{x(a)}_d:f\mapsto K(f)(a).\]</span> <span
+class="math inline">\(y\circ x=\mathrm{id}_{K(r)}\)</span>
+を示す．任意の <span class="math inline">\(a\in K(r)\)</span> について
+<span class="math display">\[\begin{aligned}
+    y(x(a)) &amp; ={x(a)}_r(\mathrm{id}_{r}) \\
+            &amp; =K(\mathrm{id}_{r})(a)     \\
+            &amp; =\mathrm{id}_{K(r)}(a)     \\
+            &amp; =a.
+  
+\end{aligned}\]</span> <span class="math inline">\(x\circ
+y=\mathrm{id}_{\mathbf{Set}^\mathscr{D}(\mathscr{D}(r,-),K)}\)</span>
+を示す． 任意の <span class="math inline">\(\alpha:\mathscr{D}(r,d)\to
+K\)</span>，<span
+class="math inline">\(d\in|\mathscr{D}|\)</span>，<span
+class="math inline">\(f:r\to d\)</span> について <span
+class="math display">\[\begin{aligned}
+    {x(y(\alpha))}_d(f) &amp; =K(f)(y(\alpha))                       \\
+                        &amp;
+=K(f)(\alpha_r(\mathrm{id}_{r}))                \\
+                        &amp;
+=\alpha_d(\mathscr{D}(r,f)(\mathrm{id}_{r})) \\
+                        &amp; =\alpha_d(f).
+  
+\end{aligned}\]</span> ここで 3
+行目の変換には，以下の図式が可換である事実を用いた．</p>
+<div class="center">
+<p><img src="src/yoneda.png" alt="image" /></p>
+</div>
+<p>よって <span class="math inline">\(y\)</span>
+は全単射であることが示された． ◻</p>
+</div>
 <h1 id="カン拡張">カン拡張</h1>
 <div class="epigraph">
 <p>All Concepts are Kan Extensions.</p>
@@ -170,7 +237,7 @@ G\)</span> と表記する．</p>
 <h2 id="すべての概念はカン拡張である">すべての概念はカン拡張である</h2>
 <p>本節では，極限や随伴がカン拡張として表現されることを確認する．</p>
 <div id="thm:limit-is-right-kan-extension" class="theorem">
-<p><strong>定理 2.1</strong> (極限は右カン拡張である). 関手 <span
+<p><strong>定理 3.1</strong> (極限は右カン拡張である). 関手 <span
 class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
 について以下の2つは同値である:</p>
 <ul>
@@ -199,7 +266,7 @@ class="math inline">\((\mathop{\mathrm{Ran}}_{K_1}T,\epsilon)\)</span>
 <p><img src="src/lim-right-kan-2.png" alt="image" /></p>
 </div>
 <div class="theorem">
-<p><strong>定理 2.2</strong> (余極限は左カン拡張である). 関手 <span
+<p><strong>定理 3.2</strong> (余極限は左カン拡張である). 関手 <span
 class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
 について以下の2つは同値である:</p>
 <ul>
@@ -214,7 +281,7 @@ class="math inline">\(\mathop{\mathrm{Colim}}T\simeq\mathop{\mathrm{Lan}}_{K_1}T
 <div class="proof">
 <p><em>Proof.</em> <a href="#thm:limit-is-right-kan-extension"
 data-reference-type="ref"
-data-reference="thm:limit-is-right-kan-extension">2.1</a>
+data-reference="thm:limit-is-right-kan-extension">3.1</a>
 より双対的に示される． ◻</p>
 </div>
 <div class="center">

@@ -3,8 +3,7 @@
 \input{src/macro.tex}
 \usepackage{epigraph}
 
-\usepackage{tikz}
-\usetikzlibrary{positioning}
+\usepackage{graphicx}
 
 \usepackage{amsthm}
 \theoremstyle{definition}
@@ -121,6 +120,58 @@
   を満たすとき，$t$ を自然変換 (natural transformation) といい，
   $t:F\Rightarrow G$ と表記する．
 \end{definition}
+
+\chapter{普遍性}
+
+\section{米田の補題}
+
+所与の集合値関手 $K:\cat{D}\to\set$ に対して
+表現可能関手 $\mrp{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
+コンポーネント $\alpha_r$ が恒等射 $\id{r}$
+をどこに写すかを決めることと等価である．
+以下で紹介する米田の補題はその事実を主張しており，
+$\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
+
+\begin{theorem}[米田の補題]
+  $\cat{D}$ を局所小圏とする．
+  任意の $K:\cat{D}\to\set$ と $d\in\obj{\cat{D}}$ について
+  \begin{equation}
+    y:\set^\cat{D}(\mrp{\cat{D}}{r}{-},K)\ni\alpha\mapsto\alpha_r(\id{r})\in K(r)
+  \end{equation}
+  は全単射である．
+\end{theorem}
+
+\begin{proof}
+  $x:K(r)\to\set^\cat{D}(\mrp{\cat{D}}{r}{-},K)$ を考え，
+  $x$ が $\set$ における $y$ の逆射であることを示す．
+  ただし $x$ は任意の $a\in K(r)$ を以下のコンポーネントで構成される自然変換
+  $x(a)$ に写す:
+  \begin{equation}
+    {x(a)}_d:f\mapsto K(f)(a).
+  \end{equation}
+  $y\circ x=\id{K(r)}$ を示す．任意の $a\in K(r)$ について
+  \begin{align*}
+    y(x(a)) & ={x(a)}_r(\id{r}) \\
+            & =K(\id{r})(a)     \\
+            & =\id{K(r)}(a)     \\
+            & =a.
+  \end{align*}
+  $x\circ y=\id{\set^\cat{D}(\mrp{\cat{D}}{r}{-},K)}$ を示す．
+  任意の $\alpha:\mrp{\cat{D}}{r}{d}\to K$，$d\in\obj{\cat{D}}$，$f:r\to d$
+  について
+  \begin{align*}
+    {x(y(\alpha))}_d(f) & =K(f)(y(\alpha))                       \\
+                        & =K(f)(\alpha_r(\id{r}))                \\
+                        & =\alpha_d(\mrp{\cat{D}}{r}{f}(\id{r})) \\
+                        & =\alpha_d(f).
+  \end{align*}
+  ここで 3 行目の変換には，以下の図式が可換である事実を用いた．
+  \begin{center}
+    \centering
+    \includegraphics{src/yoneda}
+  \end{center}
+  よって $y$ は全単射であることが示された．
+\end{proof}
 
 \chapter{カン拡張}
 
