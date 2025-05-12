@@ -123,6 +123,125 @@
 
 \chapter{普遍性}
 
+\section{ブール代数と圏論}
+
+\subsection{さまざまな代数構造の圏論的定義}
+
+Heyting 代数は，
+半順序，交わりと結び，最大元と最小元，相対擬補元をそなえた代数構造であり，
+ブール代数は相対擬補元が補元に一致する Heyting 代数である．
+普通これらの構造は集合論の土台の上で定義されるが，
+圏論の概念を用いて定義することもできる．
+例えば，交わりと結びは積と余積として，最大元と最小限は終対象と始対象として,
+相対擬補元は冪として表現することができる．
+
+\begin{definition}[半順序集合]
+  圏 $\cat{C}$ について
+  \begin{equation}
+    \forall x,y\in\obj{\cat{C}};|\mrp{\cat{C}}{x}{y}|\le1
+  \end{equation}
+  が成り立つとき，
+  $\cat{C}$ は半順序集合 (partially ordered set, poset)
+  であるという．
+\end{definition}
+
+\begin{definition}[束]
+  半順序集合 $\cat{C}$ が
+  有限積と有限余積をもつとき，
+  $\cat{C}$ は束 (lattice) であるという．
+\end{definition}
+
+\begin{definition}[有界束]
+  束 $\cat{C}$ が終対象と始対象をもつとき，
+  $\cat{C}$ は有界束 (bounded lattice) であるという．
+\end{definition}
+
+\begin{definition}[Heyting 代数]
+  有界束 $\cat{C}$ が任意の対象の組について冪をもつとき,
+  $\cat{C}$ は有界束 (bounded lattice) であるという．
+\end{definition}
+
+\begin{definition}[ブール代数]
+  Heyting 代数 $\cat{C}$ について
+  \begin{equation}
+    \forall x\in\obj{\cat{C}};\ \neg\neg x=x
+  \end{equation}
+  が成り立つとき $\cat{C}$ は ブール代数であるという．
+\end{definition}
+
+\subsection{位相空間論の用語}
+
+\begin{definition}[コンパクト集合]
+  位相空間 $(X,\mathcal{O})$ の部分集合 $A\subseteq X$ の任意の開被覆
+  $\mathcal{C}\subseteq\mathcal{O}$ に対して有限部分被覆
+  $\mathcal{C}_0\in\mathcal{C}$ が存在するとき，
+  $A$ はコンパクト集合 (compact set) であるという．
+\end{definition}
+
+\begin{definition}[コンパクト空間]
+  位相空間 $(X,\mathcal{O})$ について $X$ がコンパクト集合であるとき,
+  $(X,\mathcal{O})$ はコンパクト空間 (compact space) であるという。
+\end{definition}
+
+\begin{definition}[完全不連結]
+  連結成分がすべて一点集合である位相空間を完全不連結 (disconnected)
+  であるという．
+\end{definition}
+
+\begin{definition}[ハウスドルフ空間]
+  連結成分が一点集合でない位相空間をハウスドルフ空間 (Hausdorff space)
+  であるという．
+\end{definition}
+
+\begin{definition}[ストーン空間]
+  コンパクト完全不連結ハウスドルフ空間をストーン空間 (stone space) という．
+\end{definition}
+
+\subsection{ストーンの表現定理}
+
+\begin{definition}[ブール代数の圏]
+  ブール代数とブール準同型のなす圏を $\blat$ と表記する．
+\end{definition}
+
+\begin{definition}[位相空間の圏]
+  位相空間と連続写像のなす圏を $\Top$ と表記する．
+\end{definition}
+
+\begin{definition}[ストーン空間の圏]
+  ストーン空間のなす $\Top$ の充満部分圏を $\stone$ と表記する．
+\end{definition}
+
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\clop}{\operatorname{clop}}
+
+\begin{theorem}[ストーンの表現定理]
+  $\blat$ と $\stone$ は圏同値である．
+\end{theorem}
+
+\begin{proof}
+  反変函手 $\spec:\blat^\mathrm{op}\to\stone$ および
+  $\clop:\stone^\mathrm{op}\to\blat$ を定め，自然同型
+  $\eta:\id{\blat}\simeq\clop\circ(\spec^\mathrm{op})$ が存在することを示す．
+  以下，メモ．
+  \begin{itemize}
+    \item $\spec(B)$: ブール準同型 $B\to2$ の全体
+          \begin{itemize}
+            \item 集合 $2$ に離散位相を入れて $2^B$ に積位相を入れた位相空間を
+                  考えると，$\spec(B)\subseteq 2^B$ はその部分位相空間になる
+          \end{itemize}
+    \item $\spec(b:B'\to B)=b^{-1}:\spec(B)\to\spec(B')$
+          \begin{itemize}
+            \item $b^{-1}$ は $b$ の逆像を与える
+          \end{itemize}
+    \item 反変函手 $\clop:\stone^\mathrm{op}\to\blat$
+          \begin{itemize}
+            \item $\clop(X)$: $X$ の開かつ閉集合の全体
+            \item 和集合および積集合を取る操作について閉じており，ブール代数となる
+          \end{itemize}
+    \item $\eta_B:B\ni b\mapsto\{v\in\spec(B)\mid v(b)=1\}\in\clop(\spec(B))$
+  \end{itemize}
+\end{proof}
+
 \section{米田の補題}
 
 所与の集合値関手 $K:\cat{D}\to\set$ に対して
