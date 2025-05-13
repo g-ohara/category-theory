@@ -1,25 +1,33 @@
-# category-theory
+# Category Theory (圏論ノート)
 
-The book of category theory written in Japanese.
+The notebook of category theory written in Japanese.
 
-## Usage
+## How to build
 
-### Prerequisites
+### Requirements
 
-* $\TeX{}$ compiler
+#### building tool
+
+* GNU Make
+
+#### TeX to PDF
+
+* lualatex
 * latexmk
 * (optional) ChkTeX
 * (optional) latexindent
 
-### How to compile locally
+#### TeX to HTML
 
-1. Edit `main.tex`
-1. Run: `latexmk main.tex`
+* Pandoc
 
-### How to compile on GitHub
+#### PDF to PNG
 
-1. Tag your commit.
-1. Push the tag.
+* pdftocairo
+
+### How to build
+
+Run `make` in the root directory.
 
 ## Contributing
 
