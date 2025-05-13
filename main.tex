@@ -5,17 +5,20 @@
 
 \usepackage{graphicx}
 
+\usepackage{amssymb}
+\usepackage[colorlinks=true]{hyperref}
+
 \usepackage{amsthm}
 \theoremstyle{definition}
-\newtheorem{definition}{定義}[chapter]
 \newtheorem{theorem}{定理}[chapter]
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
 
 \usepackage{proof}
 \renewcommand{\proofname}{\textbf{証明}}
 
 \usepackage{cleveref}
-\crefname{definition}{定義}{定義}
-\crefname{theorem}{定理}{定理}
+\crefname{theorem}{}{}
 
 \title{圏論ノート}
 \author{大原玄嗣}
@@ -176,6 +179,60 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \chapter{カン拡張}
 
 \epigraph{All Concepts are Kan Extensions.}{Saunders Mac Lane}
+
+\section{カン拡張}
+
+\begin{definition}[右カン拡張]
+  函手
+  $T:\cat{M}\to\cat{A},\ K:\cat{M}\to\cat{C},\ R:\cat{C}\to\cat{A}$
+  について自然変換
+  $\epsilon:RK\to T$
+  が
+  $A^K$
+  から
+  $T$
+  への普遍射であるとき，
+  $(R,\epsilon)$
+  を
+  $K$
+  に沿った
+  $T$
+  の右カン拡張
+  (right Kan extension)
+  といい，
+  $R=\ran_{K}T$
+  と表記する．
+\end{definition}
+
+\begin{center}
+  \includegraphics{src/right-kan}
+\end{center}
+
+\begin{definition}[左カン拡張]
+  函手
+  $T:\cat{M}\to\cat{A},\ K:\cat{M}\to\cat{C},\ L:\cat{C}\to\cat{A}$
+  について自然変換
+  $\eta:T\to RK$
+  が
+  $T$
+  から
+  $A^K$
+  への普遍射であるとき，
+  $(L,\epsilon)$
+  を
+  $K$
+  に沿った
+  $T$
+  の左カン拡張
+  (left Kan extension)
+  といい，
+  $L=\lan_{K}T$
+  と表記する．
+\end{definition}
+
+\begin{center}
+  \includegraphics{src/left-kan}
+\end{center}
 
 \section{すべての概念はカン拡張である}
 

@@ -158,15 +158,15 @@ figure figcaption {
     padding-left:30px;
 }
 
-.definition,.theorem,.proof {
+.definition,.theorem,.example,.proof {
   position: relative;
   margin: 30px;
   padding: 1em calc(1.5em + 9px);
   border-top: 1px solid var(--main-color);
   border-bottom: 1px solid var(--main-color);
 }
-:is(.definition,.theorem,.proof)::before,
-:is(.definition,.theorem,.proof)::after {
+:is(.definition,.theorem,.example,.proof)::before,
+:is(.definition,.theorem,.example,.proof)::after {
   position: absolute;
   width: 1px;
   top: 50%;
@@ -175,9 +175,9 @@ figure figcaption {
   background-color: var(--main-color);
   content: '';
 }
-:is(.definition,.theorem,.proof)::before {
+:is(.definition,.theorem,.example,.proof)::before {
   left: 9px;
 }
-:is(.definition,.theorem,.proof)::after {
+:is(.definition,.theorem,.example,.proof)::after {
   right: 9px;
 }

@@ -1,0 +1,23 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{positioning}
+\input{macro.tex}
+
+\begin{document}
+\begin{tikzpicture}
+	\node (C) {$\cat{C}$};
+	\node [below=2cm of C] (M) {$\cat{M}$};
+	\node [right=2cm of M] (A) {$\cat{A}$};
+	\draw [->] (M) to node [left]         {$K$}      (C);
+	\draw [->] (M) to node [below]        {$T$}        (A);
+	\draw [->] (C) to node [right]  {$\lan_{K}T$} (A);
+	\node [above right=0.9cm of C] (astart) {};
+	\node [below right=2.1cm and 2.2cm of astart] (aend) {};
+	\draw [->] (astart) to node [above right] {$A$} (aend);
+	\node [below right=1cm of C] (eend) {};
+	\node [below=1.2cm of eend] (estart) {};
+	\draw [->,double] (estart) to node [left] {$\mu$} (eend);
+	\node [above right=1.1cm and 0.6cm of M] (sstart) {};
+	\node [above right=1.0cm of sstart] (send) {};
+	\draw [->,double] (sstart) to node [above left] {$\tau$} (send);
+\end{tikzpicture}
+\end{document}
