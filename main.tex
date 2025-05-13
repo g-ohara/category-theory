@@ -27,7 +27,7 @@
 \begin{document}
 \maketitle
 
-\chapter{圏・関手・自然変換}
+\chapter{圏・函手・自然変換}
 
 \section{圏}
 
@@ -88,24 +88,24 @@
   集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．
 \end{definition}
 
-\section{関手}
+\section{函手}
 
 2つの世界 (圏) を比較したときに，世界を構成する要素は全く違っていても，
 それらの関係性に着目するとなんとなく似ている気がしてくることがある．
-関手はそのようなアナロジーを表現する矢印である．
-\begin{definition}[関手]
+函手はそのようなアナロジーを表現する矢印である．
+\begin{definition}[函手]
   2つの圏 $\cat{C},\cat{D}$ の対象から対象へ，射から射へ対応づける写像
   $F:\cat{C}\to\cat{D}$ が以下の条件を満たすとき，
-  $F$ を関手 (functor) という．
+  $F$ を函手 (functor) という．
   \begin{itemize}
     \item $F(A\to B)=F(A)\to F(B)$,
     \item $F(\id{A})=\id{F(A)}$,
     \item $F(g\circ f)=F(g)\circ F(f)$.
   \end{itemize}
 \end{definition}
-すなわち関手は域と余域，恒等射と射の合成を保存する写像である．
+すなわち函手は域と余域，恒等射と射の合成を保存する写像である．
 のちに「圏の圏」なるものを考えるが，
-そこでは圏が対象として，関手が射として扱われることになる
+そこでは圏が対象として，函手が射として扱われることになる
 (これが\cref{def:category}を満たすことは容易に確認できる)．
 
 \section{自然変換}
@@ -115,7 +115,7 @@
 この高次のアナロジーが自然変換である．
 
 \begin{definition}[自然変換]
-  2つの関手 $F:\cat{C}\to\cat{D},G:\cat{C}\to\cat{D}$ について，
+  2つの函手 $F:\cat{C}\to\cat{D},G:\cat{C}\to\cat{D}$ について，
   $\cat{C}$ の対象 $X$ を $\cat{D}$ の射 $t_X:F(X)\to G(X)$ に対応づける
   写像 $t$ が
   \begin{equation}
@@ -129,8 +129,8 @@
 
 \section{米田の補題}
 
-所与の集合値関手 $K:\cat{D}\to\set$ に対して
-表現可能関手 $\mrp{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
+所与の集合値函手 $K:\cat{D}\to\set$ に対して
+表現可能函手 $\mrp{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
 コンポーネント $\alpha_r$ が恒等射 $\id{r}$
 をどこに写すかを決めることと等価である．
 以下で紹介する米田の補題はその事実を主張しており，
@@ -240,17 +240,17 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 本節では，極限や随伴がカン拡張として表現されることを確認する．
 
 \begin{theorem}[極限は右カン拡張である]\label{thm:limit-is-right-kan-extension}
-  関手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
+  函手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
   \begin{itemize}
     \item $T$ が極限をもつ，
-    \item $T$ が (一意的な) 関手 $K_1:\cat{M}\to\mathbf{1}$
+    \item $T$ が (一意的な) 函手 $K_1:\cat{M}\to\mathbf{1}$
           に沿った右カン拡張をもつ．
   \end{itemize}
   またこれらが成り立つとき $\lim T\simeq\ran_{K_1}T$．
 \end{theorem}
 
 \begin{proof}
-  関手 $A:\mathbf{1}\to\cat{A}$ は $\cat{A}$ の対象であり，
+  函手 $A:\mathbf{1}\to\cat{A}$ は $\cat{A}$ の対象であり，
   $A\circ K_1=\Delta(A)$ である．
   よって自然変換 $\alpha:A\circ K_1\to T$ は $T$ への錐 $(A,\alpha)$ をなす．
   右カン拡張 $(\ran_{K_1}T,\epsilon)$ も同様に $T$ への錐であり，
@@ -267,10 +267,10 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \end{center}
 
 \begin{theorem}[余極限は左カン拡張である]
-  関手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
+  函手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
   \begin{itemize}
     \item $T$ が余極限をもつ，
-    \item $T$ が (一意的な) 関手 $K_1:\cat{M}\to\mathbf{1}$
+    \item $T$ が (一意的な) 函手 $K_1:\cat{M}\to\mathbf{1}$
           に沿った左カン拡張をもつ．
   \end{itemize}
   またこれらが成り立つとき $\colim T\simeq\lan_{K_1}T$．
