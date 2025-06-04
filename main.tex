@@ -146,6 +146,28 @@
 
 \chapter{普遍性}
 
+\section{普遍射}
+
+\begin{definition}[普遍射-1]
+  函手 $S:\cat{C}\to\cat{D}$ と対象 $c\in\obj{\cat{C}}$ について，
+  対象 $r\in\obj{\cat{D}}$ と射 $v:S(r)\to c$ の組 $(r,v)$ が
+  \begin{equation}
+    \forall d\in\obj{\cat{D}}\ \forall f\in\mrp{\cat{C}}{S(d)}{c}
+    \ \exists!f'\in\mrp{\cat{D}}{d}{r};\ f=v\circ S(f')
+  \end{equation}
+  を満たすとき，$(r,v)$ を $S$ から $c$ への普遍射 (universal arrow) という．
+\end{definition}
+
+\begin{definition}[普遍射-2]
+  函手 $S:\cat{D}\to\cat{C}$ と対象 $c\in\obj{\cat{C}}$ について，
+  対象 $r\in\obj{\cat{D}}$ と射 $u:S(r)\to c$ の組 $(r,u)$ が
+  \begin{equation}
+    \forall d\in\obj{\cat{D}}\ \forall f\in\mrp{\cat{C}}{S(d)}{c}
+    \ \exists!f'\in\mrp{\cat{D}}{r}{d};\ f=S(f')\circ u
+  \end{equation}
+  を満たすとき，$(r,u)$ を $c$ から $S$ への普遍射という．
+\end{definition}
+
 \section{米田の補題}
 
 所与の集合値函手 $K:\cat{D}\to\set$ に対して
