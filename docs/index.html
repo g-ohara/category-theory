@@ -46,7 +46,20 @@ id="toc-圏函手自然変換">圏・函手・自然変換</a>
 </ul></li>
 <li><a href="#普遍性" id="toc-普遍性">普遍性</a>
 <ul>
+<li><a href="#普遍射" id="toc-普遍射">普遍射</a></li>
 <li><a href="#米田の補題" id="toc-米田の補題">米田の補題</a></li>
+<li><a href="#米田の補題の系"
+id="toc-米田の補題の系">米田の補題の系</a></li>
+</ul></li>
+<li><a href="#極限" id="toc-極限">極限</a>
+<ul>
+<li><a href="#極限の例" id="toc-極限の例">極限の例</a></li>
+<li><a href="#完備" id="toc-完備">完備</a></li>
+</ul></li>
+<li><a href="#随伴" id="toc-随伴">随伴</a>
+<ul>
+<li><a href="#随伴函手の性質"
+id="toc-随伴函手の性質">随伴函手の性質</a></li>
 </ul></li>
 <li><a href="#カン拡張" id="toc-カン拡張">カン拡張</a>
 <ul>
@@ -209,6 +222,34 @@ transformation) といい， <span class="math inline">\(t:F\Rightarrow
 G\)</span> と表記する．</p>
 </div>
 <h1 id="普遍性">普遍性</h1>
+<h2 id="普遍射">普遍射</h2>
+<div class="definition">
+<p>函手 <span class="math inline">\(S:\mathscr{C}\to\mathscr{D}\)</span>
+と対象 <span class="math inline">\(c\in\mathscr{C}\)</span> について，
+対象 <span class="math inline">\(r\in\mathscr{D}\)</span> と射 <span
+class="math inline">\(v:S(r)\to c\)</span> の組 <span
+class="math inline">\((r,v)\)</span> が <span
+class="math display">\[\forall d\in\mathscr{D}\ \forall
+f\in\mathscr{C}(S(d),c)
+    \ \exists!f&#39;\in\mathscr{D}(d,r);\ f=v\circ S(f&#39;)\]</span>
+を満たすとき，<span class="math inline">\((r,v)\)</span> を <span
+class="math inline">\(S\)</span> から <span
+class="math inline">\(c\)</span> への普遍射 (universal arrow)
+という．</p>
+</div>
+<div class="definition">
+<p>函手 <span class="math inline">\(S:\mathscr{D}\to\mathscr{C}\)</span>
+と対象 <span class="math inline">\(c\in\mathscr{C}\)</span> について，
+対象 <span class="math inline">\(r\in\mathscr{D}\)</span> と射 <span
+class="math inline">\(u:S(r)\to c\)</span> の組 <span
+class="math inline">\((r,u)\)</span> が <span
+class="math display">\[\forall d\in\mathscr{D}\ \forall
+f\in\mathscr{C}(S(d),c)
+    \ \exists!f&#39;\in\mathscr{D}(r,d);\ f=S(f&#39;)\circ u\]</span>
+を満たすとき，<span class="math inline">\((r,u)\)</span> を <span
+class="math inline">\(c\)</span> から <span
+class="math inline">\(S\)</span> への普遍射という．</p>
+</div>
 <h2 id="米田の補題">米田の補題</h2>
 <p>所与の集合値函手 <span
 class="math inline">\(K:\mathscr{D}\to\mathbf{Set}\)</span> に対して
@@ -268,6 +309,94 @@ class="math display">\[\begin{aligned}
 </div>
 <p>よって <span class="math inline">\(y\)</span>
 は全単射であることが示された． ◻</p>
+</div>
+<h2 id="米田の補題の系">米田の補題の系</h2>
+<div class="theorem">
+<p>任意の群 <span class="math inline">\(G\)</span> は，対称群 <span
+class="math inline">\(\operatorname{Sym}(G)\)</span>
+の部分群と同型である．</p>
+</div>
+<h1 id="極限">極限</h1>
+<h2 id="極限の例">極限の例</h2>
+<div class="definition">
+<p>圏 <span class="math inline">\(\mathscr{C}\)</span> ，圏 <span
+class="math inline">\(\mathscr{J}=(\rightarrow\cdot\leftarrow)\)</span>
+および 函手 <span
+class="math inline">\(F:\mathscr{J}\to\mathscr{C}\)</span> の極限を，
+引き戻し (pullback) またはファイバー積 (fiber product) という．</p>
+</div>
+<h2 id="完備">完備</h2>
+<div class="definition">
+<p>圏 <span class="math inline">\(\mathscr{C}\)</span>
+について任意の有限圏 <span class="math inline">\(\mathscr{J}\)</span>
+および函手 <span
+class="math inline">\(F:\mathscr{J}\to\mathscr{C}\)</span>
+が極限をもつとき，<span class="math inline">\(\mathscr{C}\)</span>
+は有限完備であるという．</p>
+</div>
+<div class="definition">
+<p>圏 <span class="math inline">\(\mathscr{C}\)</span>
+について任意の小圏 <span class="math inline">\(\mathscr{J}\)</span>
+および函手 <span
+class="math inline">\(F:\mathscr{J}\to\mathscr{C}\)</span>
+が極限をもつとき，<span class="math inline">\(\mathscr{C}\)</span>
+は完備であるという．</p>
+</div>
+<h1 id="随伴">随伴</h1>
+<h2 id="随伴函手の性質">随伴函手の性質</h2>
+<div class="theorem">
+<p><span id="thm:adjoint-functor-definitions"
+label="thm:adjoint-functor-definitions"></span> 函手 <span
+class="math inline">\(F:\mathscr{C}\rightleftarrows\mathscr{D}:G\)</span>
+について以下の命題は全て同値である:</p>
+<ol>
+<li><p><span class="math inline">\(F\dashv G\)</span>．</p></li>
+<li><p>自然変換 <span
+class="math inline">\(\eta:\mathrm{id}_{\mathscr{C}}\to GF\)</span>
+が存在し， 各 <span class="math inline">\(\eta_c:c\to GF(c)\)</span> が
+<span class="math inline">\(c\)</span> から <span
+class="math inline">\(G\)</span> への普遍射である．</p></li>
+<li><p>自然変換 <span
+class="math inline">\(\epsilon:FG\to\mathrm{id}_{\mathscr{D}}\)</span>
+が存在し， 各 <span class="math inline">\(\epsilon_d:FG(d)\to d\)</span>
+が <span class="math inline">\(F\)</span> から <span
+class="math inline">\(d\)</span> への普遍射である．</p></li>
+</ol>
+</div>
+<div class="theorem">
+<p><span class="math display">\[-\times A\dashv{(-)}^A.\]</span></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <a href="#thm:adjoint-functor-definitions"
+data-reference-type="ref"
+data-reference="thm:adjoint-functor-definitions">[thm:adjoint-functor-definitions]</a>
+の (i) <span class="math inline">\(\Leftrightarrow\)</span> (iii)
+を用いる． 評価射 <span class="math inline">\(\epsilon_c:{C}^A\to
+C\)</span> が (i) 対象 <span class="math inline">\(C\)</span>
+について自然であり， (ii) <span class="math inline">\(-\times A\)</span>
+から <span class="math inline">\(C\)</span>
+への普遍射であることを示す．</p>
+<ol>
+<li><p>自然性を示す． 冪函手の定義より，任意の <span
+class="math inline">\(C,D\in\mathscr{C}\)</span> と射 <span
+class="math inline">\(f:C\to D\)</span> について <span
+class="math display">\[\begin{aligned}
+            f\circ\epsilon_C
+             &amp;
+=\epsilon_D\circ(\widetilde{(f\circ\epsilon_C)}\times\mathrm{id}_{A}) \\
+             &amp;
+=\epsilon_D\circ(f^A\times\mathrm{id}_{A})                            \\
+          
+\end{aligned}\]</span> よって自然性は示された．</p></li>
+<li><p>普遍性を示す． 冪函手の定義より，任意の <span
+class="math inline">\(X\in\mathscr{C}\)</span> と <span
+class="math inline">\(g:X\times A\to C\)</span>
+について以下を満たす<span class="math inline">\(\tilde{g}:X\to
+C^A\)</span> がただ一つ存在する: <span
+class="math display">\[\epsilon_C\circ(\tilde{g}\times\mathrm{id}_{A})=g.\]</span>
+よって普遍性は示された．</p></li>
+</ol>
+<p> ◻</p>
 </div>
 <h1 id="カン拡張">カン拡張</h1>
 <div class="epigraph">
