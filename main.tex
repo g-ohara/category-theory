@@ -10,10 +10,10 @@
 \usepackage[colorlinks=true]{hyperref}
 
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{theorem}{定理}[chapter]
-\newtheorem{definition}[theorem]{定義}
-\newtheorem{example}[theorem]{例}
+\usepackage{thmbox}
+\newtheorem[S]{theorem}{定理}[chapter]
+\newtheorem[S]{definition}[theorem]{定義}
+\newtheorem[S]{example}[theorem]{例}
 
 \usepackage{proof}
 \renewcommand{\proofname}{\textbf{証明}}

@@ -34,14 +34,14 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#圏関手自然変換"
-id="toc-圏関手自然変換">圏・関手・自然変換</a>
+<li><a href="#圏函手自然変換"
+id="toc-圏函手自然変換">圏・函手・自然変換</a>
 <ul>
 <li><a href="#圏" id="toc-圏">圏</a>
 <ul>
 <li><a href="#集合圏" id="toc-集合圏">集合圏</a></li>
 </ul></li>
-<li><a href="#関手" id="toc-関手">関手</a></li>
+<li><a href="#函手" id="toc-函手">函手</a></li>
 <li><a href="#自然変換" id="toc-自然変換">自然変換</a></li>
 </ul></li>
 <li><a href="#普遍性" id="toc-普遍性">普遍性</a>
@@ -76,14 +76,15 @@ id="toc-位相幾何学の知識">位相幾何学の知識</a>
 </ul></li>
 </ul>
 </nav>
-<h1 id="圏関手自然変換">圏・関手・自然変換</h1>
+<h1 id="圏函手自然変換">圏・函手・自然変換</h1>
 <h2 id="圏">圏</h2>
-<p>射は，圏という世界における関係を表す矢印であり，．
+<p>射は，圏という世界における関係を表す矢印であり，
 圏論において対象は矢印の始まりと終わりにつけられる名称に過ぎず，
 対象のもつ性質は射によってのみ特徴づけられる．</p>
-<div id="def:category" class="definition">
-<p><strong>定義 1.1</strong> (圏). 圏 (category) は，対象 (object) と射
-(arrow, morphism) の集まりからなり， 以下を満たす．</p>
+<div class="definition">
+<p><span id="def:category" label="def:category"></span> 圏 (category)
+は，対象 (object) と射 (arrow, morphism) の集まりからなり，
+以下を満たす．</p>
 <ul>
 <li><p>任意の射は，域 (domain) と余域 (codomain) と呼ばれる対象をもつ．
 射 <span class="math inline">\(f\)</span> の域を<span
@@ -120,16 +121,38 @@ class="math inline">\(\mathscr{C}(A,B)\)</span> と表記する．</p>
 <img src="src/category.png" />
 <figcaption>圏の例</figcaption>
 </figure>
+<div class="definition">
+<p>射 <span class="math inline">\(f:A\to B\)</span>
+について以下を満たす射 <span class="math inline">\(g:B\to A\)</span> を
+<span class="math inline">\(f\)</span> の逆射 (inverse) といい， <span
+class="math inline">\(f^{-1}\)</span> と表記する: <span
+class="math display">\[g\circ f=\mathrm{id}_{A}\wedge f\circ
+g=\mathrm{id}_{B}.\]</span></p>
+</div>
+<div class="theorem">
+<p>任意の射について，逆射は高々1つである．</p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> 射 <span class="math inline">\(f:A\to B\)</span>
+の相異なる逆射 <span class="math inline">\(g,h:B\to A\)</span>
+が存在すると仮定する． <span
+class="math display">\[g=g\circ\mathrm{id}_{B}=g\circ(f\circ h)=(g\circ
+f)\circ h=\mathrm{id}_{A}\circ h=h.\]</span>
+これは仮定に矛盾し，定理は示された． ◻</p>
+</div>
+<div class="definition">
+<p>射 <span class="math inline">\(f\)</span> について逆射 <span
+class="math inline">\(f^{-1}\)</span> が存在するとき， <span
+class="math inline">\(f\)</span> は同型射 (isomorphism)
+であるという．</p>
+</div>
 <p>対象は性質をもたないため，
 対象どうしの「本質的な等しさ」なるものも射によって定められる．</p>
 <div class="definition">
-<p><strong>定義 1.2</strong> (同型). 圏 <span
-class="math inline">\(\mathscr{C}\)</span> の対象 <span
-class="math inline">\(A,B\)</span> について <span
-class="math display">\[\exists f\in\mathscr{C}(A,B);
-    \ \exists g\in\mathscr{C}(B,A);
-    \ g\circ f=\mathrm{id}_{A}\wedge f\circ g=\mathrm{id}_{B}\]</span>
-が成り立つとき， <span class="math inline">\(A\)</span> と <span
+<p>圏 <span class="math inline">\(\mathscr{C}\)</span> の対象 <span
+class="math inline">\(A,B\)</span> について同型射 <span
+class="math inline">\(A\to B\)</span> が存在するとき， <span
+class="math inline">\(A\)</span> と <span
 class="math inline">\(B\)</span> は同型 (isomorphic) であるといい，<span
 class="math inline">\(A\simeq B\)</span> と表記する．</p>
 </div>
@@ -141,20 +164,18 @@ class="math inline">\(A\simeq B\)</span> と表記する．</p>
 圏論はその逆をいく．「集合」という何かの間に写像を定めてしまい，
 それによって初めて集合の要素を定義する．</p>
 <div class="definition">
-<p><strong>定義 1.3</strong> (集合圏).
-集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．</p>
+<p>集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．</p>
 </div>
-<h2 id="関手">関手</h2>
+<h2 id="函手">函手</h2>
 <p>2つの世界 (圏)
 を比較したときに，世界を構成する要素は全く違っていても，
 それらの関係性に着目するとなんとなく似ている気がしてくることがある．
-関手はそのようなアナロジーを表現する矢印である．</p>
+函手はそのようなアナロジーを表現する矢印である．</p>
 <div class="definition">
-<p><strong>定義 1.4</strong> (関手). 2つの圏 <span
-class="math inline">\(\mathscr{C},\mathscr{D}\)</span>
+<p>2つの圏 <span class="math inline">\(\mathscr{C},\mathscr{D}\)</span>
 の対象から対象へ，射から射へ対応づける写像 <span
 class="math inline">\(F:\mathscr{C}\to\mathscr{D}\)</span>
-が以下の条件を満たすとき， <span class="math inline">\(F\)</span> を関手
+が以下の条件を満たすとき， <span class="math inline">\(F\)</span> を函手
 (functor) という．</p>
 <ul>
 <li><p><span class="math inline">\(F(A\to B)=F(A)\to
@@ -165,17 +186,17 @@ class="math inline">\(F(\mathrm{id}_{A})=\mathrm{id}_{F(A)}\)</span>,</p></li>
 F(f)\)</span>.</p></li>
 </ul>
 </div>
-<p>すなわち関手は域と余域，恒等射と射の合成を保存する写像である．
+<p>すなわち函手は域と余域，恒等射と射の合成を保存する写像である．
 のちに「圏の圏」なるものを考えるが，
-そこでは圏が対象として，関手が射として扱われることになる (これが<a
+そこでは圏が対象として，函手が射として扱われることになる (これが<a
 href="#def:category" data-reference-type="ref"
-data-reference="def:category">1.1</a>を満たすことは容易に確認できる)．</p>
+data-reference="def:category">[def:category]</a>を満たすことは容易に確認できる)．</p>
 <h2 id="自然変換">自然変換</h2>
 <p>2つの世界 (圏) について異なるアナロジーを考えることもできる．
 すると，異なるアナロジーの間にも何らかのアナロジーが見えてくることがある．
 この高次のアナロジーが自然変換である．</p>
 <div class="definition">
-<p><strong>定義 1.5</strong> (自然変換). 2つの関手 <span
+<p>2つの函手 <span
 class="math inline">\(F:\mathscr{C}\to\mathscr{D},G:\mathscr{C}\to\mathscr{D}\)</span>
 について， <span class="math inline">\(\mathscr{C}\)</span> の対象 <span
 class="math inline">\(X\)</span> を <span
@@ -189,9 +210,9 @@ G\)</span> と表記する．</p>
 </div>
 <h1 id="普遍性">普遍性</h1>
 <h2 id="米田の補題">米田の補題</h2>
-<p>所与の集合値関手 <span
+<p>所与の集合値函手 <span
 class="math inline">\(K:\mathscr{D}\to\mathbf{Set}\)</span> に対して
-表現可能関手 <span class="math inline">\(\mathscr{D}(r,-)\)</span>
+表現可能函手 <span class="math inline">\(\mathscr{D}(r,-)\)</span>
 からの自然変換 <span class="math inline">\(\alpha\)</span>
 を与えることは， コンポーネント <span
 class="math inline">\(\alpha_r\)</span> が恒等射 <span
@@ -202,10 +223,9 @@ class="math inline">\(\alpha_r(\mathrm{id}_{r})\)</span>
 の値ひとつから自然変換 <span class="math inline">\(\alpha\)</span>
 を構成する方法を提供する．</p>
 <div class="theorem">
-<p><strong>定理 2.1</strong> (米田の補題). <span
-class="math inline">\(\mathscr{D}\)</span> を局所小圏とする． 任意の
-<span class="math inline">\(K:\mathscr{D}\to\mathbf{Set}\)</span> と
-<span class="math inline">\(d\in\mathscr{D}\)</span> について <span
+<p><span class="math inline">\(\mathscr{D}\)</span> を局所小圏とする．
+任意の <span class="math inline">\(K:\mathscr{D}\to\mathbf{Set}\)</span>
+と <span class="math inline">\(d\in\mathscr{D}\)</span> について <span
 class="math display">\[y:\mathbf{Set}^\mathscr{D}(\mathscr{D}(r,-),K)\ni\alpha\mapsto\alpha_r(\mathrm{id}_{r})\in
 K(r)\]</span> は全単射である．</p>
 </div>
@@ -256,8 +276,7 @@ class="math display">\[\begin{aligned}
 </div>
 <h2 id="カン拡張-1">カン拡張</h2>
 <div class="definition">
-<p><strong>定義 3.1</strong> (右カン拡張). 函手 <span
-class="math inline">\(T:\mathscr{M}\to\mathscr{A},\
+<p>函手 <span class="math inline">\(T:\mathscr{M}\to\mathscr{A},\
 K:\mathscr{M}\to\mathscr{C},\ R:\mathscr{C}\to\mathscr{A}\)</span>
 について自然変換 <span class="math inline">\(\epsilon:RK\to T\)</span>
 が <span class="math inline">\(A^K\)</span> から <span
@@ -273,8 +292,7 @@ class="math inline">\(R=\mathop{\mathrm{Ran}}_{K}T\)</span>
 <p><img src="src/right-kan.png" alt="image" /></p>
 </div>
 <div class="definition">
-<p><strong>定義 3.2</strong> (左カン拡張). 函手 <span
-class="math inline">\(T:\mathscr{M}\to\mathscr{A},\
+<p>函手 <span class="math inline">\(T:\mathscr{M}\to\mathscr{A},\
 K:\mathscr{M}\to\mathscr{C},\ L:\mathscr{C}\to\mathscr{A}\)</span>
 について自然変換 <span class="math inline">\(\eta:T\to RK\)</span> が
 <span class="math inline">\(T\)</span> から <span
@@ -291,13 +309,14 @@ class="math inline">\(L=\mathop{\mathrm{Lan}}_{K}T\)</span>
 </div>
 <h2 id="すべての概念はカン拡張である">すべての概念はカン拡張である</h2>
 <p>本節では，極限や随伴がカン拡張として表現されることを確認する．</p>
-<div id="thm:limit-is-right-kan-extension" class="theorem">
-<p><strong>定理 3.3</strong> (極限は右カン拡張である). 関手 <span
+<div class="theorem">
+<p><span id="thm:limit-is-right-kan-extension"
+label="thm:limit-is-right-kan-extension"></span> 函手 <span
 class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
 について以下の2つは同値である:</p>
 <ul>
 <li><p><span class="math inline">\(T\)</span> が極限をもつ，</p></li>
-<li><p><span class="math inline">\(T\)</span> が (一意的な) 関手 <span
+<li><p><span class="math inline">\(T\)</span> が (一意的な) 函手 <span
 class="math inline">\(K_1:\mathscr{M}\to\mathbf{1}\)</span>
 に沿った右カン拡張をもつ．</p></li>
 </ul>
@@ -305,7 +324,7 @@ class="math inline">\(K_1:\mathscr{M}\to\mathbf{1}\)</span>
 T\simeq\mathop{\mathrm{Ran}}_{K_1}T\)</span>．</p>
 </div>
 <div class="proof">
-<p><em>Proof.</em> 関手 <span
+<p><em>Proof.</em> 函手 <span
 class="math inline">\(A:\mathbf{1}\to\mathscr{A}\)</span> は <span
 class="math inline">\(\mathscr{A}\)</span> の対象であり， <span
 class="math inline">\(A\circ K_1=\Delta(A)\)</span> である．
@@ -321,12 +340,11 @@ class="math inline">\((\mathop{\mathrm{Ran}}_{K_1}T,\epsilon)\)</span>
 <p><img src="src/lim-right-kan-2.png" alt="image" /></p>
 </div>
 <div class="theorem">
-<p><strong>定理 3.4</strong> (余極限は左カン拡張である). 関手 <span
-class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
+<p>函手 <span class="math inline">\(T:\mathscr{M}\to\mathscr{A}\)</span>
 について以下の2つは同値である:</p>
 <ul>
 <li><p><span class="math inline">\(T\)</span> が余極限をもつ，</p></li>
-<li><p><span class="math inline">\(T\)</span> が (一意的な) 関手 <span
+<li><p><span class="math inline">\(T\)</span> が (一意的な) 函手 <span
 class="math inline">\(K_1:\mathscr{M}\to\mathbf{1}\)</span>
 に沿った左カン拡張をもつ．</p></li>
 </ul>
@@ -336,7 +354,7 @@ class="math inline">\(\mathop{\mathrm{Colim}}T\simeq\mathop{\mathrm{Lan}}_{K_1}T
 <div class="proof">
 <p><em>Proof.</em> <a href="#thm:limit-is-right-kan-extension"
 data-reference-type="ref"
-data-reference="thm:limit-is-right-kan-extension">3.3</a>
+data-reference="thm:limit-is-right-kan-extension">[thm:limit-is-right-kan-extension]</a>
 より双対的に示される． ◻</p>
 </div>
 <div class="center">
@@ -355,21 +373,20 @@ data-reference="thm:limit-is-right-kan-extension">3.3</a>
 ストーンの双対性定理は位相空間と束の対応を与えるが，
 ストーンの表現定理はそれらに制約を加えたストーン空間とブール代数の対応を与える．</p>
 <div class="definition">
-<p><strong>定義 4.1</strong> (ストーン空間の圏). ストーン空間 (<a
-href="#def:stone-space" data-reference-type="ref"
-data-reference="def:stone-space">6.12</a>) と連続写像 (<a
+<p>ストーン空間 (<a href="#def:stone-space" data-reference-type="ref"
+data-reference="def:stone-space">[def:stone-space]</a>) と連続写像 (<a
 href="#def:continuous-map" data-reference-type="ref"
-data-reference="def:continuous-map">6.3</a>) のなす圏を <span
-class="math inline">\(\mathsf{Stone}\)</span> と表記する．</p>
+data-reference="def:continuous-map">[def:continuous-map]</a>) のなす圏を
+<span class="math inline">\(\mathsf{Stone}\)</span> と表記する．</p>
 </div>
 <div class="definition">
-<p><strong>定義 4.2</strong> (ブール代数の圏). ブール代数 (<a
-href="#def:boolean-algebra" data-reference-type="ref"
-data-reference="def:boolean-algebra">5.7</a>) とブール準同型のなす圏を
-<span class="math inline">\(\mathsf{BLat}\)</span> と表記する．</p>
+<p>ブール代数 (<a href="#def:boolean-algebra" data-reference-type="ref"
+data-reference="def:boolean-algebra">[def:boolean-algebra]</a>)
+とブール準同型のなす圏を <span
+class="math inline">\(\mathsf{BLat}\)</span> と表記する．</p>
 </div>
 <div class="theorem">
-<p><strong>定理 4.3</strong> (ストーンの表現定理). <span
+<p><span
 class="math display">\[\mathsf{Stone}\simeq\mathsf{BLat}^\mathrm{op}.\]</span></p>
 </div>
 <div class="proof">
@@ -410,28 +427,27 @@ v(b)=1\}\in\operatorname{clop}(\operatorname{spec}(B))\)</span></p></li>
 </div>
 <h3 id="ストーンの双対性定理-1">ストーンの双対性定理</h3>
 <div class="definition">
-<p><strong>定義 4.4</strong> (既約). 以下の条件を満たす位相空間 <span
+<p>以下の条件を満たす位相空間 <span
 class="math inline">\((X,\mathcal{O})\)</span> を既約 (irreducible)
 であるという． <span class="math display">\[\forall
 O_1,O_2\in\mathcal{O}\setminus\{\emptyset\};
     \ (X\setminus O_1)\cap(X\setminus O_2)\neq X\]</span></p>
 </div>
 <div class="definition">
-<p><strong>定義 4.5</strong> (sober 空間). 既約位相空間 <span
-class="math inline">\((X,\mathcal{O})\)</span> の任意の既約閉部分集合
-<span class="math inline">\(A\subseteq X\)</span> について， <span
-class="math inline">\(\{a\}\)</span> の閉包が <span
+<p>既約位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
+の任意の既約閉部分集合 <span class="math inline">\(A\subseteq X\)</span>
+について， <span class="math inline">\(\{a\}\)</span> の閉包が <span
 class="math inline">\(A\)</span> に等しくなるような <span
 class="math inline">\(a\in A\)</span> がただ一つ存在するとき， <span
 class="math inline">\((X,\mathcal{O})\)</span> を sober 空間 (sober
 space) という．</p>
 </div>
 <div class="definition">
-<p><strong>定義 4.6</strong> (空間的完備ハイティング代数). 完備 (<a
-href="#def:complete-lattice" data-reference-type="ref"
-data-reference="def:complete-lattice">5.3</a>) なハイティング代数 (<a
-href="#def:heyting-algebra" data-reference-type="ref"
-data-reference="def:heyting-algebra">5.6</a>) <span
+<p>完備 (<a href="#def:complete-lattice" data-reference-type="ref"
+data-reference="def:complete-lattice">[def:complete-lattice]</a>)
+なハイティング代数 (<a href="#def:heyting-algebra"
+data-reference-type="ref"
+data-reference="def:heyting-algebra">[def:heyting-algebra]</a>) <span
 class="math inline">\(F\)</span> について，任意の <span
 class="math inline">\(a,b\in F\)</span> に対して <span
 class="math inline">\(a\le b\)</span> でないならば <span
@@ -441,17 +457,15 @@ class="math inline">\(f(a)=1\wedge f(b)=0\)</span> を満たす束準同型
 (spatial complete Heyting algebra) という。</p>
 </div>
 <div class="definition">
-<p><strong>定義 4.7</strong> (sober 空間の圏). sober
-空間と連続写像のなす圏を <span
+<p>sober 空間と連続写像のなす圏を <span
 class="math inline">\(\mathbf{Sob}\)</span> と表記する．</p>
 </div>
 <div class="definition">
-<p><strong>定義 4.8</strong> (空間的完備ハイティング代数の圏).
-空間的完備ハイティング代数と束準同型のなす圏を <span
+<p>空間的完備ハイティング代数と束準同型のなす圏を <span
 class="math inline">\(\mathbf{SFrm}\)</span> と表記する．</p>
 </div>
 <div class="theorem">
-<p><strong>定理 4.9</strong> (ストーンの双対性定理). <span
+<p><span
 class="math display">\[\mathbf{Sob}\simeq\mathbf{SFrm}^\mathrm{op}.\]</span></p>
 </div>
 <h1 id="代数学の知識">代数学の知識</h1>
@@ -464,54 +478,51 @@ class="math display">\[\mathbf{Sob}\simeq\mathbf{SFrm}^\mathrm{op}.\]</span></p>
 例えば交わりと結びは積と余積として，最大元と最小限は終対象と始対象として,
 相対擬補元は冪として表現することができる．</p>
 <div class="definition">
-<p><strong>定義 5.1</strong> (半順序集合). 圏 <span
-class="math inline">\(\mathscr{C}\)</span> について <span
+<p>圏 <span class="math inline">\(\mathscr{C}\)</span> について <span
 class="math display">\[\forall
 x,y\in\mathscr{C};|\mathscr{C}(x,y)|\le1\]</span> が成り立つとき， <span
 class="math inline">\(\mathscr{C}\)</span> は半順序集合 (partially
 ordered set, poset) であるという．</p>
 </div>
 <div class="definition">
-<p><strong>定義 5.2</strong> (束). 半順序集合 <span
-class="math inline">\(\mathscr{C}\)</span> が
+<p>半順序集合 <span class="math inline">\(\mathscr{C}\)</span> が
 有限積と有限余積をもつとき， <span
 class="math inline">\(\mathscr{C}\)</span> は束 (lattice)
 であるという．</p>
 </div>
-<div id="def:complete-lattice" class="definition">
-<p><strong>定義 5.3</strong> (完備束).
+<div class="definition">
+<p><span id="def:complete-lattice" label="def:complete-lattice"></span>
 任意の部分集合が下限と上限をもつような半順序集合を 完備束 (complete
 lattice) という．</p>
 </div>
 <div class="theorem">
-<p><strong>定理 5.4</strong>.
-任意の位相空間の位相は完備ハイティング代数である．</p>
+<p>任意の位相空間の位相は完備ハイティング代数である．</p>
 </div>
 <div class="definition">
-<p><strong>定義 5.5</strong> (有界束). 束 <span
-class="math inline">\(\mathscr{C}\)</span> が終対象と始対象をもつとき，
-<span class="math inline">\(\mathscr{C}\)</span> は有界束 (bounded
-lattice) であるという．</p>
+<p>束 <span class="math inline">\(\mathscr{C}\)</span>
+が終対象と始対象をもつとき， <span
+class="math inline">\(\mathscr{C}\)</span> は有界束 (bounded lattice)
+であるという．</p>
 </div>
-<div id="def:heyting-algebra" class="definition">
-<p><strong>定義 5.6</strong> (ハイティング代数). 有界束 <span
-class="math inline">\(\mathscr{C}\)</span>
+<div class="definition">
+<p><span id="def:heyting-algebra" label="def:heyting-algebra"></span>
+有界束 <span class="math inline">\(\mathscr{C}\)</span>
 が任意の対象の組について冪をもつとき, <span
 class="math inline">\(\mathscr{C}\)</span> はハイティング代数 (Heyting
 algebra) であるという．</p>
 </div>
-<div id="def:boolean-algebra" class="definition">
-<p><strong>定義 5.7</strong> (ブール代数). ハイティング代数 <span
-class="math inline">\(\mathscr{C}\)</span> について <span
-class="math display">\[\forall x\in\mathscr{C};\ \neg\neg x=x\]</span>
-が成り立つとき， <span class="math inline">\(\mathscr{C}\)</span> は
-ブール代数 (Boolean algebra) であるという．</p>
+<div class="definition">
+<p><span id="def:boolean-algebra" label="def:boolean-algebra"></span>
+ハイティング代数 <span class="math inline">\(\mathscr{C}\)</span>
+について <span class="math display">\[\forall x\in\mathscr{C};\ \neg\neg
+x=x\]</span> が成り立つとき， <span
+class="math inline">\(\mathscr{C}\)</span> は ブール代数 (Boolean
+algebra) であるという．</p>
 </div>
 <h1 id="位相幾何学の知識">位相幾何学の知識</h1>
 <h2 id="位相空間論">位相空間論</h2>
 <div class="definition">
-<p><strong>定義 6.1</strong> (位相空間). 集合 <span
-class="math inline">\(X\)</span> とその部分集合族 <span
+<p>集合 <span class="math inline">\(X\)</span> とその部分集合族 <span
 class="math inline">\(\mathcal{O}\subseteq2^X\)</span>
 が以下の条件を満たすとき, <span
 class="math inline">\((X,\mathcal{O})\)</span> は位相空間 (topological
@@ -524,9 +535,8 @@ space) であるという． <span class="math display">\[\begin{aligned}
 \end{aligned}\]</span></p>
 </div>
 <div class="definition">
-<p><strong>定義 6.2</strong> (開集合，閉集合，開かつ閉集合). 位相空間
-<span class="math inline">\((X,\mathcal{O})\)</span> について， <span
-class="math inline">\(\mathcal{O}\)</span> の元を <span
+<p>位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
+について， <span class="math inline">\(\mathcal{O}\)</span> の元を <span
 class="math inline">\(X\)</span> の開集合 (open set) という．
 また部分集合 <span class="math inline">\(S\subseteq X\)</span> が <span
 class="math display">\[\exists O\in\mathcal{O};\ S=X\setminus O\]</span>
@@ -538,9 +548,9 @@ class="math inline">\(X\)</span> の閉集合である集合を <span
 class="math inline">\(X\)</span> の開かつ閉集合 (closed-open set, clopen
 set) という．</p>
 </div>
-<div id="def:continuous-map" class="definition">
-<p><strong>定義 6.3</strong> (連続写像). 位相空間 <span
-class="math inline">\((X,\mathcal{O}_X)\)</span> と <span
+<div class="definition">
+<p><span id="def:continuous-map" label="def:continuous-map"></span>
+位相空間 <span class="math inline">\((X,\mathcal{O}_X)\)</span> と <span
 class="math inline">\((Y,\mathcal{O}_Y)\)</span> および写像 <span
 class="math inline">\(f:X\to Y\)</span> が <span
 class="math display">\[\forall O\in\mathcal{O}_Y;\
@@ -549,8 +559,7 @@ class="math inline">\(f\)</span> は連続写像 (continuous map)
 であるという．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.4</strong> (被覆，開被覆，部分被覆，有限部分被覆).
-位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
+<p>位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
 の部分集合族 <span
 class="math inline">\(\mathcal{C}\subseteq2^X\)</span> について <span
 class="math display">\[X\subset\bigcup_{C\in\mathcal{C}}C\]</span>
@@ -570,32 +579,28 @@ class="math inline">\(\mathcal{C}_0\subseteq\mathcal{C}\)</span> を
 (finite subcover) であるという．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.5</strong> (コンパクト集合). 位相空間 <span
-class="math inline">\((X,\mathcal{O})\)</span> の部分集合 <span
-class="math inline">\(A\subseteq X\)</span> の
+<p>位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
+の部分集合 <span class="math inline">\(A\subseteq X\)</span> の
 任意の開被覆が有限部分被覆をもつとき， <span
 class="math inline">\(A\)</span> はコンパクト集合 (compact set)
 であるという．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.6</strong> (コンパクト空間). 位相空間 <span
-class="math inline">\((X,\mathcal{O})\)</span> について <span
-class="math inline">\(X\)</span> がコンパクト集合であるとき, <span
+<p>位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
+について <span class="math inline">\(X\)</span>
+がコンパクト集合であるとき, <span
 class="math inline">\((X,\mathcal{O})\)</span> はコンパクト空間 (compact
 space) であるという．</p>
 </div>
 <div class="example">
-<p><strong>例 6.7</strong> (<span
-class="math inline">\(\mathbb{R}\)</span> はコンパクト空間でない).
-通常の位相をもつ <span class="math inline">\(\mathbb{R}\)</span>
+<p>通常の位相をもつ <span class="math inline">\(\mathbb{R}\)</span>
 の開被覆 <span class="math inline">\(\{(n,n+2)\mid
 n\in\mathbb{Z}\}\)</span> は有限部分被覆をもたないため， <span
 class="math inline">\(\mathbb{R}\)</span> はコンパクト空間でない．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.8</strong> (連結，不連結). 位相空間 <span
-class="math inline">\((X,\mathcal{O})\)</span> の部分集合 <span
-class="math inline">\(A\subseteq X\)</span> が <span
+<p>位相空間 <span class="math inline">\((X,\mathcal{O})\)</span>
+の部分集合 <span class="math inline">\(A\subseteq X\)</span> が <span
 class="math display">\[\exists
 O_1,O_2\in\mathcal{O}\setminus\{\emptyset\};
     \ O_1\cup O_2=A\wedge O_1\cap O_2=\emptyset\]</span> を満たすとき
@@ -604,18 +609,15 @@ O_1,O_2\in\mathcal{O}\setminus\{\emptyset\};
 の部分集合は連結 (connected) であるという．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.9</strong> (連結成分).
-位相空間の極大な連結部分集合を， その位相空間の連結成分 (connected
+<p>位相空間の極大な連結部分集合を， その位相空間の連結成分 (connected
 component) という．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.10</strong> (完全不連結).
-任意の連結成分が一点集合であるような位相空間を 完全不連結 (disconnected)
-であるという．</p>
+<p>任意の連結成分が一点集合であるような位相空間を 完全不連結
+(disconnected) であるという．</p>
 </div>
 <div class="definition">
-<p><strong>定義 6.11</strong> (ハウスドルフ空間).
-以下の条件を満たす位相空間 <span
+<p>以下の条件を満たす位相空間 <span
 class="math inline">\((X,\mathcal{O})\)</span> を ハウスドルフ空間
 (Hausdorff space) という． <span class="math display">\[\forall x,y\in
 X;
@@ -623,8 +625,8 @@ X;
       \ x\in O_1\wedge y\in O_2\wedge O_1\cap
 O_2=\emptyset\right].\]</span></p>
 </div>
-<div id="def:stone-space" class="definition">
-<p><strong>定義 6.12</strong> (ストーン空間).
+<div class="definition">
+<p><span id="def:stone-space" label="def:stone-space"></span>
 コンパクト完全不連結ハウスドルフ空間をストーン空間 (Stone space)
 という．</p>
 </div>
