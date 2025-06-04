@@ -31,7 +31,7 @@
 
 \section{圏}
 
-射は，圏という世界における関係を表す矢印であり，．
+射は，圏という世界における関係を表す矢印であり，
 圏論において対象は矢印の始まりと終わりにつけられる名称に過ぎず，
 対象のもつ性質は射によってのみ特徴づけられる．
 
@@ -60,17 +60,36 @@
   \caption{圏の例}
 \end{figure}
 
+\begin{definition}[逆射]
+  射 $f:A\to B$ について以下を満たす射 $g:B\to A$ を $f$ の逆射 (inverse) といい，
+  $f^{-1}$ と表記する:
+  \begin{equation}
+    g\circ f=\id{A}\wedge f\circ g=\id{B}.
+  \end{equation}
+\end{definition}
+
+\begin{theorem}[逆射の一意性]
+  任意の射について，逆射は高々1つである．
+\end{theorem}
+
+\begin{proof}
+  射 $f:A\to B$ の相異なる逆射 $g,h:B\to A$ が存在すると仮定する．
+  \begin{equation*}
+    g=g\circ\id{B}=g\circ(f\circ h)=(g\circ f)\circ h=\id{A}\circ h=h.
+  \end{equation*}
+  これは仮定に矛盾し，定理は示された．
+\end{proof}
+
+\begin{definition}[同型射]
+  射 $f$ について逆射 $f^{-1}$ が存在するとき，
+  $f$ は同型射 (isomorphism) であるという．
+\end{definition}
+
 対象は性質をもたないため，
 対象どうしの「本質的な等しさ」なるものも射によって定められる．
 
 \begin{definition}[同型]
-  圏 $\cat{C}$ の対象 $A,B$ について
-  \begin{equation}
-    \exists f\in\mrp{\cat{C}}{A}{B};
-    \ \exists g\in\mrp{\cat{C}}{B}{A};
-    \ g\circ f=\id{A}\wedge f\circ g=\id{B}
-  \end{equation}
-  が成り立つとき，
+  圏 $\cat{C}$ の対象 $A,B$ について同型射 $A\to B$ が存在するとき，
   $A$ と $B$ は同型 (isomorphic) であるといい，$A\simeq B$ と表記する．
 \end{definition}
 
