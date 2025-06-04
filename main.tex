@@ -18,6 +18,8 @@
 \usepackage{proof}
 \renewcommand{\proofname}{\textbf{証明}}
 
+\usepackage{enumitem}
+
 \usepackage{cleveref}
 \crefname{theorem}{}{}
 
@@ -216,6 +218,80 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
     \includegraphics{src/yoneda}
   \end{center}
   よって $y$ は全単射であることが示された．
+\end{proof}
+
+\section{米田の補題の系}
+
+\begin{theorem}[Cayley の定理]
+  任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
+\end{theorem}
+
+\chapter{極限}
+
+\section{極限の例}
+
+\begin{definition}[引き戻し]
+  圏 $\cat{C}$ ，圏 $\cat{J}=(\rightarrow\cdot\leftarrow)$ および
+  函手 $F:\cat{J}\to\cat{C}$ の極限を，
+  引き戻し (pullback) またはファイバー積 (fiber product) という．
+\end{definition}
+
+\section{完備}
+
+\begin{definition}[有限完備]
+  圏 $\cat{C}$ について任意の有限圏 $\cat{J}$ および函手 $F:\cat{J}\to\cat{C}$
+  が極限をもつとき，$\cat{C}$ は有限完備であるという．
+\end{definition}
+
+\begin{definition}[完備]
+  圏 $\cat{C}$ について任意の小圏 $\cat{J}$ および函手 $F:\cat{J}\to\cat{C}$
+  が極限をもつとき，$\cat{C}$ は完備であるという．
+\end{definition}
+
+\chapter{随伴}
+
+\section{随伴函手の性質}
+
+\begin{theorem}[随伴函手の並列定義]\label{thm:adjoint-functor-definitions}
+  函手 $F:\cat{C}\rightleftarrows\cat{D}:G$ について以下の命題は全て同値である:
+  \begin{enumerate}
+    \item $F\dashv G$．
+    \item 自然変換 $\eta:\id{\cat{C}}\to GF$ が存在し，
+          各 $\eta_c:c\to GF(c)$ が $c$ から $G$ への普遍射である．
+    \item 自然変換 $\epsilon:FG\to\id{\cat{D}}$ が存在し，
+          各 $\epsilon_d:FG(d)\to d$ が $F$ から $d$ への普遍射である．
+  \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[並列定義の系]
+  \begin{equation}
+    -\times A\dashv{(-)}^A.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  \cref{thm:adjoint-functor-definitions} の (i) $\Leftrightarrow$ (iii) を用いる．
+  評価射 $\epsilon_c:{C}^A\to C$ が
+  (i) 対象 $C$ について自然であり，
+  (ii) $-\times A$ から $C$ への普遍射であることを示す．
+
+  \begin{enumerate}[label=(\roman*)] % chktex 36
+    \item 自然性を示す．
+          冪函手の定義より，任意の $C,D\in\obj{\cat{C}}$ と射 $f:C\to D$ について
+          \begin{align*}
+            f\circ\epsilon_C
+             & =\epsilon_D\circ(\widetilde{(f\circ\epsilon_C)}\times\id{A}) \\
+             & =\epsilon_D\circ(f^A\times\id{A})                            \\
+          \end{align*}
+          よって自然性は示された．
+    \item 普遍性を示す．
+          冪函手の定義より，任意の $X\in\obj{\cat{C}}$ と $g:X\times A\to C$
+          について以下を満たす$\tilde{g}:X\to C^A$ がただ一つ存在する:
+          \begin{equation*}
+            \epsilon_C\circ(\tilde{g}\times\id{A})=g.
+          \end{equation*}
+          よって普遍性は示された．
+  \end{enumerate}
 \end{proof}
 
 \chapter{カン拡張}
