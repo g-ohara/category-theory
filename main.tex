@@ -226,9 +226,122 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
 \end{theorem}
 
+\begin{center}
+  \includegraphics{src/yoneda-embedding}
+\end{center}
+
 \chapter{極限}
 
-\section{極限の例}
+\section{極限と余極限}
+
+\begin{definition}[終対象]
+  圏 $\cat{C}$ および対象 $t\in\obj{\cat{C}}$ が
+  \begin{equation}
+    \forall x\in\obj{\cat{C}};\ |\mrp{\cat{C}}{x}{t}|=1
+  \end{equation}
+  を満たすとき，
+  $t$ を $\cat{C}$ の終対象 (terminal object) という．
+\end{definition}
+
+\begin{definition}[始対象]
+  圏 $\cat{C}$ および対象 $i\in\obj{\cat{C}}$ が
+  \begin{equation}
+    \forall x\in\obj{\cat{C}};\ |\mrp{\cat{C}}{i}{x}|=1
+  \end{equation}
+  を満たすとき，
+  $i$ を $\cat{C}$ の始対象 (initial object) という．
+\end{definition}
+
+\begin{center}
+  \includegraphics{src/terminal-and-initial-object}
+\end{center}
+
+\begin{definition}[定函手]
+  圏 $\cat{C},\cat{D}$ および対象 $d\in\obj{\cat{D}}$ について，
+  $\cat{C}$ の任意の対象を $d$ に写し，
+  $\cat{C}$ の任意の射を $\id{d}$ に写す函手を $d$ の定函手 (constant functor) という．
+\end{definition}
+
+\begin{definition}[対角函手]
+  圏 $\cat{C},\cat{D}$ について，
+  任意の対象 $d\in\obj{\cat{D}}$ を $d$ の定函手に写す函手
+  $\Delta:\cat{D}\to\cat{D}^{\cat{C}}$ を対角函手 (diagonal functor) という．
+  ただし $\Delta$ は射 $f\in\mrp{\cat{D}}{a}{b}$ を，
+  任意のコンポーネントが $f$ であるような自然変換
+  $\Delta(f):\Delta(a)\to\Delta(b)$ に写す．
+\end{definition}
+
+\begin{definition}[錐]
+  圏 $\cat{C},\cat{D}$ および函手 $F:\cat{C}\to\cat{D}$ について，
+  対象 $d\in\obj{\cat{D}}$ および自然変換 $\psi:\id{d}\to F$ の組 $(d,\psi)$
+  を $F$ への錐 (cone) という．
+\end{definition}
+
+\begin{definition}[余錐]
+  圏 $\cat{C},\cat{D}$ および函手 $F:\cat{C}\to\cat{D}$ について，
+  対象 $d\in\obj{\cat{D}}$ および自然変換 $\phi:F\to\id{d}$ の組 $(d,\phi)$
+  を $F$ からの余錐 (cocone) という．
+\end{definition}
+
+\begin{definition}[錐の圏]
+  函手 $F$ への錐を対象とする圏を錐の圏といい，$\cone(F)$ と表記する．
+  ただし射 $u\in\mrp{\cone(F)}{(d,\psi)}{(d',\psi')}$ は
+  以下の図式を可換にする自然変換 $\id{d}\to\id{d'}$ である．
+  \begin{center}
+    \includegraphics{src/cone-category}
+  \end{center}
+\end{definition}
+
+\begin{definition}[余錐の圏]
+  函手 $F$ からの余錐を対象とする圏を余錐の圏といい，$\cocone(F)$ と表記する．
+  ただし射 $u\in\mrp{\cocone(F)}{(d,\phi)}{(d',\phi')}$ は
+  以下の図式を可換にする自然変換 $\id{d}\to\id{d'}$ である．
+  \begin{center}
+    \includegraphics{src/cocone-category}
+  \end{center}
+\end{definition}
+
+\begin{definition}[極限]
+  $\cone(F)$ が終対象 $(t,\pi)$ をもつとき $t$ を $F$ の極限 (limit) といい，
+  $t=\lim(F)$ と表記する．
+\end{definition}
+
+\begin{definition}[余極限]
+  $\cocone(F)$ が始対象 $(i,\iota)$ をもつとき $i$ を $F$ の余極限 (colimit) といい，
+  $i=\colim(F)$ と表記する．
+\end{definition}
+
+\section{さまざまな極限}
+
+前節では非常に抽象的な形で極限と余極限を定義した．
+本節ではさまざまな図式の極限と余極限を紹介し，
+それらが具体的な圏においてどのような対象に対応するのかをみていく．
+
+\subsection{終対象と始対象}
+
+(余) 極限の定義に用いた終対象と始対象は，
+実はそれぞれ最も単純な極限と余極限として記述できる．
+\begin{theorem}[極限としての終対象]
+  任意の圏 $\cat{C}$ および空圏 $\cat{J}$ について，
+  自明な図式 $\cat{J}\to\cat{C}$ の極限は
+  $\cat{C}$ の終対象に同型である．
+\end{theorem}
+\begin{theorem}[余極限としての始対象]
+  任意の圏 $\cat{C}$ および空圏 $\cat{J}$ について，
+  自明な図式 $\cat{J}\to\cat{C}$ の余極限は
+  $\cat{C}$ の始対象に同型である．
+\end{theorem}
+終対象や始対象の具体的な例をみてみよう．
+例えば集合圏 $\set$ における終対象と始対象は，それぞれ一点集合と空集合に対応する．
+一点集合 $1=\{\cdot\}$ が終対象であることは，任意の集合 $S$ について，
+$S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の要素に写す写像ただひとつであることからわかる．
+空集合 $\emptyset$ が始対象であることについては，
+やや無理があるかもしれないが，任意の集合 $S$ について
+何もしない写像 $\emptyset\to S$ がただひとつ存在するのだと考えてほしい．
+
+\subsection{積と余積}
+
+\subsection{引き戻しと押し出し}
 
 \begin{definition}[引き戻し]
   圏 $\cat{C}$ ，圏 $\cat{J}=(\rightarrow\cdot\leftarrow)$ および
@@ -570,26 +683,27 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   $\cat{C}$ は束 (lattice) であるという．
 \end{definition}
 
-\begin{definition}[完備束]\label{def:complete-lattice}
+\begin{definition}[完備束]\label{def:complete-lattice}%
   任意の部分集合が下限と上限をもつような半順序集合を
   完備束
   (complete lattice)
   という．
 \end{definition}
 
-\begin{theorem}
-  任意の位相空間の位相は完備ハイティング代数である．
-\end{theorem}
-
 \begin{definition}[有界束]
   束 $\cat{C}$ が終対象と始対象をもつとき，
   $\cat{C}$ は有界束 (bounded lattice) であるという．
 \end{definition}
 
-\begin{definition}[ハイティング代数]\label{def:heyting-algebra}
+\begin{definition}[ハイティング代数]\label{def:heyting-algebra}%
   有界束 $\cat{C}$ が任意の対象の組について冪をもつとき,
   $\cat{C}$ はハイティング代数 (Heyting algebra) であるという．
 \end{definition}
+
+\begin{theorem}
+  任意の位相空間 (\cref{def:topological-space})
+  の位相は完備ハイティング代数である．
+\end{theorem}
 
 \begin{definition}[ブール代数]\label{def:boolean-algebra}
   ハイティング代数 $\cat{C}$ について
@@ -604,7 +718,7 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 
 \section{位相空間論}
 
-\begin{definition}[位相空間]
+\begin{definition}[位相空間]\label{def:topological-space}
   集合 $X$ とその部分集合族 $\mathcal{O}\subseteq2^X$ が以下の条件を満たすとき,
   $(X,\mathcal{O})$ は位相空間 (topological space) であるという．
   \begin{align}

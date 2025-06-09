@@ -1,0 +1,13 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{cd}
+\input{macro.tex}
+
+\begin{document}
+\begin{tikzcd}
+	\id{d}\arrow{r}{u}
+	& \id{d'} \\
+	F\arrow[equal]{r}[swap]{\id{F}}\arrow{u}{\phi}
+	& F\arrow{u}[swap]{\phi'}
+\end{tikzcd}
+\end{document}
