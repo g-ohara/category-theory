@@ -3,7 +3,7 @@
 \input{src/macro.tex}
 \usepackage{epigraph}
 
-\usepackage[subpreambles=true]{standalone}
+\usepackage[subpreambles=true,sort=true]{standalone}
 \usepackage{tikz}
 
 \usepackage{amssymb}
@@ -162,34 +162,65 @@
   $\mrp{t}{F}{G}$ と表記する．
 \end{definition}
 
-\chapter{普遍性}
+\chapter{表現可能函手}
 
-\section{普遍射}
+\section{表現可能函手}
 
-\begin{definition}[普遍射-1]
+はじめに hom 函手の概念を導入する．
+hom 函手は，あるひとつの対象に着目して
+そこから見た「主観的な」圏を与える函手である．
+共変 hom 函手は他の対象を「そこへの」射の集合と同一視し，
+反変 hom 函手は他の対象を「そこからの」射の集合と同一視する．
+\begin{definition}[共変 hom 函手]
+  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
-  \def\r{\obj{r}}%
-  函手 $\mrp{S}{\cat{C}}{\cat{D}}$ と対象 $\c\in\objs{\cat{C}}$ について，
-  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{v}{S(r)}{\c}$ の組 $(\r,v)$ が
-  \begin{equation}
-    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
-    \ \exists!f'\in\mrps{\cat{D}}{\d}{\r};\ f=v\circ S(f')
-  \end{equation}
-  を満たすとき，$(\r,v)$ を $S$ から $\c$ への普遍射 (universal arrow) という．
+  \def\f{f}%
+  \def\g{g}%
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
+  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ に対して，
+  以下のように定義される函手 $\mrp{\mrps{\C}{\c}{-}}{\C}{\set}$ を
+  $\c$ に関する共変 hom 函手 (covariant hom-functor) という．
+  \begin{itemize}
+    \item 対象 $\x$ を射 $\c\to\x$ の集合 $\mrps{\C}{\c}{\x}$ に写す．
+    \item 射 $\mrp{\f}{\x}{\y}$ を写像
+          $\mrps{\C}{\c}{\f}:\mrps{\C}{\c}{\x}\ni\g\mapsto\f\circ\g\in\mrps{\C}{\c}{\y}$
+          に写す．
+  \end{itemize}
 \end{definition}
-
-\begin{definition}[普遍射-2]
+\begin{definition}[反変 hom 函手]
+  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
-  \def\r{\obj{r}}%
-  函手 $\mrp{S}{\cat{D}}{\cat{C}}$ と対象 $\c\in\objs{\cat{C}}$ について，
-  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{u}{S(r)}{\c}$ の組 $(\r,u)$ が
+  \def\f{f}%
+  \def\g{h}%
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
+  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
+  \begin{itemize}
+    \item 対象 $\x$ を射 $\x\to\c$ の集合 $\mrps{\C}{\x}{\c}$ に写し，
+    \item 射 $\mrp{\f}{\x}{\y}$ を写像
+          $\mrps{\C}{\f}{\c}:\mrps{\C}{\y}{\c}\ni\g\mapsto\g\circ\f\in\mrps{\C}{\x}{\c}$
+          に写す
+  \end{itemize}
+  函手 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
+  $\c$ に関する反変 hom 函手 (contravariant hom-functor) という．
+\end{definition}
+表現可能函手とは hom 函手に同型な函手のことである．
+
+\begin{definition}[表現可能函手]
+  \def\C{\cat{C}}%
+  \def\c{\obj{c}}%
+  \def\K{K}%
+  局所小圏 $\C$ 上の集合値函手 $\mrp{\K}{\C}{\set}$ と
+  ある対象 $\c\in\objs{\C}$ に関する共変 hom 函手 $\mrps{\C}{\c}{-}$ について
+  自然同型
   \begin{equation}
-    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
-    \ \exists!f'\in\mrps{\cat{D}}{\r}{\d};\ f=S(f')\circ u
+    \psi:\mrps{\C}{\c}{-}\cong\K
   \end{equation}
-  を満たすとき，$(\r,u)$ を $\c$ から $S$ への普遍射という．
+  が存在するとき，
+  $\K$ は表現可能 (representable) であるという．
+  またこのとき，組 $(\c,\psi)$ を $\K$ の表現 (representation) といい，
+  $\c$ を $\K$ の表現対象 (representing object) という．
 \end{definition}
 
 \section{米田の補題}
@@ -276,6 +307,34 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \end{theorem}
 
 \chapter{極限}
+
+\section{普遍射}
+
+\begin{definition}[普遍射-1]
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\r{\obj{r}}%
+  函手 $\mrp{S}{\cat{C}}{\cat{D}}$ と対象 $\c\in\objs{\cat{C}}$ について，
+  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{v}{S(r)}{\c}$ の組 $(\r,v)$ が
+  \begin{equation}
+    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
+    \ \exists!f'\in\mrps{\cat{D}}{\d}{\r};\ f=v\circ S(f')
+  \end{equation}
+  を満たすとき，$(\r,v)$ を $S$ から $\c$ への普遍射 (universal arrow) という．
+\end{definition}
+
+\begin{definition}[普遍射-2]
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\r{\obj{r}}%
+  函手 $\mrp{S}{\cat{D}}{\cat{C}}$ と対象 $\c\in\objs{\cat{C}}$ について，
+  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{u}{S(r)}{\c}$ の組 $(\r,u)$ が
+  \begin{equation}
+    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
+    \ \exists!f'\in\mrps{\cat{D}}{\r}{\d};\ f=S(f')\circ u
+  \end{equation}
+  を満たすとき，$(\r,u)$ を $\c$ から $S$ への普遍射という．
+\end{definition}
 
 \section{極限と余極限}
 
