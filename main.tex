@@ -38,22 +38,27 @@
 対象のもつ性質は射によってのみ特徴づけられる．
 
 \begin{definition}[圏]\label{def:category}
+  \def\a{\obj{a}}%
+  \def\b{\obj{b}}%
   圏 (category) は，対象 (object) と射 (arrow, morphism) の集まりからなり，
   以下を満たす．
   \begin{itemize}
     \item 任意の射は，域 (domain) と余域 (codomain) と呼ばれる対象をもつ．
           射 $f$ の域を$\dom(f)$，余域を $\cod(f)$ と表記する．
-          また，$\dom(f)=A$，$\cod(f)=B$ であるとき $f:A\to B$ と表記する．
+          また，$\dom(f)=\a$，$\cod(f)=\b$ であるとき
+          $\mrp{f}{\a}{\b}$ と表記する．
     \item 任意の射 $f,g$ について，$\cod(f)=\dom(g)$ ならば，
           $f,g$ の合成 (composition) $g\circ f$ が一意に存在する．
     \item 任意の射 $f,g,h$ について，
           $\cod(f)=\dom(g)$ かつ $\cod(g)=\dom(h)$ ならば，
           $h\circ(g\circ f)=(h\circ g)\circ f$ が成り立つ．
-    \item 任意の対象 $A$ について恒等射 (identity) $\id{A}:A\to A$ が一意に存在し，
-          任意の射 $f:A\to B$ について $f\circ \id{A}=\id{B}\circ f=f$ が成り立つ．
+    \item 任意の対象 $\a$ について恒等射 (identity)
+          $\mrp{\id{\a}}{\a}{\a}$ が一意に存在し，
+          任意の射 $\mrp{f}{\a}{\b}$ について
+          $f\circ\id{\a}=\id{\b}\circ f=f$ が成り立つ．
   \end{itemize}
-  また，圏 $\cat{C}$ の対象の集まりを $\obj{\cat{C}}$，
-  射 $A\to B$ の集まりを $\mrp{\cat{C}}{A}{B}$ と表記する．
+  また，圏 $\cat{C}$ の対象の集まりを $\objs{\cat{C}}$，
+  射 $\a\to\b$ の集まりを $\mrps{\cat{C}}{\a}{\b}$ と表記する．
 \end{definition}
 
 \begin{figure}[htbp]
@@ -63,10 +68,13 @@
 \end{figure}
 
 \begin{definition}[逆射]
-  射 $f:A\to B$ について以下を満たす射 $g:B\to A$ を $f$ の逆射 (inverse) といい，
+  \def\a{\obj{a}}%
+  \def\b{\obj{b}}%
+  射 $\mrp{f}{\a}{\b}$ について以下を満たす射 $\mrp{g}{\b}{\a}$ を
+  $f$ の逆射 (inverse) といい，
   $f^{-1}$ と表記する:
   \begin{equation}
-    g\circ f=\id{A}\wedge f\circ g=\id{B}.
+    g\circ f=\id{\a}\wedge f\circ g=\id{\b}.
   \end{equation}
 \end{definition}
 
@@ -75,9 +83,11 @@
 \end{theorem}
 
 \begin{proof}
-  射 $f:A\to B$ の相異なる逆射 $g,h:B\to A$ が存在すると仮定する．
+  \def\a{\obj{a}}%
+  \def\b{\obj{b}}%
+  射 $\mrp{f}{\a}{\b}$ の相異なる逆射 $\mrp{g,h}{\b}{\a}$ が存在すると仮定する．
   \begin{equation*}
-    g=g\circ\id{B}=g\circ(f\circ h)=(g\circ f)\circ h=\id{A}\circ h=h.
+    g=g\circ\id{\b}=g\circ(f\circ h)=(g\circ f)\circ h=\id{\a}\circ h=h.
   \end{equation*}
   これは仮定に矛盾し，定理は示された．
 \end{proof}
@@ -91,8 +101,10 @@
 対象どうしの「本質的な等しさ」なるものも射によって定められる．
 
 \begin{definition}[同型]
-  圏 $\cat{C}$ の対象 $A,B$ について同型射 $A\to B$ が存在するとき，
-  $A$ と $B$ は同型 (isomorphic) であるといい，$A\simeq B$ と表記する．
+  \def\a{\obj{a}}%
+  \def\b{\obj{b}}%
+  圏 $\cat{C}$ の対象 $\a,\b$ について同型射 $\a\to\b$ が存在するとき，
+  $\a$ と $\b$ は同型 (isomorphic) であるといい，$\a\simeq\b$ と表記する．
 \end{definition}
 
 \subsection{集合圏}
@@ -115,12 +127,14 @@
 それらの関係性に着目するとなんとなく似ている気がしてくることがある．
 函手はそのようなアナロジーを表現する矢印である．
 \begin{definition}[函手]
+  \def\a{\obj{a}}%
+  \def\b{\obj{b}}%
   2つの圏 $\cat{C},\cat{D}$ の対象から対象へ，射から射へ対応づける写像
-  $F:\cat{C}\to\cat{D}$ が以下の条件を満たすとき，
+  $\mrp{F}{\cat{C}}{\cat{D}}$ が以下の条件を満たすとき，
   $F$ を函手 (functor) という．
   \begin{itemize}
-    \item $F(A\to B)=F(A)\to F(B)$,
-    \item $F(\id{A})=\id{F(A)}$,
+    \item $F(\a\to\b)=F(\a)\to F(\b)$,
+    \item $F(\id{\a})=\id{F(\a)}$,
     \item $F(g\circ f)=F(g)\circ F(f)$.
   \end{itemize}
 \end{definition}
@@ -136,14 +150,16 @@
 この高次のアナロジーが自然変換である．
 
 \begin{definition}[自然変換]
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
   2つの函手 $F:\cat{C}\to\cat{D},G:\cat{C}\to\cat{D}$ について，
-  $\cat{C}$ の対象 $X$ を $\cat{D}$ の射 $t_X:F(X)\to G(X)$ に対応づける
+  $\cat{C}$ の対象 $\x$ を $\cat{D}$ の射 $t_{\x}:F(\x)\to G(\x)$ に対応づける
   写像 $t$ が
   \begin{equation}
-    \forall X,Y\ \forall f:X\to Y\ G(f)\circ t_X=t_Y\circ F(f)
+    \forall\x,\y\ \forall\mrp{f}{\x}{\y}\ G(f)\circ t_{\x}=t_{\y}\circ F(f)
   \end{equation}
   を満たすとき，$t$ を自然変換 (natural transformation) といい，
-  $t:F\Rightarrow G$ と表記する．
+  $\mrp{t}{F}{G}$ と表記する．
 \end{definition}
 
 \chapter{普遍性}
@@ -151,74 +167,107 @@
 \section{普遍射}
 
 \begin{definition}[普遍射-1]
-  函手 $S:\cat{C}\to\cat{D}$ と対象 $c\in\obj{\cat{C}}$ について，
-  対象 $r\in\obj{\cat{D}}$ と射 $v:S(r)\to c$ の組 $(r,v)$ が
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\r{\obj{r}}%
+  函手 $\mrp{S}{\cat{C}}{\cat{D}}$ と対象 $\c\in\objs{\cat{C}}$ について，
+  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{v}{S(r)}{\c}$ の組 $(\r,v)$ が
   \begin{equation}
-    \forall d\in\obj{\cat{D}}\ \forall f\in\mrp{\cat{C}}{S(d)}{c}
-    \ \exists!f'\in\mrp{\cat{D}}{d}{r};\ f=v\circ S(f')
+    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
+    \ \exists!f'\in\mrps{\cat{D}}{\d}{\r};\ f=v\circ S(f')
   \end{equation}
-  を満たすとき，$(r,v)$ を $S$ から $c$ への普遍射 (universal arrow) という．
+  を満たすとき，$(\r,v)$ を $S$ から $\c$ への普遍射 (universal arrow) という．
 \end{definition}
 
 \begin{definition}[普遍射-2]
-  函手 $S:\cat{D}\to\cat{C}$ と対象 $c\in\obj{\cat{C}}$ について，
-  対象 $r\in\obj{\cat{D}}$ と射 $u:S(r)\to c$ の組 $(r,u)$ が
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\r{\obj{r}}%
+  函手 $\mrp{S}{\cat{D}}{\cat{C}}$ と対象 $\c\in\objs{\cat{C}}$ について，
+  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{u}{S(r)}{\c}$ の組 $(\r,u)$ が
   \begin{equation}
-    \forall d\in\obj{\cat{D}}\ \forall f\in\mrp{\cat{C}}{S(d)}{c}
-    \ \exists!f'\in\mrp{\cat{D}}{r}{d};\ f=S(f')\circ u
+    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
+    \ \exists!f'\in\mrps{\cat{D}}{\r}{\d};\ f=S(f')\circ u
   \end{equation}
-  を満たすとき，$(r,u)$ を $c$ から $S$ への普遍射という．
+  を満たすとき，$(\r,u)$ を $\c$ から $S$ への普遍射という．
 \end{definition}
 
 \section{米田の補題}
 
-所与の集合値函手 $K:\cat{D}\to\set$ に対して
-表現可能函手 $\mrp{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
+所与の集合値函手 $\mrp{K}{\cat{D}}{\set}$ に対して
+表現可能函手 $\mrps{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
 コンポーネント $\alpha_r$ が恒等射 $\id{r}$
 をどこに写すかを決めることと等価である．
-以下で紹介する米田の補題はその事実を主張しており，
+以下で紹介する米田の補題 (Yoneda lemma) はその事実を主張しており，
 $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
 
 \begin{theorem}[米田の補題]
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\r{\obj{r}}%
   $\cat{D}$ を局所小圏とする．
-  任意の $K:\cat{D}\to\set$ と $d\in\obj{\cat{D}}$ について
+  任意の $\mrp{K}{\cat{D}}{\set}$ と $\d\in\objs{\cat{D}}$ について
   \begin{equation}
-    y:\set^\cat{D}(\mrp{\cat{D}}{r}{-},K)\ni\alpha\mapsto\alpha_r(\id{r})\in K(r)
+    y:\set^\cat{D}(\mrps{\cat{D}}{\r}{-},K)\ni\alpha\mapsto\alpha_r(\id{\r})\in K(\r)
   \end{equation}
   は全単射である．
 \end{theorem}
 
 \begin{proof}
-  $x:K(r)\to\set^\cat{D}(\mrp{\cat{D}}{r}{-},K)$ を考え，
+  \def\a{\obj{a}}%
+  \def\d{\obj{d}}%
+  \def\r{\obj{r}}%
+  $\mrp{x}{K(r)}{\set^\cat{D}(\mrps{\cat{D}}{r}{-},K)}$ を考え，
   $x$ が $\set$ における $y$ の逆射であることを示す．
-  ただし $x$ は任意の $a\in K(r)$ を以下のコンポーネントで構成される自然変換
-  $x(a)$ に写す:
+  ただし $x$ は任意の $\a\in K(r)$ を以下のコンポーネントで構成される自然変換
+  $x(\a)$ に写す:
   \begin{equation}
-    {x(a)}_d:f\mapsto K(f)(a).
+    {x(\a)}_{\d}:f\mapsto K(f)(\a).
   \end{equation}
-  $y\circ x=\id{K(r)}$ を示す．任意の $a\in K(r)$ について
+  $y\circ x=\id{K(\r)}$ を示す．任意の $\a\in K(\r)$ について
   \begin{align*}
-    y(x(a)) & ={x(a)}_r(\id{r}) \\
-            & =K(\id{r})(a)     \\
-            & =\id{K(r)}(a)     \\
-            & =a.
+    y(x(\a)) & ={x(\a)}_{\r}(\id{\r}) \\
+             & =K(\id{\r})(\a)        \\
+             & =\id{K(\r)}(\a)        \\
+             & =\a.
   \end{align*}
-  $x\circ y=\id{\set^\cat{D}(\mrp{\cat{D}}{r}{-},K)}$ を示す．
-  任意の $\alpha:\mrp{\cat{D}}{r}{d}\to K$，$d\in\obj{\cat{D}}$，$f:r\to d$
-  について
+  $x\circ y=\id{\set^\cat{D}(\mrps{\cat{D}}{\r}{-},K)}$ を示す．
+  任意の $\alpha:\mrps{\cat{D}}{\r}{\d}\to K$，$\d\in\objs{\cat{D}}$，
+  $\mrp{f}{\r}{\d}$ について
   \begin{align*}
-    {x(y(\alpha))}_d(f) & =K(f)(y(\alpha))                       \\
-                        & =K(f)(\alpha_r(\id{r}))                \\
-                        & =\alpha_d(\mrp{\cat{D}}{r}{f}(\id{r})) \\
-                        & =\alpha_d(f).
+    {x(y(\alpha))}_{\d}(f) & =K(f)(y(\alpha))                             \\
+                           & =K(f)(\alpha_{\r}(\id{\r}))                  \\
+                           & =\alpha_{\d}(\mrps{\cat{D}}{\r}{f}(\id{\r})) \\
+                           & =\alpha_{\d}(f).
   \end{align*}
   ここで 3 行目の変換には，以下の図式が可換である事実を用いた．
-  \begin{center}
+  \begin{figure}[h]
     \centering
-    \includegraphics{src/yoneda}
-  \end{center}
+    \includestandalone{src/yoneda}
+  \end{figure}
   よって $y$ は全単射であることが示された．
 \end{proof}
+
+\section{米田埋め込み}
+
+\begin{definition}[米田埋め込み]
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  圏 $\cat{C}$ について，
+  \begin{itemize}
+    \item 対象 $\c\in\objs{\cat{C}}$ を函手
+          $\mrp{\mrps{\cat{C}}{-}{\c}}{\op{\cat{C}}}{\set}$ に写し，
+    \item 射 $f\in\mrps{\cat{C}}{\c}{\d}$ を自然変換
+          $\mrp{\mrps{\cat{C}}{-}{f}}{\mrps{\cat{C}}{-}{\c}}{\mrps{\cat{C}}{-}{\d}}$
+          に写す
+  \end{itemize}
+  函手 $\cat{C}\to\set^{\op{\cat{C}}}$
+  を米田埋め込み (Yoneda embedding) という．
+\end{definition}
+
+\begin{center}
+  \includestandalone{src/yoneda-embedding}
+\end{center}
 
 \section{米田の補題の系}
 
@@ -226,89 +275,88 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
 \end{theorem}
 
-\begin{center}
-  \includegraphics{src/yoneda-embedding}
-\end{center}
-
 \chapter{極限}
 
 \section{極限と余極限}
 
 \begin{definition}[終対象]
-  圏 $\cat{C}$ および対象 $t\in\obj{\cat{C}}$ が
+  圏 $\cat{C}$ および対象 $\obj{t}\in\objs{\cat{C}}$ が
   \begin{equation}
-    \forall x\in\obj{\cat{C}};\ |\mrp{\cat{C}}{x}{t}|=1
+    \forall\obj{x}\in\objs{\cat{C}};\ |\mrps{\cat{C}}{\obj{x}}{\obj{t}}|=1
   \end{equation}
   を満たすとき，
-  $t$ を $\cat{C}$ の終対象 (terminal object) という．
+  $\obj{t}$ を $\cat{C}$ の終対象 (terminal object) という．
 \end{definition}
 
 \begin{definition}[始対象]
-  圏 $\cat{C}$ および対象 $i\in\obj{\cat{C}}$ が
+  圏 $\cat{C}$ および対象 $\obj{i}\in\objs{\cat{C}}$ が
   \begin{equation}
-    \forall x\in\obj{\cat{C}};\ |\mrp{\cat{C}}{i}{x}|=1
+    \forall\obj{x}\in\objs{\cat{C}};\ |\mrps{\cat{C}}{\obj{i}}{\obj{x}}|=1
   \end{equation}
   を満たすとき，
-  $i$ を $\cat{C}$ の始対象 (initial object) という．
+  $\obj{i}$ を $\cat{C}$ の始対象 (initial object) という．
 \end{definition}
 
 \begin{center}
-  \includegraphics{src/terminal-and-initial-object}
+  \includestandalone{src/terminal-and-initial-object}
 \end{center}
 
 \begin{definition}[定函手]
-  圏 $\cat{C},\cat{D}$ および対象 $d\in\obj{\cat{D}}$ について，
-  $\cat{C}$ の任意の対象を $d$ に写し，
-  $\cat{C}$ の任意の射を $\id{d}$ に写す函手を $d$ の定函手 (constant functor) という．
+  圏 $\cat{C},\cat{D}$ および対象 $\obj{d}\in\objs{\cat{D}}$ について，
+  $\cat{C}$ の任意の対象を $\obj{d}$ に写し，
+  $\cat{C}$ の任意の射を $\id{\obj{d}}$ に写す函手を
+  $\obj{d}$ の定函手 (constant functor) という．
 \end{definition}
 
 \begin{definition}[対角函手]
   圏 $\cat{C},\cat{D}$ について，
-  任意の対象 $d\in\obj{\cat{D}}$ を $d$ の定函手に写す函手
-  $\Delta:\cat{D}\to\cat{D}^{\cat{C}}$ を対角函手 (diagonal functor) という．
-  ただし $\Delta$ は射 $f\in\mrp{\cat{D}}{a}{b}$ を，
+  任意の対象 $\obj{d}\in\objs{\cat{D}}$ を $\obj{d}$ の定函手に写す函手
+  $\mrp{\Delta}{\cat{D}}{\cat{D}^{\cat{C}}}$ を対角函手 (diagonal functor) という．
+  ただし $\Delta$ は射 $f\in\mrps{\cat{D}}{a}{b}$ を，
   任意のコンポーネントが $f$ であるような自然変換
-  $\Delta(f):\Delta(a)\to\Delta(b)$ に写す．
+  $\mrp{\Delta(f)}{\Delta(a)}{\Delta(b)}$ に写す．
 \end{definition}
 
 \begin{definition}[錐]
-  圏 $\cat{C},\cat{D}$ および函手 $F:\cat{C}\to\cat{D}$ について，
-  対象 $d\in\obj{\cat{D}}$ および自然変換 $\psi:\id{d}\to F$ の組 $(d,\psi)$
-  を $F$ への錐 (cone) という．
+  圏 $\cat{C},\cat{D}$ および函手 $\mrp{F}{\cat{C}}{\cat{D}}$ について，
+  対象 $\obj{d}\in\objs{\cat{D}}$ および自然変換 $\mrp{\psi}{\id{\obj{d}}}{F}$
+  の組 $(\obj{d},\psi)$ を $F$ への錐 (cone) という．
 \end{definition}
 
 \begin{definition}[余錐]
-  圏 $\cat{C},\cat{D}$ および函手 $F:\cat{C}\to\cat{D}$ について，
-  対象 $d\in\obj{\cat{D}}$ および自然変換 $\phi:F\to\id{d}$ の組 $(d,\phi)$
-  を $F$ からの余錐 (cocone) という．
+  圏 $\cat{C},\cat{D}$ および函手 $\mrp{F}{\cat{C}}{\cat{D}}$ について，
+  対象 $\obj{d}\in\objs{\cat{D}}$ および自然変換 $\mrp{\phi}{F}{\id{\obj{d}}}$
+  の組 $(\obj{d},\phi)$ を $F$ からの余錐 (cocone) という．
 \end{definition}
 
 \begin{definition}[錐の圏]
   函手 $F$ への錐を対象とする圏を錐の圏といい，$\cone(F)$ と表記する．
-  ただし射 $u\in\mrp{\cone(F)}{(d,\psi)}{(d',\psi')}$ は
-  以下の図式を可換にする自然変換 $\id{d}\to\id{d'}$ である．
+  ただし射 $u\in\mrps{\cone(F)}{(\obj{d},\psi)}{(\obj{d'},\psi')}$ は
+  以下の図式を可換にする自然変換 $\id{\obj{d}}\to\id{\obj{d'}}$ である．
   \begin{center}
-    \includegraphics{src/cone-category}
+    \includestandalone{src/cone-category}
   \end{center}
 \end{definition}
 
 \begin{definition}[余錐の圏]
   函手 $F$ からの余錐を対象とする圏を余錐の圏といい，$\cocone(F)$ と表記する．
-  ただし射 $u\in\mrp{\cocone(F)}{(d,\phi)}{(d',\phi')}$ は
+  ただし射 $u\in\mrps{\cocone(F)}{(d,\phi)}{(d',\phi')}$ は
   以下の図式を可換にする自然変換 $\id{d}\to\id{d'}$ である．
   \begin{center}
-    \includegraphics{src/cocone-category}
+    \includestandalone{src/cocone-category}
   \end{center}
 \end{definition}
 
 \begin{definition}[極限]
-  $\cone(F)$ が終対象 $(t,\pi)$ をもつとき $t$ を $F$ の極限 (limit) といい，
-  $t=\lim(F)$ と表記する．
+  $\cone(F)$ が終対象 $(\obj{t},\pi)$ をもつとき
+  $\obj{t}$ を $F$ の極限 (limit) といい，
+  $\obj{t}=\lim(F)$ と表記する．
 \end{definition}
 
 \begin{definition}[余極限]
-  $\cocone(F)$ が始対象 $(i,\iota)$ をもつとき $i$ を $F$ の余極限 (colimit) といい，
-  $i=\colim(F)$ と表記する．
+  $\cocone(F)$ が始対象 $(\obj{i},\iota)$ をもつとき
+  $\obj{i}$ を $F$ の余極限 (colimit) といい，
+  $\obj{i}=\colim(F)$ と表記する．
 \end{definition}
 
 \section{さまざまな極限}
@@ -390,7 +438,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
   \begin{enumerate}[label=(\roman*)] % chktex 36
     \item 自然性を示す．
-          冪函手の定義より，任意の $C,D\in\obj{\cat{C}}$ と射 $f:C\to D$ について
+          冪函手の定義より，任意の $C,D\in\objs{\cat{C}}$ と射 $f:C\to D$ について
           \begin{align*}
             f\circ\epsilon_C
              & =\epsilon_D\circ(\widetilde{(f\circ\epsilon_C)}\times\id{A}) \\
@@ -398,7 +446,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
           \end{align*}
           よって自然性は示された．
     \item 普遍性を示す．
-          冪函手の定義より，任意の $X\in\obj{\cat{C}}$ と $g:X\times A\to C$
+          冪函手の定義より，任意の $X\in\objs{\cat{C}}$ と $g:X\times A\to C$
           について以下を満たす$\tilde{g}:X\to C^A$ がただ一つ存在する:
           \begin{equation*}
             \epsilon_C\circ(\tilde{g}\times\id{A})=g.
@@ -670,7 +718,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \begin{definition}[半順序集合]
   圏 $\cat{C}$ について
   \begin{equation}
-    \forall x,y\in\obj{\cat{C}};|\mrp{\cat{C}}{x}{y}|\le1
+    \forall x,y\in\objs{\cat{C}};|\mrps{\cat{C}}{x}{y}|\le1
   \end{equation}
   が成り立つとき，
   $\cat{C}$ は半順序集合 (partially ordered set, poset)
@@ -708,7 +756,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \begin{definition}[ブール代数]\label{def:boolean-algebra}
   ハイティング代数 $\cat{C}$ について
   \begin{equation}
-    \forall x\in\obj{\cat{C}};\ \neg\neg x=x
+    \forall x\in\objs{\cat{C}};\ \neg\neg x=x
   \end{equation}
   が成り立つとき，
   $\cat{C}$ は ブール代数 (Boolean algebra) であるという．
