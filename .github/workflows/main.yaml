@@ -16,11 +16,6 @@ jobs:
         with:
           root_file: main.tex
           args: ""
-      - name: Upload PDF file to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          file: main.pdf
-          overwrite: true
       - name: Prepare deployment files
         run: |
           mkdir -p public
