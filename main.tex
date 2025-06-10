@@ -282,23 +282,38 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \section{米田埋め込み}
 
 \begin{definition}[米田埋め込み]
-  \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
-  圏 $\cat{C}$ について，
+  \def\C{\cat{C}}%
+  \def\Y{よ}%
+  \def\a{\obj{a}}%
+  \def\c{\obj{a}}%
+  \def\d{\obj{b}}%
+  \def\f{\phi}%
+  局所小圏 $\C$ について，
   \begin{itemize}
-    \item 対象 $\c\in\objs{\cat{C}}$ を函手
-          $\mrp{\mrps{\cat{C}}{-}{\c}}{\op{\cat{C}}}{\set}$ に写し，
-    \item 射 $f\in\mrps{\cat{C}}{\c}{\d}$ を自然変換
-          $\mrp{\mrps{\cat{C}}{-}{f}}{\mrps{\cat{C}}{-}{\c}}{\mrps{\cat{C}}{-}{\d}}$
-          に写す
+    \item 対象 $\a$ を表現可能函手
+          $\mrp{\mrps{\C}{-}{\a}}{\op{\C}}{\set}$ に写し，
+    \item 射 $\mrp{\f}{\c}{\d}$ を自然変換
+          $\mrp{\mrps{\C}{-}{\f}}{\mrps{\C}{-}{\c}}{\mrps{\C}{-}{\d}}$ に写す
   \end{itemize}
-  函手 $\cat{C}\to\set^{\op{\cat{C}}}$
+  函手 $\mrp{\Y}{\C}{\set^{\op{\C}}}$
   を米田埋め込み (Yoneda embedding) という．
+  ただし，任意の対象 $x\in\objs{\C}$ について，
+  自然変換 $\Y(\f)=\mrps{\C}{-}{\f}$ の $x$ におけるコンポーネントは
+  \begin{equation}
+    \mrps{\C}{x}{\f}:\mrps{\C}{x}{\c}\ni g\mapsto\phi\circ g\in\mrps{\C}{x}{\d}
+  \end{equation}
+  である．
+  \begin{center}
+    \includestandalone{src/yoneda-embedding}
+  \end{center}
 \end{definition}
 
-\begin{center}
-  \includestandalone{src/yoneda-embedding}
-\end{center}
+\begin{theorem}[米田埋め込みは充満忠実]
+  \def\C{\cat{C}}%
+  \def\Y{よ}%
+  任意の局所小圏 $\C$ において
+  米田埋め込み $\mrp{\Y}{\C}{\set^{\op{\C}}}$ は充満忠実である．
+\end{theorem}
 
 \section{米田の補題の系}
 
