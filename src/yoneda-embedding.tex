@@ -1,14 +1,13 @@
 \documentclass[tikz]{standalone}
-
 \usetikzlibrary{cd}
-\input{macro.tex}
+\include{macro.tex}
 
 \begin{document}
 \begin{tikzcd}
-	\mrp{\cat{C}}{x}{a}\arrow{d}[swap]{\mrp{\cat{C}}{x}{\phi}}
-	& \mrp{\cat{C}}{y}{a}\arrow{l}[swap]{\mrp{\cat{C}}{f}{a}}
-	\arrow{d}{\mrp{\cat{C}}{x}{\phi}} \\
-	\mrp{\cat{C}}{x}{b}
-	& \mrp{\cat{C}}{y}{b}\arrow{l}{\mrp{\cat{C}}{f}{b}}
+	\mrps{\cat{C}}{x}{a}\arrow{d}[swap]{\mrps{\cat{C}}{x}{\phi}}
+	& \mrps{\cat{C}}{y}{a}\arrow{l}[swap]{\mrps{\cat{C}}{f}{a}}
+	\arrow{d}{\mrps{\cat{C}}{x}{\phi}} \\
+	\mrps{\cat{C}}{x}{b}
+	& \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{f}{b}}
 \end{tikzcd}
 \end{document}

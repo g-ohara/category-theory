@@ -1,15 +1,15 @@
 \documentclass[tikz]{standalone}
-
 \usetikzlibrary{positioning}
+\include{macro.tex}
 
 \begin{document}
 \begin{tikzpicture}
-	\node (A) {$A$};
-	\node [below=0.5cm of A] (B) {$B$};
-	\node [below=0.5cm of B] (C) {$C$};
+	\node (A) {$\obj{a}$};
+	\node [below=0.5cm of A] (B) {$\obj{b}$};
+	\node [below=0.5cm of B] (C) {$\obj{c}$};
 	\node [below=0.2cm of C] (D) {$\vdots$};
-	\node [below left =0.0cm and 1.0cm of B] (I) {$I$};
-	\node [below right=0.0cm and 1.0cm of B] (T) {$T$};
+	\node [below left =0.0cm and 1.0cm of B] (I) {$\obj{i}$};
+	\node [below right=0.0cm and 1.0cm of B] (T) {$\obj{t}$};
 	\draw [->] (I) to (A);
 	\draw [->] (I) to (B);
 	\draw [->] (I) to (C);

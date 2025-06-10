@@ -3,8 +3,8 @@
 \input{src/macro.tex}
 \usepackage{epigraph}
 
-\usepackage{graphicx}
-\graphicspath{{docs/}}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{tikz}
 
 \usepackage{amssymb}
 \usepackage[colorlinks=true]{hyperref}
@@ -58,7 +58,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{src/category}
+  \includestandalone{src/category}
   \caption{圏の例}
 \end{figure}
 
@@ -436,7 +436,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \end{definition}
 
 \begin{center}
-  \includegraphics{src/right-kan}
+  \includestandalone{src/right-kan}
 \end{center}
 
 \begin{definition}[左カン拡張]
@@ -462,7 +462,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \end{definition}
 
 \begin{center}
-  \includegraphics{src/left-kan}
+  \includestandalone{src/left-kan}
 \end{center}
 
 \section{すべての概念はカン拡張である}
@@ -489,10 +489,10 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{center}
   \begin{minipage}[b]{0.4\linewidth}
-    \includegraphics{src/lim-right-kan-1}
+    \includestandalone{src/lim-right-kan-1}
   \end{minipage}
   \begin{minipage}[b]{0.4\linewidth}
-    \includegraphics{src/lim-right-kan-2}
+    \includestandalone{src/lim-right-kan-2}
   \end{minipage}
 \end{center}
 
@@ -512,10 +512,10 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{center}
   \begin{minipage}[b]{0.4\linewidth}
-    \includegraphics{src/colim-left-kan-1}
+    \includestandalone{src/colim-left-kan-1}
   \end{minipage}
   \begin{minipage}[b]{0.4\linewidth}
-    \includegraphics{src/colim-left-kan-2}
+    \includestandalone{src/colim-left-kan-2}
   \end{minipage}
 \end{center}
 
