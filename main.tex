@@ -182,38 +182,33 @@ hom 函手は，あるひとつの対象に着目して
 そこから見た「主観的な」圏を与える函手である．
 共変 hom 函手は他の対象を「そこへの」射の集合と同一視し，
 反変 hom 函手は他の対象を「そこからの」射の集合と同一視する．
+\begin{definition}[hom 双函手]
+  \def\C{\cat{C}}%
+  局所小圏 $\C$ について，
+  双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$
+  を hom 双函手 (hom-bifunctor) という．
+  ただし $\mrps{\C}{-}{-}$ は
+  \begin{itemize}
+    \item $a,b\in\C$ を集合 $\mrps{\C}{a}{b}\in\set$ に写し，
+    \item $\psi\in\mrps{\C}{a}{a'},\phi\in\mrps{\C}{b}{b'}$
+          を以下の写像に写す．
+          \begin{equation}
+            \mrps{\C}{a'}{b}\in f\mapsto\phi\circ f\circ\psi\in\mrps{\C}{a}{b'}
+          \end{equation}
+  \end{itemize}
+\end{definition}
 \begin{definition}[共変 hom 函手]
   \def\C{\cat{C}}%
   \def\c{\obj{c}}%
-  \def\f{f}%
-  \def\g{g}%
-  \def\x{\obj{x}}%
-  \def\y{\obj{y}}%
-  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ に対して，
-  以下のように定義される函手 $\mrp{\mrps{\C}{\c}{-}}{\C}{\set}$ を
+  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
+  hom 双函手の部分適用 $\mrp{\mrps{\C}{\c}{-}}{\C}{\set}$ を
   $\c$ に関する共変 hom 函手 (covariant hom-functor) という．
-  \begin{itemize}
-    \item 対象 $\x$ を射 $\c\to\x$ の集合 $\mrps{\C}{\c}{\x}$ に写す．
-    \item 射 $\mrp{\f}{\x}{\y}$ を写像
-          $\mrps{\C}{\c}{\f}:\mrps{\C}{\c}{\x}\ni\g\mapsto\f\circ\g\in\mrps{\C}{\c}{\y}$
-          に写す．
-  \end{itemize}
 \end{definition}
 \begin{definition}[反変 hom 函手]
   \def\C{\cat{C}}%
   \def\c{\obj{c}}%
-  \def\f{f}%
-  \def\g{h}%
-  \def\x{\obj{x}}%
-  \def\y{\obj{y}}%
   局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
-  \begin{itemize}
-    \item 対象 $\x$ を射 $\x\to\c$ の集合 $\mrps{\C}{\x}{\c}$ に写し，
-    \item 射 $\mrp{\f}{\x}{\y}$ を写像
-          $\mrps{\C}{\f}{\c}:\mrps{\C}{\y}{\c}\ni\g\mapsto\g\circ\f\in\mrps{\C}{\x}{\c}$
-          に写す
-  \end{itemize}
-  函手 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
+  hom 双函手の部分適用 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
   $\c$ に関する反変 hom 函手 (contravariant hom-functor) という．
 \end{definition}
 表現可能函手とは hom 函手に同型な函手のことである．
@@ -294,26 +289,10 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 
 \begin{definition}[米田埋め込み]
   \def\C{\cat{C}}%
-  \def\Y{よ}%
-  \def\a{\obj{a}}%
-  \def\c{\obj{a}}%
-  \def\d{\obj{b}}%
-  \def\f{\phi}%
+  \def\Y{\textbf{よ}}%
   局所小圏 $\C$ について，
-  \begin{itemize}
-    \item 対象 $\a$ を表現可能函手
-          $\mrp{\mrps{\C}{-}{\a}}{\op{\C}}{\set}$ に写し，
-    \item 射 $\mrp{\f}{\c}{\d}$ を自然変換
-          $\mrp{\mrps{\C}{-}{\f}}{\mrps{\C}{-}{\c}}{\mrps{\C}{-}{\d}}$ に写す
-  \end{itemize}
-  函手 $\mrp{\Y}{\C}{\set^{\op{\C}}}$
-  を米田埋め込み (Yoneda embedding) という．
-  ただし，任意の対象 $x\in\objs{\C}$ について，
-  自然変換 $\Y(\f)=\mrps{\C}{-}{\f}$ の $x$ におけるコンポーネントは
-  \begin{equation}
-    \mrps{\C}{x}{\f}:\mrps{\C}{x}{\c}\ni g\mapsto\phi\circ g\in\mrps{\C}{x}{\d}
-  \end{equation}
-  である．
+  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
+  $\mrp{\Y}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
   \begin{center}
     \includestandalone{src/yoneda-embedding}
   \end{center}
@@ -321,7 +300,7 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 
 \begin{theorem}[米田埋め込みは充満忠実]
   \def\C{\cat{C}}%
-  \def\Y{よ}%
+  \def\Y{\textbf{よ}}%
   任意の局所小圏 $\C$ において
   米田埋め込み $\mrp{\Y}{\C}{\set^{\op{\C}}}$ は充満忠実である．
 \end{theorem}
