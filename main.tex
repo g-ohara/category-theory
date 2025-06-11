@@ -1,33 +1,54 @@
 \documentclass[titlepage]{ltjsreport}
 
-\input{src/macro.tex}
-\usepackage{epigraph}
-
+% Figures
 \usepackage[subpreambles=true,sort=true]{standalone}
 \usepackage{tikz}
 
+% Text
+\usepackage{enumitem}
+\usepackage{epigraph}
+
+% Math
+\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[colorlinks=true]{hyperref}
-
 \usepackage{amsthm}
-\usepackage{thmbox}
-\newtheorem[S]{theorem}{定理}[chapter]
-\newtheorem[S]{definition}[theorem]{定義}
-\newtheorem[S]{example}[theorem]{例}
 
+% References
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\usepackage{thmtools}
+\declaretheorem[
+  thmbox=S,
+  name=定理,
+  refname={定理,定理},
+  Refname={定理,定理},
+  numberwithin=chapter,
+]{theorem}
+\declaretheorem[
+  thmbox=S,
+  name=定義,
+  refname={定義,定義},
+  Refname={定義,定義},
+  numberlike=theorem,
+]{definition}
+\declaretheorem[
+  thmbox=S,
+  name=例,
+  refname={例,例},
+  Refname={例,例},
+]{example}
 \usepackage{proof}
 \renewcommand{\proofname}{\textbf{証明}}
 
-\usepackage{enumitem}
-
-\usepackage{cleveref}
-\crefname{theorem}{}{}
+\input{src/macro.tex}
 
 \title{圏論ノート}
 \author{大原玄嗣}
 
 \begin{document}
+
 \maketitle
+\tableofcontents
 
 \chapter{圏・函手・自然変換}
 
