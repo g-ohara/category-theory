@@ -35,7 +35,7 @@
 	\draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
 
 	% functor category
-	\node [right=1.7cm of c] (f) {$\set^\C$};
+	\node [right=1.7cm of c] (f) {${\set}^{\op{\C}}$};
 	\draw [->, bend left =20] (opc) to node (ya) [above] {$\mrps{\C}{-}{a}$} (s);
 	\draw [->, bend right=20] (opc) to node (yb) [below] {$\mrps{\C}{-}{b}$} (s);
 	\draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{-}{\psi}$} (yb);

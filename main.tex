@@ -297,6 +297,16 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
     \includestandalone{src/yoneda-embedding}
   \end{center}
 \end{definition}
+\begin{definition}[余米田埋め込み]
+  \def\C{\cat{C}}%
+  \def\Y{\textbf{よ}}%
+  局所小圏 $\C$ について，
+  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
+  $\mrp{\Y'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
+  \begin{center}
+    \includestandalone{src/coyoneda-embedding}
+  \end{center}
+\end{definition}
 
 \begin{theorem}[米田埋め込みは充満忠実]
   \def\C{\cat{C}}%
