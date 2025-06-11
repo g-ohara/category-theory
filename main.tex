@@ -535,56 +535,48 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \section{カン拡張}
 
-\begin{definition}[右カン拡張]
-  函手
-  $T:\cat{M}\to\cat{A},\ K:\cat{M}\to\cat{C},\ R:\cat{C}\to\cat{A}$
-  について自然変換
-  $\epsilon:RK\to T$
-  が
-  $A^K$
-  から
-  $T$
-  への普遍射であるとき，
-  $(R,\epsilon)$
-  を
-  $K$
-  に沿った
-  $T$
-  の右カン拡張
-  (right Kan extension)
-  といい，
-  $R=\ran_{K}T$
-  と表記する．
+\begin{definition}[函手の誘導]
+  \def\C{\cat{C}}%
+  \def\A{\cat{C'}}%
+  \def\D{\cat{D}}%
+  \def\K{K}%
+  \def\h{H}%
+  函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ について，
+  以下のように定義される函手 $\mrp{\K^*}{\D^\A}{\D^\C}$ を
+  $\K$ と $\D$ によって誘導される函手という:
+  \begin{align}
+    \objs{\D^\A}\ni\h
+     & \mapsto\h\circ\K\in\objs{\D^\C},                            \\
+    \mrps{\D^\A}{\h}{\h'}\ni\sigma
+     & \mapsto\sigma\circ\K\in\mrps{\D^\C}{\h\circ\K}{\h'\circ\K}.
+  \end{align}
 \end{definition}
-
-\begin{center}
-  \includestandalone{src/right-kan}
-\end{center}
-
 \begin{definition}[左カン拡張]
-  函手
-  $T:\cat{M}\to\cat{A},\ K:\cat{M}\to\cat{C},\ L:\cat{C}\to\cat{A}$
-  について自然変換
-  $\eta:T\to RK$
-  が
-  $T$
-  から
-  $A^K$
-  への普遍射であるとき，
-  $(L,\epsilon)$
-  を
-  $K$
-  に沿った
-  $T$
-  の左カン拡張
-  (left Kan extension)
-  といい，
-  $L=\lan_{K}T$
-  と表記する．
+  \def\C{\cat{C}}%
+  \def\A{\cat{C'}}%
+  \def\D{\cat{D}}%
+  \def\K{K}%
+  \def\L{\K_!}%
+  函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
+  $\mrp{\K^*}{\D^\A}{\D^\C}$ が左随伴 $\mrp{\L}{\D^\C}{\D^\A}$ をもつとき，
+  $\L$ を $\K$ に沿った左カン拡張 (left Kan extension) といい，
+  $\L=\lan_{\K}$ と表記する．
 \end{definition}
-
+\begin{definition}[右カン拡張]
+  \def\C{\cat{C}}%
+  \def\A{\cat{C'}}%
+  \def\D{\cat{D}}%
+  \def\K{K}%
+  \def\R{\K_*}%
+  函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
+  $\mrp{\K^*}{\D^\A}{\D^\C}$ が右随伴 $\mrp{\R}{\D^\C}{\D^\A}$ をもつとき，
+  $\R$ を $\K$ に沿った右カン拡張 (right Kan extension) といい，
+  $\R=\ran_{\K}$ と表記する．
+\end{definition}
 \begin{center}
   \includestandalone{src/left-kan}
+  \hspace{20pt}
+  \includestandalone{src/right-kan}
 \end{center}
 
 \section{すべての概念はカン拡張である}
