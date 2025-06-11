@@ -107,6 +107,17 @@
   $\a$ と $\b$ は同型 (isomorphic) であるといい，$\a\simeq\b$ と表記する．
 \end{definition}
 
+\subsection{圏の大きさ}
+
+\begin{definition}[局所小圏]
+  \def\C{\cat{C}}%
+  \def\a{\obj{a}}%
+  \def\b{\obj{b}}%
+  圏 $\C$ の任意の対象 $\a,\b\in\C$ について
+  $\mrps{\C}{\a}{\b}$ が小さい集合 (\cref{def:small-set}) であるとき，
+  $\C$ を局所小圏 (locally small category) という．
+\end{definition}
+
 \subsection{集合圏}
 
 前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
@@ -776,6 +787,27 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \end{theorem}
 
 \appendix
+
+\chapter{基礎論}
+
+\begin{definition}[グロタンディーク宇宙]
+  \def\U{U}%
+  \def\x{x}%
+  \def\y{y}%
+  以下の性質をもつ集合 $\U$ を
+  グロタンディーク宇宙 (Grothendieck universe) という．
+  \begin{align}
+     & \forall\x\in\U\ \forall\y\in\x;\ \x\in\U,              \\
+     & \forall\x,\y\in\U;\ \{\x,\y\}\in\U,                    \\
+     & \forall\x\in\U;\ 2^\x\in\U,                            \\
+     & \forall I\in\U\ \forall{\{\x_i\}}_{i\in I}\subseteq\U;
+    \ \bigcup_{i\in I}\x_i\in\U.
+  \end{align}
+\end{definition}
+
+\begin{definition}[小さい集合]\label{def:small-set}
+  グロタンディーク宇宙の元を小さい集合 (small set) という．
+\end{definition}
 
 \chapter{代数学の知識}
 
