@@ -1,13 +1,48 @@
 \documentclass[tikz]{standalone}
-\usetikzlibrary{cd}
-\include{macro.tex}
+
+\usetikzlibrary{cd,positioning}
+\include{macro}
 
 \begin{document}
-\begin{tikzcd}
-	\mrps{\cat{C}}{x}{a}\arrow{d}[swap]{\mrps{\cat{C}}{x}{\phi}}
-	& \mrps{\cat{C}}{y}{a}\arrow{l}[swap]{\mrps{\cat{C}}{f}{a}}
-	\arrow{d}{\mrps{\cat{C}}{y}{\phi}} \\
-	\mrps{\cat{C}}{x}{b}
-	& \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{f}{b}}
-\end{tikzcd}
+\def\C{\cat{C}}
+\begin{tikzpicture}
+	% Set
+	\node (s) {$\set$};
+	\node [below right=0.1cm and -1.5cm of s] (scom) {
+		\begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
+			\mrps{\cat{C}}{x}{a}\arrow{d}{\psi\circ-}[swap]{\mrps{\cat{C}}{x}{\psi}}
+			& \mrps{\cat{C}}{y}{a}\arrow{l}{-\circ\phi}[swap]{\mrps{\cat{C}}{\phi}{a}}
+			\arrow{d}{\mrps{\cat{C}}{y}{\psi}}[swap]{\psi\circ-} \\
+			\mrps{\cat{C}}{x}{b}
+			& \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{\phi}{b}}[swap]{-\circ\phi}
+		\end{tikzcd}
+	};
+	\node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
+	\node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
+	\draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
+
+	% source category
+	\node [left=4.0cm of s]     (opc) {$\op{\C}$};
+	\node [above=1.2cm of opc]  (c)   {$\C$};
+	\node [above=0.5cm of c]    (y)   {$y$};
+	\node [left =0.4cm of y]    (x)   {$x$};
+	\node [below=0.1cm of x]    (a)   {$a$};
+	\node [below=0.3cm of a]    (b)   {$b$};
+	\draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
+	\draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
+	\node [above left =0.2cm and 0.1cm of x] (crec1) {};
+	\node [below right=0.2cm and 0.1cm of c] (crec2) {};
+	\draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
+
+	% functor category
+	\node [right=1.7cm of c] (f) {$\set^\C$};
+	\draw [->, bend left =20] (opc) to node (ya) [above] {$\mrps{\C}{-}{a}$} (s);
+	\draw [->, bend right=20] (opc) to node (yb) [below] {$\mrps{\C}{-}{b}$} (s);
+	\draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{-}{\psi}$} (yb);
+	\draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
+	\draw [->] (c) to node [above left=0cm and -0.1cm] {$\textbf{よ}$} (f);
+	\node [above left =0.0cm and 0.5cm of f] (frec1) {};
+	\node [below right=0.0cm and 0.4cm of yb] (frec2) {};
+	\draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
+\end{tikzpicture}
 \end{document}
