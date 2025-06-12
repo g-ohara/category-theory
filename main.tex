@@ -196,7 +196,7 @@
 
 \chapter{表現可能函手}
 
-\section{表現可能函手}
+\section{hom 函手}
 
 はじめに hom 函手の概念を導入する．
 hom 函手は，あるひとつの対象に着目して
@@ -232,22 +232,32 @@ hom 函手は，あるひとつの対象に着目して
   hom 双函手の部分適用 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
   $\c$ に関する反変 hom 函手 (contravariant hom-functor) という．
 \end{definition}
-表現可能函手とは hom 函手に同型な函手のことである．
+
+\section{表現可能函手}
+
+\begin{definition}[前層]
+  \def\C{\cat{C}}%
+  小圏 $\C$ 上の反変函手 $\op{\C}\to\set$ を
+  $\C$ の前層 (presheaf) という．
+\end{definition}
+
+表現可能函手とは，
+hom 函手に同型な前層のことである．
 
 \begin{definition}[表現可能函手]
   \def\C{\cat{C}}%
   \def\c{\obj{c}}%
-  \def\K{K}%
-  局所小圏 $\C$ 上の集合値函手 $\mrp{\K}{\C}{\set}$ と
-  ある対象 $\c\in\objs{\C}$ に関する共変 hom 函手 $\mrps{\C}{\c}{-}$ について
-  自然同型
+  \def\F{F}%
+  \def\iso{\phi}%
+  小圏 $\C$ の前層 $\F$ と対象 $\c\in\objs{\C}$
+  に関する共変 hom 函手 $\mrps{\C}{-}{\c}$ について自然同型
   \begin{equation}
-    \psi:\mrps{\C}{\c}{-}\cong\K
+    \iso:\F\cong\mrps{\C}{-}{\c}
   \end{equation}
   が存在するとき，
-  $\K$ は表現可能 (representable) であるという．
-  またこのとき，組 $(\c,\psi)$ を $\K$ の表現 (representation) といい，
-  $\c$ を $\K$ の表現対象 (representing object) という．
+  $\F$ は表現可能 (representable) であるという．
+  このとき $\iso$ を $\F$ の表現 (representation) といい，
+  $\c$ を $\F$ の表現対象 (representing object) という．
 \end{definition}
 
 \section{米田の補題}
