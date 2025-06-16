@@ -459,14 +459,14 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \end{definition}
 
 \begin{definition}[極限]
-  $\cone(F)$ が終対象 $(\obj{t},\pi)$ をもつとき
-  $\obj{t}$ を $F$ の極限 (limit) といい，
+  $\cone(F)$ の終対象 $(\obj{t},\pi)$ を $F$ の極限 (limit) という．
+  このとき $\obj{t}$ を $F$ の極限対象 (limit object) といい，
   $\obj{t}=\lim(F)$ と表記する．
 \end{definition}
 
 \begin{definition}[余極限]
-  $\cocone(F)$ が始対象 $(\obj{i},\iota)$ をもつとき
-  $\obj{i}$ を $F$ の余極限 (colimit) といい，
+  $\cocone(F)$ の始対象 $(\obj{i},\iota)$ を $F$ の余極限 (colimit) といい，
+  このとき $\obj{i}$ を $F$ の余極限対象 (colimit object) といい，
   $\obj{i}=\colim(F)$ と表記する．
 \end{definition}
 
@@ -500,12 +500,56 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \subsection{積と余積}
 
+\begin{definition}[積]
+  離散圏 $\cat{J}=\{1,2\}$ について，
+  函手 $F:\cat{J}\to\cat{C}$ の極限を積 (product) といい，
+  $F(1)=A,F(2)=B$ のとき $A\times B$ と表記する．
+  \begin{center}
+    \includestandalone{src/product}
+  \end{center}
+\end{definition}
+
+\begin{definition}[余積]
+  離散圏 $\cat{J}=\{1,2\}$ について，
+  函手 $F:\cat{J}\to\cat{C}$ の余極限を余積 (coproduct) といい，
+  $F(1)=A,F(2)=B$ のとき $A+B$ と表記する．
+  \begin{center}
+    \includestandalone{src/coproduct}
+  \end{center}
+\end{definition}
+
 \subsection{引き戻しと押し出し}
 
 \begin{definition}[引き戻し]
-  圏 $\cat{C}$ ，圏 $\cat{J}=(\rightarrow\cdot\leftarrow)$ および
-  函手 $F:\cat{J}\to\cat{C}$ の極限を，
-  引き戻し (pullback) またはファイバー積 (fiber product) という．
+  圏 $\cat{J}=(1\rightarrow3\leftarrow2)$ について，
+  函手 $F:\cat{J}\to\cat{C}$ の極限を
+  引き戻し (pullback) またはファイバー積 (fiber product) といい，
+  $F(1)=A,F(2)=B,F(3)=C$ のとき極限対象を $A\times_CB$ と表記する．
+\end{definition}
+
+\begin{definition}[押し出し]
+  圏 $\cat{J}=(1\leftarrow3\rightarrow2)$ について，
+  函手 $F:\cat{J}\to\cat{C}$ の余極限を
+  押し出し (pushout) またはファイバー和 (fiber sum) といい，
+  $F(1)=A,F(2)=B,F(3)=C$ のとき余極限対象を $A+_CB$ と表記する．
+\end{definition}
+
+\subsection{等化子と余等化子}
+
+\begin{definition}[等化子]
+  圏 $\cat{J}=\{\cdot\rightrightarrows\cdot\}$ について，
+  函手 $F:\cat{J}\to\cat{C}$ の極限を等化子 (equalizer) という．
+  \begin{center}
+    \includestandalone{src/equalizer}
+  \end{center}
+\end{definition}
+
+\begin{definition}[余等化子]
+  圏 $\cat{J}=\{\cdot\rightrightarrows\cdot\}$ について，
+  函手 $F:\cat{J}\to\cat{C}$ の余極限を余等化子 (coequalizer) という．
+  \begin{center}
+    \includestandalone{src/coequalizer}
+  \end{center}
 \end{definition}
 
 \section{完備}
