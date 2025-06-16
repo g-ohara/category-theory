@@ -2,32 +2,14 @@
 
 The notebook of category theory written in Japanese.
 
-## How to build
+## Build document
 
-### Requirements
+You need to have installed `texlive-full` locally.
 
-#### building tool
-
-* GNU Make
-
-#### TeX to PDF
-
-* lualatex
-* latexmk
-* (optional) ChkTeX
-* (optional) latexindent
-
-#### TeX to HTML
-
-* Pandoc
-
-#### PDF to PNG
-
-* pdftocairo
-
-### How to build
-
-Run `make` in the root directory.
+Then, in the root directory of the repo, run:
+```
+latexmk main.tex
+```
 
 ## Contributing
 
