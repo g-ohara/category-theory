@@ -214,6 +214,21 @@
   (i) を満たすが (ii) を満たさない．
 \end{shadebox}
 
+\begin{definition}[充満，忠実，充満忠実]
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
+  函手 $\mrp{F}{\C}{\D}$ および任意の対象 $\x,\y\in\objs{\C}$ に対して，
+  射についての対応 $\mrps{\C}{\x}{\y}\to\mrps{\D}{F(\x)}{F(\y)}$ が
+  \begin{itemize}
+    \item 全射であるとき $F$ は充満 (full) であるといい，
+    \item 単射であるとき $F$ は忠実 (faithful) であるという．
+  \end{itemize}
+  また $F$ が充満かつ忠実であるとき，
+  $F$ は充満忠実 (full and faithful, fully faithful) であるという．
+\end{definition}
+
 \section{自然変換}
 
 2つの世界 (圏) について異なるアナロジーを考えることもできる．
