@@ -3,6 +3,11 @@
 % Figures
 \usepackage[subpreambles=true,sort=true]{standalone}
 \usepackage{tikz}
+\usetikzlibrary{
+  cd,
+  positioning,
+}
+
 
 % Text
 \usepackage{ascmac}   % for \itembox
@@ -438,31 +443,57 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 
 \section{普遍射}
 
-\begin{definition}[普遍射-1]
+ {
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
   \def\c{\obj{c}}%
   \def\d{\obj{d}}%
   \def\r{\obj{r}}%
-  函手 $\mrp{S}{\cat{C}}{\cat{D}}$ と対象 $\c\in\objs{\cat{C}}$ について，
-  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{v}{S(r)}{\c}$ の組 $(\r,v)$ が
-  \begin{equation}
-    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
-    \ \exists!f'\in\mrps{\cat{D}}{\d}{\r};\ f=v\circ S(f')
-  \end{equation}
-  を満たすとき，$(\r,v)$ を $S$ から $\c$ への普遍射 (universal arrow) という．
-\end{definition}
+  \def\S{S}%
+  \def\f{f}%
+  \def\g{f'}%
 
-\begin{definition}[普遍射-2]
-  \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
-  \def\r{\obj{r}}%
-  函手 $\mrp{S}{\cat{D}}{\cat{C}}$ と対象 $\c\in\objs{\cat{C}}$ について，
-  対象 $\r\in\objs{\cat{D}}$ と射 $\mrp{u}{S(r)}{\c}$ の組 $(\r,u)$ が
-  \begin{equation}
-    \forall\d\in\objs{\cat{D}}\ \forall f\in\mrps{\cat{C}}{S(d)}{\c}
-    \ \exists!f'\in\mrps{\cat{D}}{\r}{\d};\ f=S(f')\circ u
-  \end{equation}
-  を満たすとき，$(\r,u)$ を $\c$ から $S$ への普遍射という．
-\end{definition}
+  \begin{definition}[普遍射-1]
+    \def\v{v}%
+    函手 $\mrp{S}{\D}{\C}$ と対象 $\c\in\objs{\C}$ について，
+    対象 $\r\in\objs{\D}$ と射 $\mrp{\v}{\S(\r)}{\c}$ の組 $(\r,\v)$ が
+    \begin{equation}
+      \forall\d\in\objs{\D}\ \forall\f\in\mrps{\C}{\S(\d)}{\c}
+      \ \exists!\g\in\mrps{\D}{\d}{\r};\ \f=\v\circ\S(\g)
+    \end{equation}
+    を満たすとき，$(\r,\v)$ を $\S$ から $\c$ への普遍射 (universal arrow) という．
+    \begin{center}
+      \begin{tikzcd}[column sep=0.8cm]
+        &\C
+        &\D\arrow{l}[swap]{\S} \\
+        & \S(\d)\arrow[dashed]{d}{\S(\g)}\arrow{ld}[swap]{\f}
+        & \d\arrow[dashed]{d}{\g} \\
+        \c & \S(\r)\arrow{l}{\v} & \r
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
+
+  \begin{definition}[普遍射-2]
+    \def\u{u}%
+    函手 $\mrp{\S}{\D}{\C}$ と対象 $\c\in\objs{\C}$ について，
+    対象 $\r\in\objs{\D}$ と射 $\mrp{\u}{\c}{\S(\r)}$ の組 $(\r,\u)$ が
+    \begin{equation}
+      \forall\d\in\objs{\D}\ \forall\f\in\mrps{\C}{\c}{\S(\d)}
+      \ \exists!\g\in\mrps{\D}{\r}{\d};\ \f=\S(\g)\circ\u
+    \end{equation}
+    を満たすとき，$(\r,u)$ を $\c$ から $S$ への普遍射という．
+    \begin{center}
+      \begin{tikzcd}[column sep=0.8cm]
+        &\C
+        &\D\arrow{l}[swap]{\S} \\
+        \c\arrow{r}{\u}\arrow{rd}{\f}
+        & \S(\r)\arrow[dashed]{d}{S(\g)}
+        & r\arrow[dashed]{d}{\g}\\
+        & \S(\d) & \d
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
+ }
 
 \section{極限と余極限}
 
