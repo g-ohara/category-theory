@@ -62,22 +62,23 @@
 \begin{definition}[圏]\label{def:category}
   \def\a{\obj{a}}%
   \def\b{\obj{b}}%
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
   圏 (category) は，対象 (object) と射 (arrow, morphism) の集まりからなり，
   以下を満たす．
   \begin{itemize}
     \item 任意の射は，域 (domain) と余域 (codomain) と呼ばれる対象をもつ．
-          射 $f$ の域を$\dom(f)$，余域を $\cod(f)$ と表記する．
-          また，$\dom(f)=\a$，$\cod(f)=\b$ であるとき
+          対象 $\a$ を域，対象 $\b$ を余域とする射 $f$ を
           $\mrp{f}{\a}{\b}$ と表記する．
-    \item 任意の射 $f,g$ について，$\cod(f)=\dom(g)$ ならば，
-          $f,g$ の合成 (composition) $g\circ f$ が一意に存在する．
-    \item 任意の射 $f,g,h$ について，
-          $\cod(f)=\dom(g)$ かつ $\cod(g)=\dom(h)$ ならば，
+    \item 任意の射 $\mrp{f}{\a}{\b},\mrp{g}{\b}{\c}$ について，
+          $f,g$ の合成 (composition) $\mrp{g\circ f}{\a}{\c}$
+          が一意に存在する．
+    \item 任意の射 $\mrp{f}{\a}{\b},\mrp{g}{\b}{\c},\mrp{h}{\c}{\d}$ について，
           $h\circ(g\circ f)=(h\circ g)\circ f$ が成り立つ．
-    \item 任意の対象 $\a$ について恒等射 (identity)
-          $\mrp{\id{\a}}{\a}{\a}$ が一意に存在し，
-          任意の射 $\mrp{f}{\a}{\b}$ について
-          $f\circ\id{\a}=\id{\b}\circ f=f$ が成り立つ．
+    \item 任意の対象 $\b$ について恒等射 (identity)
+          $\mrp{\id{\b}}{\b}{\b}$ が一意に存在し，
+          任意の射 $\mrp{f}{\a}{\b},\mrp{g}{\b}{\c}$ について
+          $\id{\b}\circ f=f$ かつ $g\circ\id{\b}=g$ が成り立つ．
   \end{itemize}
   また，圏 $\cat{C}$ の対象の集まりを $\objs{\cat{C}}$，
   射 $\a\to\b$ の集まりを $\mrps{\cat{C}}{\a}{\b}$ と表記する．
