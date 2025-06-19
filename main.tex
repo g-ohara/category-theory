@@ -671,6 +671,24 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   が極限をもつとき，$\cat{C}$ は完備であるという．
 \end{definition}
 
+\section{冪}
+
+\begin{definition}[冪]
+  \def\C{\cat{C}}%
+  \def\a{X}%
+  \def\b{Y}%
+  \def\c{Z}%
+  \def\e{\operatorname{eval}}%
+  有限積をもつ圏 $\C$ の対象 $\a,\b,\c\in\objs{\C}$ について，
+  対象 $\c^\b\in\objs{\C}$ と射 $\e:\c^\b\times\b\to\c$ の組 $(\c^\b,\e)$ で，
+  任意の $f:\a\times\b\to\c$ に対して
+  以下の図式を可換にするような射 $\tilde{f}:\a\to\c^\b$ がただ一つ存在するものを
+  冪 (exponential) という．
+  \begin{center}
+    \includestandalone{src/exponential}
+  \end{center}
+\end{definition}
+
 \section{極限の保存}
 
 \begin{definition}[極限の保存]
@@ -736,24 +754,6 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
           各 $\epsilon_d:FG(d)\to d$ が $F$ から $d$ への普遍射である．
   \end{enumerate}
 \end{theorem}
-
-\subsection{冪}
-
-\begin{definition}[冪]
-  \def\C{\cat{C}}%
-  \def\a{X}%
-  \def\b{Y}%
-  \def\c{Z}%
-  \def\e{\operatorname{eval}}%
-  有限積をもつ圏 $\C$ の対象 $\a,\b,\c\in\objs{\C}$ について，
-  対象 $\c^\b\in\objs{\C}$ と射 $\e:\c^\b\times\b\to\c$ の組 $(\c^\b,\e)$ で，
-  任意の $f:\a\times\b\to\c$ に対して
-  以下の図式を可換にするような射 $\tilde{f}:\a\to\c^\b$ がただ一つ存在するものを
-  冪 (exponential) という．
-  \begin{center}
-    \includestandalone{src/exponential}
-  \end{center}
-\end{definition}
 
 \begin{theorem}[並列定義の系]
   \begin{equation}
