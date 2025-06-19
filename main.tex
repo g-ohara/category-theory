@@ -16,6 +16,7 @@
 % References
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
+\crefname{equation}{式}{式}
 \usepackage{thmtools}
 \declaretheorem[
   thmbox=S,
@@ -224,7 +225,7 @@ hom 函手は，あるひとつの対象に着目して
           \end{equation}
   \end{itemize}
 \end{definition}
-\begin{definition}[共変 hom 函手]
+\begin{definition}[共変 hom 函手]\label{def:covariant-hom-functor}
   \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
@@ -353,6 +354,17 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \end{theorem}
 
 \section{米田の補題の系}
+
+\begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
+  \def\C{\cat{C}}%
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\Y{\textbf{よ}}%
+  任意の小圏 $\C$ について
+  \begin{equation}
+    \forall\c,\d\in\objs{\C};\ \c\simeq\d\iff\Y(\c)\simeq\Y(\d).
+  \end{equation}
+\end{theorem}
 
 \begin{theorem}[Cayley の定理]
   任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
@@ -564,6 +576,42 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   が極限をもつとき，$\cat{C}$ は完備であるという．
 \end{definition}
 
+\section{極限の保存}
+
+\begin{definition}[極限の保存]
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\f{F}%
+  \def\J{\cat{J}}%
+  \def\diagram{D}%
+  函手 $\mrp{\f}{\C}{\D}$ が
+  \begin{equation}
+    \forall\J\in\objs{\Cat}\ \forall\diagram\in\Fun{\J}{\C};
+    \ \f(\lim(\diagram))\simeq\lim(\f\circ\diagram)
+  \end{equation}
+  を満たすとき，$\f$ は極限を保存する (preserves limits) という．
+\end{definition}
+
+\begin{theorem}[hom 函手は極限を保存する]\label{thm:hom-functor-preserves-limits}
+  任意の共変 hom 函手 (\cref{def:covariant-hom-functor}) は極限を保存する．
+\end{theorem}
+\begin{proof}
+  \def\C{\cat{C}}%
+  \def\c{\obj{c}}%
+  \def\f{F}%
+  \def\J{\cat{J}}%
+  \def\diagram{D}%
+  任意の対象 $\c\in\objs{\C}$ および函手 $\mrp{\diagram}{\J}{\C}$ について，
+  極限 $\lim(\diagram)$ が存在するならば
+  \begin{align}
+    \mrps{\C}{\c}{\lim(\diagram)}
+     & \simeq\operatorname{Cones}(\c,\diagram) \\
+     & \simeq\lim(\mrps{\C}{\c}{\diagram(-)}).
+  \end{align}
+  ただし $\operatorname{Cones}(\c,\diagram)$ は
+  $\c$ から $\diagram$ への錐の全体を表す．
+\end{proof}
+
 \chapter{随伴}
 
 \section{随伴函手の性質}
@@ -627,6 +675,40 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
           よって普遍性は示された．
   \end{enumerate}
 \end{proof}
+
+\subsection{随伴は極限を保存する}
+
+{
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\E{\cat{E}}%
+  \def\L{L}%
+  \def\R{R}%
+  \def\F{F}%
+  \def\d{d}%
+  \begin{theorem}[右随伴は極限を保存する]
+    $\L\dashv\R$ のとき，任意の圏 $\C,\D,\E$ について
+    \begin{equation}
+      \forall\L\in\objs{\Fun{\C}{\D}}\ \forall\R\in\objs{\Fun{\D}{\C}};
+      \ \L\dashv\R\rightarrow\left(
+      \forall\F\in\objs{\Fun{\C}{\E}};\ \R(\lim{\F})\simeq\lim(\R\F)
+      \right).
+    \end{equation}
+  \end{theorem}
+  \begin{proof}
+    任意の $\d\in\objs{\D}$ について
+    \begin{align}
+      \mrps{\D}{\d}{\R(\lim(F))}
+       & \simeq\mrps{\C}{\L(\d)}{\lim(F)}                   \\
+       & \simeq\lim\mrps{\C}{\L(\d)}{F(-)}\label{eq:rapl-2} \\
+       & \simeq\lim\mrps{\D}{\d}{RF(-)}                     \\
+       & \simeq\mrps{\D}{\d}{\lim(RF)}
+    \end{align}
+    ただし \cref{eq:rapl-2} では \cref{thm:hom-functor-preserves-limits}
+    を用いた．
+    よって \cref{thm:unique-representable-object} より $\R(\lim(F))\simeq\lim(RF)$.
+  \end{proof}
+}
 
 \chapter{カン拡張}
 
