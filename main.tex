@@ -238,7 +238,9 @@
 
 \chapter{表現可能函手}
 
-\section{hom 函手}
+\section{表現可能函手}
+
+\subsection{hom 函手}
 
 はじめに hom 函手の概念を導入する．
 hom 函手は，あるひとつの対象に着目して
@@ -275,7 +277,7 @@ hom 函手は，あるひとつの対象に着目して
   $\c$ に関する反変 hom 函手 (contravariant hom-functor) という．
 \end{definition}
 
-\section{表現可能函手}
+\subsection{表現可能函手}
 
 \begin{definition}[前層]
   \def\C{\cat{C}}%
@@ -304,6 +306,27 @@ hom 函手に同型な前層のことである．
 
 \section{米田の補題}
 
+\subsection{米田埋め込み}
+
+\begin{definition}[米田埋め込み]
+  \def\C{\cat{C}}%
+  局所小圏 $\C$ について，
+  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
+  $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
+  \begin{center}
+    \includestandalone{src/yoneda-embedding}
+  \end{center}
+\end{definition}
+\begin{definition}[余米田埋め込み]
+  \def\C{\cat{C}}%
+  局所小圏 $\C$ について，
+  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
+  $\mrp{\yoneda'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
+  \begin{center}
+    \includestandalone{src/coyoneda-embedding}
+  \end{center}
+\end{definition}
+
 所与の集合値函手 $\mrp{K}{\cat{D}}{\set}$ に対して
 表現可能函手 $\mrps{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
 コンポーネント $\alpha_r$ が恒等射 $\id{r}$
@@ -311,43 +334,43 @@ hom 函手に同型な前層のことである．
 以下で紹介する米田の補題 (Yoneda lemma) はその事実を主張しており，
 $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
 
+{
+\def\C{\cat{C}}%
+\def\opC{\op{\C}}%
+\def\c{\obj{c}}%
+\def\K{K}%
 \begin{theorem}[米田の補題]
-  \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
-  \def\r{\obj{r}}%
-  $\cat{D}$ を局所小圏とする．
-  任意の $\mrp{K}{\cat{D}}{\set}$ と $\d\in\objs{\cat{D}}$ について
+  $\C$ を局所小圏とする．
+  任意の前層 $\mrp{\K}{\opC}{\set}$ と $\c\in\objs{\C}$ について
   \begin{equation}
-    y:\set^\cat{D}(\mrps{\cat{D}}{\r}{-},K)\ni\alpha\mapsto\alpha_r(\id{\r})\in K(\r)
+    y:\set^{\opC}(\yoneda(\c),\K)\ni\alpha\mapsto\alpha_{\c}(\id{\c})\in\K(\c)
   \end{equation}
   は全単射である．
 \end{theorem}
-
 \begin{proof}
   \def\a{\obj{a}}%
-  \def\d{\obj{d}}%
-  \def\r{\obj{r}}%
-  $\mrp{x}{K(r)}{\set^\cat{D}(\mrps{\cat{D}}{r}{-},K)}$ を考え，
+  \def\d{\obj{c}'}%
+  $\mrp{x}{K(\c)}{\set^\C(\mrps{\C}{\c}{-},K)}$ を考え，
   $x$ が $\set$ における $y$ の逆射であることを示す．
-  ただし $x$ は任意の $\a\in K(r)$ を以下のコンポーネントで構成される自然変換
+  ただし $x$ は任意の $\a\in K(\c)$ を以下のコンポーネントで構成される自然変換
   $x(\a)$ に写す:
   \begin{equation}
     {x(\a)}_{\d}:f\mapsto K(f)(\a).
   \end{equation}
-  $y\circ x=\id{K(\r)}$ を示す．任意の $\a\in K(\r)$ について
+  $y\circ x=\id{K(\c)}$ を示す．任意の $\a\in K(\c)$ について
   \begin{align*}
-    y(x(\a)) & ={x(\a)}_{\r}(\id{\r}) \\
-             & =K(\id{\r})(\a)        \\
-             & =\id{K(\r)}(\a)        \\
+    y(x(\a)) & ={x(\a)}_{\c}(\id{\c}) \\
+             & =K(\id{\c})(\a)        \\
+             & =\id{K(\c)}(\a)        \\
              & =\a.
   \end{align*}
-  $x\circ y=\id{\set^\cat{D}(\mrps{\cat{D}}{\r}{-},K)}$ を示す．
-  任意の $\alpha:\mrps{\cat{D}}{\r}{\d}\to K$，$\d\in\objs{\cat{D}}$，
-  $\mrp{f}{\r}{\d}$ について
+  $x\circ y=\id{\set^\C(\mrps{\cat{D}}{\c}{-},K)}$ を示す．
+  任意の $\alpha:\mrps{\C}{\c}{\d}\to K$，$\d\in\objs{\C}$，
+  $\mrp{f}{\c}{\d}$ について
   \begin{align*}
-    {x(y(\alpha))}_{\d}(f) & =K(f)(y(\alpha))                             \\
-                           & =K(f)(\alpha_{\r}(\id{\r}))                  \\
-                           & =\alpha_{\d}(\mrps{\cat{D}}{\r}{f}(\id{\r})) \\
+    {x(y(\alpha))}_{\d}(f) & =K(f)(y(\alpha))                        \\
+                           & =K(f)(\alpha_{\c}(\id{\c}))             \\
+                           & =\alpha_{\d}(\mrps{\C}{\c}{f}(\id{\c})) \\
                            & =\alpha_{\d}(f).
   \end{align*}
   ここで 3 行目の変換には，以下の図式が可換である事実を用いた．
@@ -357,47 +380,23 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   \end{figure}
   よって $y$ は全単射であることが示された．
 \end{proof}
+}
 
-\section{米田埋め込み}
-
-\begin{definition}[米田埋め込み]
-  \def\C{\cat{C}}%
-  \def\Y{\textbf{よ}}%
-  局所小圏 $\C$ について，
-  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
-  $\mrp{\Y}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
-  \begin{center}
-    \includestandalone{src/yoneda-embedding}
-  \end{center}
-\end{definition}
-\begin{definition}[余米田埋め込み]
-  \def\C{\cat{C}}%
-  \def\Y{\textbf{よ}}%
-  局所小圏 $\C$ について，
-  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
-  $\mrp{\Y'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
-  \begin{center}
-    \includestandalone{src/coyoneda-embedding}
-  \end{center}
-\end{definition}
+\section{米田の補題の系}
 
 \begin{theorem}[米田埋め込みは充満忠実]
   \def\C{\cat{C}}%
-  \def\Y{\textbf{よ}}%
   任意の局所小圏 $\C$ において
-  米田埋め込み $\mrp{\Y}{\C}{\set^{\op{\C}}}$ は充満忠実である．
+  米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実である．
 \end{theorem}
-
-\section{米田の補題の系}
 
 \begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
   \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   \def\d{\obj{d}}%
-  \def\Y{\textbf{よ}}%
   任意の小圏 $\C$ について
   \begin{equation}
-    \forall\c,\d\in\objs{\C};\ \c\simeq\d\iff\Y(\c)\simeq\Y(\d).
+    \forall\c,\d\in\objs{\C};\ \c\simeq\d\iff\yoneda(\c)\simeq\yoneda(\d).
   \end{equation}
 \end{theorem}
 
@@ -571,14 +570,14 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   圏 $\cat{J}=(1\rightarrow3\leftarrow2)$ について，
   函手 $F:\cat{J}\to\cat{C}$ の極限を
   引き戻し (pullback) またはファイバー積 (fiber product) といい，
-  $F(1)=A,F(2)=B,F(3)=C$ のとき極限対象を $A\times_CB$ と表記する．
+  $F(1)=A,F(2)=B,F(3)=C$ のとき極限対象を $A{\times}_{C}B$ と表記する．
 \end{definition}
 
 \begin{definition}[押し出し]
   圏 $\cat{J}=(1\leftarrow3\rightarrow2)$ について，
   函手 $F:\cat{J}\to\cat{C}$ の余極限を
   押し出し (pushout) またはファイバー和 (fiber sum) といい，
-  $F(1)=A,F(2)=B,F(3)=C$ のとき余極限対象を $A+_CB$ と表記する．
+  $F(1)=A,F(2)=B,F(3)=C$ のとき余極限対象を $A{+}_{C}B$ と表記する．
 \end{definition}
 
 \subsection{等化子と余等化子}

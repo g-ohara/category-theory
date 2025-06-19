@@ -3,10 +3,15 @@
 \include{macro.tex}
 
 \begin{document}
+\def\C{\cat{C}}%
+\def\c{{\obj{c}}}%
+\def\K{K}%
+\def\a{{\obj{a}}}%
+\def\d{{\obj{c}'}}%
 \begin{tikzcd}
-	\mrps{\cat{D}}{r}{r}\arrow{r}{\mrps{\cat{D}}{r}{f}}\arrow{d}[swap]{\alpha_r}
-	& \mrps{\cat{D}}{r}{d}
-	\arrow{d}{\alpha_d} \\
-	K(r)\arrow{r}[swap]{K(f)} & K(d)
+	\mrps{\C}{\c}{\c}\arrow{r}{\mrps{\C}{\c}{f}}\arrow{d}[swap]{\alpha_\c}
+	& \mrps{\C}{\c}{\d}
+	\arrow{d}{\alpha_\d} \\
+	\K(\c)\arrow{r}[swap]{\K(f)} & \K(\d)
 \end{tikzcd}
 \end{document}
