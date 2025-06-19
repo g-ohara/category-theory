@@ -214,7 +214,7 @@
   (i) を満たすが (ii) を満たさない．
 \end{shadebox}
 
-\begin{definition}[充満，忠実，充満忠実]
+\begin{definition}[充満，忠実，充満忠実]\label{def:full-faithful}
   \def\C{\cat{C}}%
   \def\D{\cat{D}}%
   \def\x{\obj{x}}%
@@ -342,6 +342,8 @@ hom 函手に同型な前層のことである．
   \end{center}
 \end{definition}
 
+\subsection{米田の補題}
+
 所与の集合値函手 $\mrp{K}{\cat{D}}{\set}$ に対して
 表現可能函手 $\mrps{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
 コンポーネント $\alpha_r$ が恒等射 $\id{r}$
@@ -399,11 +401,24 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 
 \section{米田の補題の系}
 
-\begin{theorem}[米田埋め込みは充満忠実]
+ {
   \def\C{\cat{C}}%
-  任意の局所小圏 $\C$ において
-  米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実である．
-\end{theorem}
+  \begin{theorem}[米田埋め込みは充満忠実]
+    任意の局所小圏 $\C$ において
+    米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実
+    (\cref{def:full-faithful}) である．
+  \end{theorem}
+  \begin{proof}
+    \def\x{\obj{x}}%
+    \def\y{\obj{y}}%
+    米田の補題より，任意の $\x,\y\in\objs{\C}$ について
+    \begin{equation}
+      \set^{\op{\C}}(\yoneda(\x),\yoneda(\y))
+      \simeq\yoneda(\y)(\x)
+      \simeq\mrps{\C}{\x}{\y}.
+    \end{equation}
+  \end{proof}
+ }
 
 \begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
   \def\C{\cat{C}}%
