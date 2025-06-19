@@ -709,7 +709,22 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \chapter{随伴}
 
-\section{随伴函手の性質}
+\section{随伴}
+
+\begin{definition}[随伴]
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\L{L}%
+  \def\R{R}%
+  函手 $\mrp{\L}{\C}{\D},\mrp{\R}{\D}{\C}$ について自然同型
+  \begin{equation}
+    \mrps{\D}{\L(-)}{-}\simeq\mrps{\C}{-}{\R(-)}
+  \end{equation}
+  が存在するとき $\L$ と $\R$ は随伴 (adjoint) であるといい，
+  $\L\dashv\R$ と表記する．
+  またこのとき $\L$ を $\R$ の左随伴 (left adjoint) といい，
+  $\R$ を $\L$ の右随伴 (right adjoint) という．
+\end{definition}
 
 \begin{theorem}[随伴函手の並列定義]\label{thm:adjoint-functor-definitions}
   函手 $F:\cat{C}\rightleftarrows\cat{D}:G$ について以下の命題は全て同値である:
