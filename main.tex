@@ -5,6 +5,7 @@
 \usepackage{tikz}
 
 % Text
+\usepackage{ascmac}   % for \itembox
 \usepackage{enumitem}
 \usepackage{epigraph}
 
@@ -141,7 +142,16 @@
   $\C$ を局所小圏 (locally small category) という．
 \end{definition}
 
-\subsection{集合圏}
+\subsection{さまざまな圏}
+
+\begin{definition}[離散圏]
+  任意の射が恒等射である圏を離散圏 (discrete category) といい，
+  対象の集まりが有限である場合は対象の数を用いて
+  $\mathbf{0},\mathbf{1},\mathbf{2},\ldots$ と表記する．
+  特に $\mathbf{0}$ を空圏 (empty category) といい，
+  $\mathbf{1}$ を終圏 (terminal category) または
+  自明な圏 (trivial category) という．
+\end{definition}
 
 前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
 むしろ対象の「性質」とは他の対象との関係性によって初めて問題にできるものだ．
@@ -160,25 +170,49 @@
 2つの世界 (圏) を比較したときに，世界を構成する要素は全く違っていても，
 それらの関係性に着目するとなんとなく似ている気がしてくることがある．
 函手はそのようなアナロジーを表現する矢印である．
-\begin{definition}[函手]
-  \def\a{\obj{a}}%
-  \def\b{\obj{b}}%
-  2つの圏 $\cat{C},\cat{D}$ の対象から対象へ，射から射へ対応づける写像
-  $\mrp{F}{\cat{C}}{\cat{D}}$ が以下の条件を満たすとき，
-  $F$ を函手 (functor) という．
-  \begin{itemize}
-    \item $F(\a\to\b)=F(\a)\to F(\b)$,
-    \item $F(\id{\a})=\id{F(\a)}$,
-    \item $F(g\circ f)=F(g)\circ F(f)$.
-  \end{itemize}
+\begin{definition}[函手]\label{def:functor}
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
+  \def\z{\obj{z}}%
+  圏 $\C,\D$ について，
+  対象 $\x\in\objs{\C}$ を対象 $F(\x)\in\objs{\D}$ に写し，
+  射 $f\in\mrps{\C}{\x}{\y}$ を射 $F(f)\in\mrps{\D}{F(\x)}{F(\y)}$ に写す
+  マップ $F$ が以下の条件を満たすとき，
+  $F$ を $\C$ から $\D$ への函手 (functor) といい，
+  $\mrp{F}{\C}{\D}$ と表記する．
+  \begin{align}
+    \forall f\in\mrps{\C}{\x}{\y}\ \forall g\in\mrps{\C}{\y}{\z};
+     & \ F(g\circ f)=F(g)\circ F(f), \\
+    \forall\x\in\objs{\C};
+     & \ F(\id{\x})=\id{F(\x)}.
+  \end{align}
   \begin{center}
     \includestandalone{src/functor}
   \end{center}
 \end{definition}
-すなわち函手は域と余域，恒等射と射の合成を保存する写像である．
-のちに「圏の圏」なるものを考えるが，
-そこでは圏が対象として，函手が射として扱われることになる
-(これが\cref{def:category}を満たすことは容易に確認できる)．
+
+\begin{shadebox}
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\e{e}%
+  \def\F{F}%
+  \cref{def:functor} では函手に (i) 合成の保存と (ii) 恒等射の保存の二条件が
+  要求されている．
+  ここで， (i) が (ii) を含意するのではないか，この定義は冗長ではないかと
+  疑問に思われたかもしれないが，一般に (i) は (ii) を含意しない．
+  以下のような場合を考える．
+  \begin{itemize}
+    \item 圏 $\C$ は対象 $\c$ と恒等射 $\id{\c}$ のみからなる．
+    \item 圏 $\D$ は対象 $\d$ と恒等射 $\id{\d}$ ，射 $\mrp{e}{\d}{\d}$
+          のみからなり，$\e=\e\circ\e$ である．
+  \end{itemize}
+  ここで $\F(\id{\c})=\e$ であるような対応 $\F$ は
+  (i) を満たすが (ii) を満たさない．
+\end{shadebox}
 
 \section{自然変換}
 
