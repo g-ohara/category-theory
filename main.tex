@@ -1,7 +1,6 @@
 \documentclass[titlepage]{ltjsreport}
 
 % Figures
-\usepackage[subpreambles=true,sort=true]{standalone}
 \usepackage{tikz}
 \usetikzlibrary{
   cd,
@@ -18,6 +17,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{mathrsfs}
 
 % References
 \usepackage[hidelinks]{hyperref}
@@ -47,7 +47,27 @@
 \usepackage{proof}
 \renewcommand{\proofname}{\textbf{証明}}
 
-\input{src/macro.tex}
+\newcommand{\cat}[1]{\mathscr{#1}}
+\newcommand{\obj}[1]{\lowercase{#1}}
+\newcommand{\objs}[1]{#1}
+\newcommand{\mrp}[3]{{#1}:{#2}\to{#3}}
+\newcommand{\mrps}[3]{#1(#2,#3)}
+\newcommand{\id}[1]{\mathrm{id}_{#1}}
+\newcommand{\op}[1]{{#1}^{\mathrm{op}}}
+\newcommand{\set}{\mathbf{Set}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Fun}[2]{{#2}^{#1}}
+\newcommand{\Top}{\mathsf{Top}}
+\newcommand{\blat}{\mathsf{BLat}}
+\newcommand{\stone}{\mathsf{Stone}}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\colim}{Colim}
+\DeclareMathOperator{\lan}{Lan}
+\DeclareMathOperator{\ran}{Ran}
+\DeclareMathOperator{\cone}{Cone}
+\DeclareMathOperator{\cocone}{Cocone}
+\DeclareMathOperator{\yoneda}{\textbf{よ}}%
 
 \title{圏論ノート}
 \author{大原玄嗣}
@@ -65,7 +85,7 @@
 圏論において対象は矢印の始まりと終わりにつけられる名称に過ぎず，
 対象のもつ性質は射によってのみ特徴づけられる．
 
-\begin{definition}[圏]\label{def:category}
+\begin{definition}[圏]
   \def\a{\obj{a}}%
   \def\b{\obj{b}}%
   \def\c{\obj{c}}%
@@ -88,13 +108,21 @@
   \end{itemize}
   また，圏 $\cat{C}$ の対象の集まりを $\objs{\cat{C}}$，
   射 $\a\to\b$ の集まりを $\mrps{\cat{C}}{\a}{\b}$ と表記する．
+  \begin{center}
+    \begin{tikzpicture}
+      \node (A) {$\a$};
+      \node [right=1cm of A] (B) {$\b$};
+      \node [right=1cm of B] (C) {$\c$};
+      \node [above=1.5cm of B] (catc) {$\cat{C}$};
+      \draw [->] (A) to [edge label=$f$] (B);
+      \draw [->] (B) to [edge label=$g$] (C);
+      \draw [->, bend right] (A) to node [below] {$g\circ f$} (C);
+      \draw [->, loop above] (A) to node [above] {$\id{\a}$} (A);
+      \draw [->, loop above] (B) to node [above] {$\id{\b}$} (B);
+      \draw [->, loop above] (C) to node [above] {$\id{\c}$} (C);
+    \end{tikzpicture}
+  \end{center}
 \end{definition}
-
-\begin{figure}[htbp]
-  \centering
-  \includestandalone{src/category}
-  \caption{圏の例}
-\end{figure}
 
 \begin{definition}[逆射]
   \def\a{\obj{a}}%
@@ -194,7 +222,31 @@
      & \ F(\id{\x})=\id{F(\x)}.
   \end{align}
   \begin{center}
-    \includestandalone{src/functor}
+    \begin{tikzpicture}
+      \node (catc) {$\C$};
+      \node [right=1.0cm of catc] (A) {$\x$};
+      \node [right=1.5cm of A] (B) {$\y$};
+      \node [right=1.5cm of B] (C) {$\z$};
+      \node [below=3.5cm of catc] (catd) {$\D$};
+      \node [below=3.5cm of A] (FA) {$F(\x)$};
+      \node [below=3.5cm of B] (FB) {$F(\y)$};
+      \node [below=3.5cm of C] (FC) {$F(\z)$};
+      \draw [->] (A) to node [above] {$f$} (B);
+      \draw [->] (B) to node [above] {$g$} (C);
+      \draw [->, bend right] (A) to node [below] {$g\circ f$} (C);
+      \draw [->, loop above] (A) to node [above] {$\id{\x}$} (A);
+      \draw [->, loop above] (B) to node [above] {$\id{\y}$} (B);
+      \draw [->, loop above] (C) to node [above] {$\id{\z}$} (C);
+      \draw [->] (FA) to node [above] {$F(f)$} (FB);
+      \draw [->] (FB) to node [above] {$F(g)$} (FC);
+      \draw [->, bend right] (FA) to node [below] {$F(g\circ f)$} (FC);
+      \draw [->, loop above] (FA) to node [above] {$\id{F(\x)}$} (FA);
+      \draw [->, loop above] (FB) to node [above] {$\id{F(\y)}$} (FB);
+      \draw [->, loop above] (FC) to node [above] {$\id{F(\z)}$} (FC);
+      \node [below=1cm of B] (from) {};
+      \node [above=1cm of FB] (to) {};
+      \draw [->] (from) to node [right] {$F$} (to);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -252,7 +304,29 @@
   を満たすとき，$t$ を自然変換 (natural transformation) といい，
   $\mrp{t}{F}{G}$ と表記する．
   \begin{center}
-    \includestandalone{src/natural-transformation}
+    \begin{tikzpicture}
+      \node (catc) {$\cat{C}$};
+      \node [below left=2cm and 0.5cm of catc.center] (A) {$\x$};
+      \node [right=1.0cm of A] (B) {$\y$};
+      \node [right=4.0cm of catc] (catd) {$\cat{D}$};
+      \node [below left=1cm and 0.6cm of catd.center] (FA) {$F(\x)$};
+      \node [right=1.2cm of FA] (FB) {$F(\y)$};
+      \node [below=1.8cm of FA.center] (GA) {$G(\y)$};
+      \node [below=1.8cm of FB.center] (GB) {$G(\y)$};
+      \draw [->] (A) to node [above] {$f$} (B);
+      \draw [->] (FA) to node [above] {$F(f)$} (FB);
+      \draw [->] (GA) to node [above] {$G(f)$} (GB);
+      \draw [->] (FA) to node [right] {$t_{\x}$} (GA);
+      \draw [->] (FB) to node [right] {$t_{\y}$} (GB);
+      \node [right=0.1cm of B] (from) {};
+      \node [left=0.1cm of FA] (fto) {};
+      \draw [->] (from) to node [above left] (F) {$F$} (fto);
+      \node [left=0.1cm of GA] (gto) {};
+      \draw [->] (from) to node [below left] (G) {$G$} (gto);
+      \node [below right=0.1cm and 0.3cm of F.center] (tfrom) {};
+      \node [above right=0.1cm and 0.3cm of G.center] (tto) {};
+      \draw [->,double] (tfrom) to node [right] {$t$} (tto);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -334,7 +408,46 @@ hom 函手に同型な前層のことである．
   hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
   $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
   \begin{center}
-    \includestandalone{src/yoneda-embedding}
+    \begin{tikzpicture}
+      % Set
+      \node (s) {$\set$};
+      \node [below right=0.1cm and -1.5cm of s] (scom) {
+        \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
+          \mrps{\cat{C}}{x}{a}\arrow{d}{\psi\circ-}[swap]{\mrps{\cat{C}}{x}{\psi}}
+          & \mrps{\cat{C}}{y}{a}\arrow{l}{-\circ\phi}[swap]{\mrps{\cat{C}}{\phi}{a}}
+          \arrow{d}{\mrps{\cat{C}}{y}{\psi}}[swap]{\psi\circ-} \\
+          \mrps{\cat{C}}{x}{b}
+          & \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{\phi}{b}}[swap]{-\circ\phi}
+        \end{tikzcd}
+      };
+      \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
+      \node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
+      \draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
+
+      % source category
+      \node [left=4.0cm of s]     (opc) {$\op{\C}$};
+      \node [above=1.2cm of opc]  (c)   {$\C$};
+      \node [above=0.5cm of c]    (y)   {$y$};
+      \node [left =0.4cm of y]    (x)   {$x$};
+      \node [below=0.1cm of x]    (a)   {$a$};
+      \node [below=0.3cm of a]    (b)   {$b$};
+      \draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
+      \draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
+      \node [above left =0.2cm and 0.1cm of x] (crec1) {};
+      \node [below right=0.2cm and 0.1cm of c] (crec2) {};
+      \draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
+
+      % functor category
+      \node [right=1.7cm of c] (f) {${\set}^{\op{\C}}$};
+      \draw [->, bend left =20] (opc) to node (ya) [above] {$\mrps{\C}{-}{a}$} (s);
+      \draw [->, bend right=20] (opc) to node (yb) [below] {$\mrps{\C}{-}{b}$} (s);
+      \draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{-}{\psi}$} (yb);
+      \draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
+      \draw [->] (c) to node [above left=0cm and -0.1cm] {$\textbf{よ}$} (f);
+      \node [above left =0.0cm and 0.5cm of f] (frec1) {};
+      \node [below right=0.0cm and 0.4cm of yb] (frec2) {};
+      \draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 \begin{definition}[余米田埋め込み]
@@ -343,7 +456,45 @@ hom 函手に同型な前層のことである．
   hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
   $\mrp{\yoneda'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
   \begin{center}
-    \includestandalone{src/coyoneda-embedding}
+    \begin{tikzpicture}
+      % Set
+      \node (s) {$\set$};
+      \node [below right=0.1cm and -1.5cm of s] (scom) {
+        \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
+          \mrps{\cat{C}}{a}{x}\arrow{r}{\mrps{\cat{C}}{a}{\psi}}[swap]{-\circ\phi}
+          & \mrps{\cat{C}}{a}{y} \\
+          \mrps{\cat{C}}{b}{x}\arrow{r}{\phi\circ-}[swap]{\mrps{\cat{C}}{b}{\phi}}\arrow{u}{\mrps{\cat{C}}{\psi}{x}}[swap]{\psi\circ-}
+          & \mrps{\cat{C}}{b}{y}\arrow{u}{-\circ\psi}[swap]{\mrps{\cat{C}}{\psi}{y}}
+        \end{tikzcd}
+      };
+      \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
+      \node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
+      \draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
+
+      % source category
+      \node [left =4.0cm of s] (c)   {$\C$};
+      \node [above=1.2cm of c] (opc) {$\op{\C}$};
+      \node [below=0.7cm of c] (y)   {$y$};
+      \node [left =0.4cm of y] (x)   {$x$};
+      \node [above=0.1cm of x] (b)   {$b$};
+      \node [above=0.3cm of b] (a)   {$a$};
+      \draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
+      \draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
+      \node [above left =0.0cm and 0.1cm of a] (crec1) {};
+      \node [below right=0.0cm and 0.1cm of y] (crec2) {};
+      \draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
+
+      % functor category
+      \node [right=1.5cm of opc] (f) {$\set^\C$};
+      \draw [->, bend left =20] (c) to node (ya) [above] {$\mrps{\C}{a}{-}$} (s);
+      \draw [->, bend right=20] (c) to node (yb) [below] {$\mrps{\C}{b}{-}$} (s);
+      \draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{\psi}{-}$} (yb);
+      \draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
+      \draw [->] (opc) to node [above left=0cm and -0.1cm] {$\textbf{よ}'$} (f);
+      \node [above left =0.0cm and 0.5cm of f] (frec1) {};
+      \node [below right=0.0cm and 0.4cm of yb] (frec2) {};
+      \draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -396,10 +547,14 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
                            & =\alpha_{\d}(f).
   \end{align*}
   ここで 3 行目の変換には，以下の図式が可換である事実を用いた．
-  \begin{figure}[h]
-    \centering
-    \includestandalone{src/yoneda}
-  \end{figure}
+  \begin{center}
+    \begin{tikzcd}
+      \mrps{\C}{\c}{\c}\arrow{r}{\mrps{\C}{\c}{f}}\arrow{d}[swap]{\alpha_{\c}}
+      & \mrps{\C}{\c}{\d}
+      \arrow{d}{\alpha_{\d}} \\
+      \K(\c)\arrow{r}[swap]{\K(f)} & \K(\d)
+    \end{tikzcd}
+  \end{center}
   よって $y$ は全単射であることが示された．
 \end{proof}
 }
@@ -452,42 +607,42 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   \def\S{S}%
   \def\f{f}%
   \def\g{f'}%
+  \def\unia{v}%
+  \def\unib{u}%
 
   \begin{definition}[普遍射-1]
-    \def\v{v}%
     函手 $\mrp{S}{\D}{\C}$ と対象 $\c\in\objs{\C}$ について，
-    対象 $\r\in\objs{\D}$ と射 $\mrp{\v}{\S(\r)}{\c}$ の組 $(\r,\v)$ が
+    対象 $\r\in\objs{\D}$ と射 $\mrp{\unia}{\S(\r)}{\c}$ の組 $(\r,\unia)$ が
     \begin{equation}
       \forall\d\in\objs{\D}\ \forall\f\in\mrps{\C}{\S(\d)}{\c}
-      \ \exists!\g\in\mrps{\D}{\d}{\r};\ \f=\v\circ\S(\g)
+      \ \exists!\g\in\mrps{\D}{\d}{\r};\ \f=\unia\circ\S(\g)
     \end{equation}
-    を満たすとき，$(\r,\v)$ を $\S$ から $\c$ への普遍射 (universal arrow) という．
+    を満たすとき，$(\r,\unia)$ を $\S$ から $\c$ への普遍射 (universal arrow) という．
     \begin{center}
       \begin{tikzcd}[column sep=0.8cm]
         &\C
         &\D\arrow{l}[swap]{\S} \\
         & \S(\d)\arrow[dashed]{d}{\S(\g)}\arrow{ld}[swap]{\f}
         & \d\arrow[dashed]{d}{\g} \\
-        \c & \S(\r)\arrow{l}{\v} & \r
+        \c & \S(\r)\arrow{l}{\unia} & \r
       \end{tikzcd}
     \end{center}
   \end{definition}
 
   \begin{definition}[普遍射-2]
-    \def\u{u}%
     函手 $\mrp{\S}{\D}{\C}$ と対象 $\c\in\objs{\C}$ について，
-    対象 $\r\in\objs{\D}$ と射 $\mrp{\u}{\c}{\S(\r)}$ の組 $(\r,\u)$ が
+    対象 $\r\in\objs{\D}$ と射 $\mrp{\unib}{\c}{\S(\r)}$ の組 $(\r,\unib)$ が
     \begin{equation}
       \forall\d\in\objs{\D}\ \forall\f\in\mrps{\C}{\c}{\S(\d)}
-      \ \exists!\g\in\mrps{\D}{\r}{\d};\ \f=\S(\g)\circ\u
+      \ \exists!\g\in\mrps{\D}{\r}{\d};\ \f=\S(\g)\circ\unib
     \end{equation}
     を満たすとき，$(\r,u)$ を $\c$ から $S$ への普遍射という．
     \begin{center}
       \begin{tikzcd}[column sep=0.8cm]
         &\C
         &\D\arrow{l}[swap]{\S} \\
-        \c\arrow{r}{\u}\arrow{rd}{\f}
-        & \S(\r)\arrow[dashed]{d}{S(\g)}
+        \c\arrow{r}{\unib}\arrow{rd}{\f}
+        & \S(\r)\arrow[dashed]{d}{\S(\g)}
         & r\arrow[dashed]{d}{\g}\\
         & \S(\d) & \d
       \end{tikzcd}
@@ -516,7 +671,22 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \end{definition}
 
 \begin{center}
-  \includestandalone{src/terminal-and-initial-object}
+  \begin{tikzpicture}
+    \node (A) {$\obj{a}$};
+    \node [below=0.5cm of A] (B) {$\obj{b}$};
+    \node [below=0.5cm of B] (C) {$\obj{c}$};
+    \node [below=0.2cm of C] (D) {$\vdots$};
+    \node [below left =0.0cm and 1.0cm of B] (I) {$\obj{i}$};
+    \node [below right=0.0cm and 1.0cm of B] (T) {$\obj{t}$};
+    \draw [->] (I) to (A);
+    \draw [->] (I) to (B);
+    \draw [->] (I) to (C);
+    \draw [->] (I) to (D.west);
+    \draw [->] (A) to (T);
+    \draw [->] (B) to (T);
+    \draw [->] (C) to (T);
+    \draw [->] (D.east) to (T);
+  \end{tikzpicture}
 \end{center}
 
 \begin{definition}[定函手]
@@ -552,7 +722,12 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   ただし射 $u\in\mrps{\cone(F)}{(\obj{d},\psi)}{(\obj{d'},\psi')}$ は
   以下の図式を可換にする自然変換 $\id{\obj{d}}\to\id{\obj{d'}}$ である．
   \begin{center}
-    \includestandalone{src/cone-category}
+    \begin{tikzcd}
+      \id{d}\arrow{r}{u}\arrow{d}[swap]{\psi}
+      & \id{d'}\arrow{d}{\psi'} \\
+      F\arrow[equal]{r}[swap]{\id{F}}
+      & F
+    \end{tikzcd}
   \end{center}
 \end{definition}
 
@@ -561,7 +736,12 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   ただし射 $u\in\mrps{\cocone(F)}{(d,\phi)}{(d',\phi')}$ は
   以下の図式を可換にする自然変換 $\id{d}\to\id{d'}$ である．
   \begin{center}
-    \includestandalone{src/cocone-category}
+    \begin{tikzcd}
+      \id{d}\arrow{r}{u}
+      & \id{d'} \\
+      F\arrow[equal]{r}[swap]{\id{F}}\arrow{u}{\phi}
+      & F\arrow{u}[swap]{\phi'}
+    \end{tikzcd}
   \end{center}
 \end{definition}
 
@@ -612,7 +792,17 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   函手 $F:\cat{J}\to\cat{C}$ の極限を積 (product) といい，
   $F(1)=A,F(2)=B$ のとき $A\times B$ と表記する．
   \begin{center}
-    \includestandalone{src/product}
+    \begin{tikzpicture}
+      \node (A) {$A$};
+      \node [right=1.0cm of A] (P) {$A\times B$};
+      \node [right=1.0cm of P] (B) {$B$};
+      \node [below=0.8cm of P] (X) {$X$};
+      \draw [->] (P) to node [above] {$p_A$} (A);
+      \draw [->] (P) to node [above] {$p_B$} (B);
+      \draw [->, dashed] (X) to node [left] {$u$} (P);
+      \draw [->] (X) to node [below left] {$x_A$} (A);
+      \draw [->] (X) to node [below right] {$x_B$} (B);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -621,7 +811,17 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   函手 $F:\cat{J}\to\cat{C}$ の余極限を余積 (coproduct) といい，
   $F(1)=A,F(2)=B$ のとき $A+B$ と表記する．
   \begin{center}
-    \includestandalone{src/coproduct}
+    \begin{tikzpicture}
+      \node (A) {$A$};
+      \node [right=1.0cm of A] (Q) {$A+B$};
+      \node [right=1.0cm of Q] (B) {$B$};
+      \node [below=0.8cm of Q] (X) {$X$};
+      \draw [->] (A) to node [above] {$i_A$} (Q);
+      \draw [->] (B) to node [above] {$i_B$} (Q);
+      \draw [->, dashed] (Q) to node [left] {$u$} (X);
+      \draw [->] (A) to node [below left] {$x_A$} (X);
+      \draw [->] (B) to node [below right] {$x_B$} (X);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -647,7 +847,17 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   圏 $\cat{J}=\{\cdot\rightrightarrows\cdot\}$ について，
   函手 $F:\cat{J}\to\cat{C}$ の極限を等化子 (equalizer) という．
   \begin{center}
-    \includestandalone{src/equalizer}
+    \begin{tikzpicture}
+      \node (X) {$X$};
+      \node [right=1.0cm of X] (Y) {$Y$};
+      \node [left =1.0cm of X] (E) {$E$};
+      \node [below=0.7cm of E] (E') {$E'$};
+      \draw [->] (X.20) to node [above] {$f$} (Y.160);
+      \draw [->] (X.340) to node [below] {$g$} (Y.200);
+      \draw [->] (E) to node [above] {$e$} (X);
+      \draw [->, dashed] (E') to node [left] {$u$} (E);
+      \draw [->] (E') to node [below right] {$e'$} (X);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -655,7 +865,17 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   圏 $\cat{J}=\{\cdot\rightrightarrows\cdot\}$ について，
   函手 $F:\cat{J}\to\cat{C}$ の余極限を余等化子 (coequalizer) という．
   \begin{center}
-    \includestandalone{src/coequalizer}
+    \begin{tikzpicture}
+      \node (X) {$X$};
+      \node [right=1.0cm of X] (Y) {$Y$};
+      \node [right=1.0cm of Y] (Q) {$Q$};
+      \node [below=0.7cm of Q] (Q') {$Q'$};
+      \draw [->] (X.20) to node [above] {$f$} (Y.160);
+      \draw [->] (X.340) to node [below] {$g$} (Y.200);
+      \draw [->] (Y) to node [above] {$q$} (Q);
+      \draw [->, dashed] (Q) to node [right] {$u$} (Q');
+      \draw [->] (Y) to node [below left] {$q'$} (Q');
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -685,7 +905,14 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   以下の図式を可換にするような射 $\tilde{f}:\a\to\c^\b$ がただ一つ存在するものを
   冪 (exponential) という．
   \begin{center}
-    \includestandalone{src/exponential}
+    \begin{tikzpicture}
+      \node (XY) {$\a\times\b$};
+      \node [below=1.0cm of XY] (ZYY) {$\c^{\b}\times\b$};
+      \node [right=1.2cm of ZYY] (Z) {$\c$};
+      \draw [->] (XY) to node [above right] {$f$} (Z);
+      \draw [->, dashed] (XY) to node [left] {$\bar{f}\times\id{\b}$} (ZYY);
+      \draw [->] (ZYY) to node [below] {\small$\operatorname{eval}$} (Z);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -878,14 +1105,32 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \def\A{\cat{C'}}%
   \def\D{\cat{D}}%
   \def\K{K}%
-  \def\F{F}%
+  \def\f{F}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
-  $\mrp{\K^*}{\D^\A}{\D^\C}$ と函手 $\mrp{\F}{\C}{\D}$ について，
-  集合値函手 $\mrp{\mrps{\D^\C}{\F}{\K^*(-)}}{\D^\A}{\set}$ が表現可能であるとき，
-  その表現対象 $L\in\objs{\D^\A}$ を $\K$ に沿った $\F$ の左カン拡張といい，
-  $L=\lan_{\K}\F$ と表記する．
+  $\mrp{\K^*}{\D^\A}{\D^\C}$ と函手 $\mrp{\f}{\C}{\D}$ について，
+  集合値函手 $\mrp{\mrps{\D^\C}{\f}{\K^*(-)}}{\D^\A}{\set}$ が表現可能であるとき，
+  その表現対象 $L\in\objs{\D^\A}$ を $\K$ に沿った $\f$ の左カン拡張といい，
+  $L=\lan_{\K}\f$ と表記する．
   \begin{center}
-    \includestandalone{src/left-kan}
+    \begin{tikzpicture}
+      \def\L{\K_!}%
+      \def\g{G}%
+      \node (C) {$\A$};
+      \node [below=2cm of C] (M) {$\C$};
+      \node [right=2cm of M] (A) {$\D$};
+      \draw [->] (M) to node [left]         {$\K$}      (C);
+      \draw [->] (M) to node [below]        {$\f$}      (A);
+      \draw [->] (C) to node [right=0.1cm]  {$\lan_{\K}\f$} (A);
+      \node [above right=0.9cm of C] (astart) {};
+      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
+      \draw [->] (astart) to node [above right] {$\g$} (aend);
+      \node [below right=0.65cm and 0.5cm of C] (eend) {};
+      \node [below=1.2cm of eend] (estart) {};
+      \draw [->,double] (estart) to node [left] {$\mu$} (eend);
+      \node [above right=1.1cm and 0.6cm of M] (sstart) {};
+      \node [above right=1.2cm of sstart] (send) {};
+      \draw [->,double] (sstart) to node [above left] {$\tau$} (send);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -894,14 +1139,32 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \def\A{\cat{C'}}%
   \def\D{\cat{D}}%
   \def\K{K}%
-  \def\F{F}%
+  \def\f{F}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
-  $\mrp{\K^*}{\D^\A}{\D^\C}$ と函手 $\mrp{\F}{\C}{\D}$ について，
-  集合値函手 $\mrp{\mrps{\D^\C}{\K^*(-)}{\F}}{\D^\A}{\set}$ が表現可能であるとき，
-  その表現対象 $R\in\objs{\D^\A}$ を $\K$ に沿った $\F$ の右カン拡張といい，
-  $R=\ran_{\K}\F$ と表記する．
+  $\mrp{\K^*}{\D^\A}{\D^\C}$ と函手 $\mrp{\f}{\C}{\D}$ について，
+  集合値函手 $\mrp{\mrps{\D^\C}{\K^*(-)}{\f}}{\D^\A}{\set}$ が表現可能であるとき，
+  その表現対象 $R\in\objs{\D^\A}$ を $\K$ に沿った $\f$ の右カン拡張といい，
+  $R=\ran_{\K}\f$ と表記する．
   \begin{center}
-    \includestandalone{src/right-kan}
+    \begin{tikzpicture}
+      \def\R{\K_*}%
+      \def\g{G}%
+      \node (C) {$\A$};
+      \node [below=2cm of C] (M) {$\C$};
+      \node [right=2cm of M] (A) {$\D$};
+      \draw [->] (M) to node [left]         {$\K$}      (C);
+      \draw [->] (M) to node [below]        {$\f$}      (A);
+      \draw [->] (C) to node [right=0.1cm]  {$\ran_{\K}\f$} (A);
+      \node [above right=0.9cm of C] (astart) {};
+      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
+      \draw [->] (astart) to node [above right] {$\g$} (aend);
+      \node [below right=0.65cm and 0.5cm of C] (estart) {};
+      \node [below=1.2cm of estart] (eend) {};
+      \draw [->,double] (estart) to node [left] {$\epsilon$} (eend);
+      \node [above right=1.1cm and 0.6cm of M] (send) {};
+      \node [above right=1.2cm of send] (sstart) {};
+      \draw [->,double] (sstart) to node [above left] {$\sigma$} (send);
+    \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -929,10 +1192,38 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{center}
   \begin{minipage}[b]{0.4\linewidth}
-    \includestandalone{src/lim-right-kan-1}
+    \begin{tikzpicture}
+      \node (1) {$\mathbf{1}$};
+      \node [below=2cm of 1] (M) {$\cat{M}$};
+      \node [right=2cm of M] (A) {$\cat{A}$};
+      \draw [->] (M) to node [left]         {$K_1$}      (1);
+      \draw [->] (M) to node [below]        {$T$}        (A);
+      \draw [->] (1) to node [right]  {$\ran_{K_1}T$} (A);
+      \node [above right=0.9cm of 1] (astart) {};
+      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
+      \draw [->] (astart) to node [above right] {$A$} (aend);
+      \node [below right=1cm of 1] (estart) {};
+      \node [below=1.2cm of estart] (eend) {};
+      \draw [->,double] (estart) to node [left] {$\epsilon$} (eend);
+      \node [above right=1.1cm and 0.6cm of M] (send) {};
+      \node [above right=1.0cm of send] (sstart) {};
+      \draw [->,double] (sstart) to node [above left] {$\sigma$} (send);
+    \end{tikzpicture}
   \end{minipage}
   \begin{minipage}[b]{0.4\linewidth}
-    \includestandalone{src/lim-right-kan-2}
+    \begin{tikzpicture}
+      \node (catA) {$\cat{A}$};
+      \node [below left=0.6cm and 0.3cm of catA] (ran) {$\ran_{K_1}T$};
+      \node [below right=2.0cm and -0.5cm of ran] (Ti) {$T_i$};
+      \node [right=1.0cm of Ti] (Tj) {$T_j$};
+      \draw [->] (Ti) to node [above] {} (Tj);
+      \draw [->] (ran) to node [left] {$\epsilon_i$} (Ti);
+      \draw [->] (ran) to node [left] {$\epsilon_j$} (Tj);
+      \node [right=1.5cm of ran] (A) {$A$};
+      \draw [->,dashed] (A) to node [above] {$\sigma$} (ran);
+      \draw [->] (A) to node [right] {$\alpha_i$} (Ti);
+      \draw [->] (A) to node [right] {$\alpha_j$} (Tj);
+    \end{tikzpicture}
   \end{minipage}
 \end{center}
 
@@ -952,10 +1243,38 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{center}
   \begin{minipage}[b]{0.4\linewidth}
-    \includestandalone{src/colim-left-kan-1}
+    \begin{tikzpicture}
+      \node (1) {$\mathbf{1}$};
+      \node [below=2cm of 1] (M) {$\cat{M}$};
+      \node [right=2cm of M] (A) {$\cat{A}$};
+      \draw [->] (M) to node [left]         {$K_1$}      (1);
+      \draw [->] (M) to node [below]        {$T$}        (A);
+      \draw [->] (1) to node [right]  {$\lan_{K_1}T$} (A);
+      \node [above right=0.9cm of 1] (astart) {};
+      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
+      \draw [->] (astart) to node [above right] {$A$} (aend);
+      \node [below right=1cm of 1] (estart) {};
+      \node [below=1.2cm of estart] (eend) {};
+      \draw [->,double] (eend) to node [left] {$\mu$} (estart);
+      \node [above right=1.1cm and 0.6cm of M] (send) {};
+      \node [above right=1.0cm of send] (sstart) {};
+      \draw [->,double] (send) to node [above left] {$\tau$} (sstart);
+    \end{tikzpicture}
   \end{minipage}
   \begin{minipage}[b]{0.4\linewidth}
-    \includestandalone{src/colim-left-kan-2}
+    \begin{tikzpicture}
+      \node (catA) {$\cat{A}$};
+      \node [below left=0.6cm and 0.3cm of catA] (ran) {$\lan_{K_1}T$};
+      \node [below right=2.0cm and -0.5cm of ran] (Ti) {$T_i$};
+      \node [right=1.0cm of Ti] (Tj) {$T_j$};
+      \draw [->] (Ti) to node [above] {} (Tj);
+      \draw [->] (Ti) to node [left] {$\mu_i$} (ran);
+      \draw [->] (Tj) to node [left] {$\mu_j$} (ran);
+      \node [right=1.5cm of ran] (A) {$A$};
+      \draw [->,dashed] (ran) to node [above] {$\tau$} (A);
+      \draw [->] (Ti) to node [right] {$\beta_i$} (A);
+      \draw [->] (Tj) to node [right] {$\beta_j$} (A);
+    \end{tikzpicture}
   \end{minipage}
 \end{center}
 
