@@ -1609,13 +1609,26 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{definition}[位相空間]\label{def:topological-space}
   集合 $X$ とその部分集合族 $\mathcal{O}\subseteq2^X$ が以下の条件を満たすとき,
-  $(X,\mathcal{O})$ は位相空間 (topological space) であるという．
+  $(X,\mathcal{O})$ は位相空間 (topological space) であるといい，
+  $\mathcal{O}$ を $X$ 上の位相 (topology) という．
   \begin{align}
     \emptyset,X\in\mathcal{O}                                 \\
     \forall O_1,O_2\in\mathcal{O};\ O_1\cup O_2\in\mathcal{O} \\
     \forall \mathcal{O}'\subseteq\mathcal{O};
     \bigcup_{O\in\mathcal{O}'}O\in\mathcal{O}
   \end{align}
+\end{definition}
+
+\begin{definition}[離散位相]
+  位相空間 $(X,2^X)$ を離散位相空間 (discrete topological space) といい，
+  $2^X$ を $X$ 上の離散位相 (discrete topology) という．
+\end{definition}
+
+\begin{definition}[密着位相]
+  位相空間 $(X,\{\emptyset,X\})$
+  を密着位相空間 (indiscrete topological space) といい，
+  $\{\emptyset,X\}$ を $X$ 上の密着位相 (indiscrete topology)
+  または自明な位相 (trivial topology) という．
 \end{definition}
 
 \begin{definition}[開集合，閉集合，開かつ閉集合]
@@ -1712,5 +1725,9 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \begin{definition}[ストーン空間]\label{def:stone-space}
   コンパクト完全不連結ハウスドルフ空間をストーン空間 (Stone space) という．
 \end{definition}
+
+\begin{theorem}[チコノフの定理]
+  任意のコンパクト空間族の直積空間はコンパクト空間である．
+\end{theorem}
 
 \end{document}
