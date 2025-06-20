@@ -19,5 +19,5 @@ please open an issue first to discuss what you would like to change.
 
 ## License
 
-[MIT](/LICENSE)
+[CC-BY-SA](/LICENSE)
 
