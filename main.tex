@@ -1123,7 +1123,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   $\R=\ran_{\K}$ と表記する．
 \end{definition}
 
-\section{局所的なカン拡張}
+\subsection{局所的なカン拡張}
 
 \begin{definition}[(局所的な) 左カン拡張]
   \def\C{\cat{C}}%
@@ -1192,6 +1192,47 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
     \end{tikzpicture}
   \end{center}
 \end{definition}
+
+\subsection{カン拡張の例}
+
+\begin{theorem}[米田埋め込みのカン拡張]
+  \def\C{\cat{C}}%
+  \def\A{\C'}%
+  \def\K{K}%
+  \def\x{\obj{x}}%
+  任意の小圏 $\C$ ，圏 $\A$ および函手 $\mrp{\K}{\C}{\A}$ について
+  \begin{equation}
+    \forall\x\in\objs{\A};\ (\lan_{\K}\yoneda_{\C})(x)\simeq\yoneda_{\A}(\x)\circ\K.
+  \end{equation}
+\end{theorem}
+
+\subsection{絶対カン拡張}
+
+{
+  \def\C{\cat{C}}%
+  \def\A{\cat{C'}}%
+  \def\D{\cat{D}}%
+  \def\E{\cat{E}}%
+  \def\K{K}%
+  \def\F{F}%
+  \def\G{G}%
+  \begin{definition}[函手と左カン拡張の交換]
+    函手 $\mrp{\K}{\C}{\A}$ に沿った函手 $\mrp{\F}{\C}{\D}$ の左カン拡張
+    $\lan_{\K}\F$ および函手 $\mrp{\G}{\D}{\E}$ について
+    \begin{equation}
+      \lan_{\K}(\G\circ\F)\simeq\G\circ\lan_{\K}\F
+    \end{equation}
+    が成り立つとき，
+    $\G$ は $\lan_{\K}\F$ と交換するという．
+  \end{definition}
+  \begin{definition}[絶対左カン拡張]
+    函手 $\mrp{\K}{\C}{\A}$ に沿った函手 $\mrp{\F}{\C}{\D}$ の左カン拡張
+    $\lan_{\K}\F$ について，
+    任意の圏 $\E$ および函手 $\mrp{\G}{\D}{\E}$ が
+    $\lan_{\K}\F$ と交換するとき，
+    $\lan_{\K}\F$ を絶対左カン拡張 (absolute left Kan extension) という．
+  \end{definition}
+}
 
 \section{すべての概念はカン拡張である}
 
