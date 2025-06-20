@@ -559,9 +559,9 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
 \end{proof}
 }
 
-\section{米田の補題の系}
+\subsection{米田の補題の系}
 
- {
+{
   \def\C{\cat{C}}%
   \begin{theorem}[米田埋め込みは充満忠実]
     任意の局所小圏 $\C$ において
@@ -578,7 +578,8 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
       \simeq\mrps{\C}{\x}{\y}.
     \end{equation}
   \end{proof}
- }
+
+}
 
 \begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
   \def\C{\cat{C}}%
@@ -951,6 +952,48 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   ただし $\operatorname{Cones}(\c,\diagram)$ は
   $\c$ から $\diagram$ への錐の全体を表す．
 \end{proof}
+
+\subsection{米田埋め込みは極限を保存する}
+{
+  \def\C{\cat{C}}%
+  \def\diagram{D}%
+  \def\c{\obj{c}}%
+  \def\eval{\operatorname{ev}}%
+
+  \begin{theorem}\label{thm:yepl-lemma}%
+    \def\J{\cat{J}}%
+    \def\D{\cat{D}}%
+    任意の小圏 $\C,\J$ ，局所小圏 $\D$ および函手
+    $\mrp{\diagram}{\J}{\Fun{\C}{\D}}$ を考える．
+    各 $\c\in\objs{\C}$ における評価函手 $\eval_{\c}:\Fun{\C}{\D}\to\D$
+    について極限 $\lim(\eval_{\c}\circ\diagram)$ が存在するならば，
+    極限 $\lim(\diagram)$ が存在し，
+    \begin{equation}
+      \forall\c\in\objs{\C};
+      \ (\lim\diagram)(c)\simeq\lim(\eval_{\c}\circ\diagram).
+    \end{equation}
+  \end{theorem}
+
+  \begin{theorem}[米田埋め込みは極限を保存する]
+    任意の局所小圏 $\C$ について，
+    米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は極限を保存する．
+  \end{theorem}
+
+  \begin{proof}
+    \begin{align}
+      \yoneda(\lim\diagram)(\c)
+       & \simeq\mrps{\C}{\c}{\lim\diagram}                             \\
+       & \simeq\lim(\yoneda'(c)\circ\diagram)\label{yepl-2}            \\
+       & \simeq\lim(\eval_{\c}\circ\yoneda\circ\diagram)\label{yepl-3} \\
+       & \simeq\lim(\yoneda\circ\diagram)(\c)\label{yepl-4}.
+    \end{align}
+    ただし \cref{yepl-2} の同型は \cref{thm:hom-functor-preserves-limits} による．
+    また \cref{yepl-3} の同型は
+    $\yoneda'(\c)=\mrps{\C}{\c}{-}=\eval_{\c}\circ\yoneda$
+    によって得られ，
+    \cref{yepl-4} の同型は \cref{thm:yepl-lemma} による．
+  \end{proof}
+}
 
 \chapter{随伴}
 
