@@ -982,7 +982,32 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[並列定義の系]
+\subsection{随伴函手の例}
+
+{
+  \def\C{\cat{C}}%
+  \begin{theorem}[終対象]
+    任意の圏 $\C$ において以下は同値である:
+    \begin{enumerate}[label=(\roman*)] % chktex 36
+      \item $\C$ が終対象をもつ，
+      \item 一意な函手 $*:\C\to\mathbf{1}$ が右随伴をもつ．
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    \def\c{\obj{c}}%
+    自明な函手 $\mrp{\phi}{\mathbf{0}}{\C}$ および
+    任意の函手 $t:\mathbf{1}\to\C$ について
+    \begin{align} % chktex 36
+      t(*)\simeq\lim(\phi)
+       & \iff\forall\c\in\objs{\C};
+      \ |\mrps{\C}{c}{t(*)}|=1                                   \\
+       & \iff\mrps{\C}{-}{t(-)}\simeq\mrps{\mathbf{1}}{*(-)}{-}.
+    \end{align}
+    よって (i) $\Leftrightarrow$ (ii) が示された．
+  \end{proof}
+}
+
+\begin{theorem}[積函手と冪函手]
   \begin{equation}
     -\times A\dashv{(-)}^A.
   \end{equation}
