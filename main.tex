@@ -286,6 +286,60 @@
   $F$ は充満忠実 (full and faithful, fully faithful) であるという．
 \end{definition}
 
+{
+
+\subsection{圏の圏 $\Cat$}
+
+\def\C{\cat{C}}%
+\def\D{\cat{D}}%
+\def\E{\cat{E}}%
+\def\F{F}%
+\def\G{G}%
+\def\a{\obj{a}}%
+\def\b{\obj{b}}%
+\def\c{\obj{c}}%
+\def\f{f}%
+\def\g{g}%
+
+\begin{definition}[函手の合成]
+  函手 $\mrp{\F}{\C}{\D},\mrp{\G}{\D}{\E}$ について，
+  以下のように定められるマップを $\F$ と $\G$ の合成といい，
+  $\G\circ\F$ と表記する．
+  \begin{align}
+    \C\ni\a                & \mapsto\G(\F(\a))\in\E,                  \\
+    \mrps{\C}{\a}{\b}\ni\f & \mapsto\mrps{\E}{\G(\F(a))}{\G(\F(\b))}.
+  \end{align}
+\end{definition}
+
+\begin{theorem}
+  任意の函手 $\mrp{\F}{\C}{\D},\mrp{\G}{\D}{\E}$ について，
+  合成 $\G\circ\F$ は $\C$ から $\E$ への函手である．
+\end{theorem}
+
+\begin{proof}
+  (i) $\G\circ\F$ が合成を保存することを示す．
+  $\C$ の任意の射 $\mrp{\f}{\a}{\b},\mrp{\g}{\b}{\c}$ について
+  \begin{align*}
+    (\G\circ\F)(\g\circ\f)
+     & =\G(\F(\g\circ\f))                    \\
+     & =\G(\F(\g)\circ\F(\f))                \\
+     & =\G(\F(\g))\circ\G(\F(\f))            \\
+     & =(\G\circ\F)(\g)\circ(\G\circ\F)(\f).
+  \end{align*}
+
+  (ii) $\G\circ\F$ が恒等射を保存することを示す．
+  $\C$ の任意の対象 $\a$ について
+  \begin{align*}
+    (\G\circ\F)(\id{\a})
+     & =\G(\F(\id{\a}))       \\
+     & =\G(\id{\F(\a)})       \\
+     & =\id{\G(\F(\a))}       \\
+     & =\id{(\G\circ\F)(\a)}.
+  \end{align*}
+\end{proof}
+
+}
+
 \section{自然変換}
 
 2つの世界 (圏) について異なるアナロジーを考えることもできる．
