@@ -1169,6 +1169,114 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \end{proof}
 }
 
+{
+
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\E{\cat{E}}%
+  \def\i{1}%
+  \def\F{F}%
+  \def\G{G}%
+  \def\w{\obj{w}}%
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
+  \def\z{\obj{z}}%
+  \def\monad{M}%
+
+  \chapter{モナドと代数}
+
+  \section{モナド}
+
+  \begin{definition}[モノイド圏]
+    圏 $\C$ ，双函手 $\mrp{\otimes}{\C\times\C}{\C}$ ，対象 $\i\in\objs{\C}$
+    および以下の 3 つの自然同型
+    \begin{align}
+      \alpha  & :(-\otimes-)\otimes-\simeq-\otimes(-\otimes-), \\
+      \lambda & :\i\otimes-\simeq\id{\C},                      \\
+      \rho    & :-\otimes\i\simeq\id{\C}
+    \end{align}
+    が任意の $\w,\x,\y,\z\in\objs{\C}$ について
+    以下の 2 つの図式を可換にするとき，
+    $(\C,\otimes,\i,\alpha,\lambda,\rho)$
+    をモノイド圏 (monoidal category) という．
+    \begin{center}
+      \begin{tikzcd}
+        (\x\otimes\i)\otimes\y
+        \arrow{rr}{\alpha_{\x,\i,\y}}
+        \arrow{rd}[swap]{\rho_x\times\id{\y}}
+        &
+        & \x\otimes(\i\times\y)
+        \arrow{ld}{\id{\x}\otimes\lambda_y} \\
+        & \x\otimes\y
+      \end{tikzcd}
+    \end{center}
+    \begin{center}
+      \begin{tikzcd}
+        & (\w\otimes\x)\otimes(\y\otimes\z)
+        \arrow{rd}{\alpha_{\w,\x,\y\otimes\z}} \\
+        ((\w\otimes\x)\otimes\y)\otimes\z
+        \arrow{ru}{\alpha_{\w\otimes\x,\y,\z}}
+        \arrow{d}{\alpha_{\w,\x,\y}\otimes\id{\z}}
+        &
+        & \w\otimes(\x\otimes(\y\otimes\z)) \\
+        (\w\otimes(\x\otimes\y))\otimes\z
+        \arrow{rr}{\alpha_{\w,\x\otimes\y,\z}}
+        &
+        & \w\otimes((\x\otimes\y)\otimes\z)
+        \arrow{u}{\id{\w}\otimes\alpha_{\x,\y,\z}}
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
+
+  \begin{definition}[モノイド]
+    モノイド圏 $(\C\otimes,\i,\alpha,\lambda,\rho)$ ，
+    対象 $\monad\in\objs{\C}$ および
+    射 $\mrp{\mu}{\monad\times\monad}{\monad},\mrp{\eta}{\i}{\monad}$
+    が以下の 2 つの図式を可換にするとき，
+    $(\monad,\mu,\eta)$ を $\C$ におけるモノイド (monoid) または
+    モノイド対象という．
+    \begin{center}
+      \begin{tikzcd}[column sep=10pt]
+        & (\monad\otimes\monad)\otimes\monad%
+        \arrow{rr}{\alpha}\arrow{ld}[swap]{\mu\otimes\i}
+        && \monad\otimes(\monad\otimes\monad)
+        \arrow{rd}{\i\otimes\mu} \\
+        \monad\otimes\monad%
+        \arrow{rr}[swap]{\mu}
+        && \monad%
+        && \monad\otimes\monad%
+        \arrow{ll}{\mu} \\
+      \end{tikzcd}
+    \end{center}
+    \begin{center}
+      \begin{tikzcd}[column sep=40pt]
+        \i\otimes\monad%
+        \arrow{r}{\eta\otimes\id{\monad}}\arrow{rd}[swap]{\lambda_{\monad}}
+        & \monad\otimes\monad%
+        & \monad\otimes\i
+        \arrow{l}[swap]{\id{\monad}\otimes\eta}
+        \arrow{ld}{\rho_{\monad}} \\
+        & \monad%
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
+
+  \begin{definition}[モナド]
+    圏 $\C$ について，
+    モノイド圏としての $\C$ の自己函手圏
+    $(\Fun{\C}{\C},\circ,\id{\C})$
+    におけるモノイド $(\monad,\eta,\mu)$ を
+    $\C$ におけるモナド (monad) という．
+  \end{definition}
+
+  \subsection{随伴とモナド}
+
+  \begin{theorem}[随伴はモナドを構成する]
+    任意の随伴 $(\mrp{F}{\C}{\D},\mrp{\G}{\D}{\C},\eta,\epsilon)$ について，
+    $(\G\circ\F,\eta,\G\circ\epsilon\circ\F)$ は $\C$ 上のモナドである．
+  \end{theorem}
+}
+
 \chapter{カン拡張}
 
 \epigraph{All Concepts are Kan Extensions.}{Saunders Mac Lane}
