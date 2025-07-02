@@ -57,9 +57,11 @@
 \newcommand{\set}{\mathbf{Set}}
 \newcommand{\Cat}{\mathbf{Cat}}
 \newcommand{\Fun}[2]{{#2}^{#1}}
+\newcommand{\Comma}[2]{\left({#1}\downarrow{#2}\right)}
 \newcommand{\Top}{\mathsf{Top}}
 \newcommand{\blat}{\mathsf{BLat}}
 \newcommand{\stone}{\mathsf{Stone}}
+\newcommand{\interval}{\mathscr{I}}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\cod}{cod}
 \DeclareMathOperator{\colim}{Colim}
@@ -184,6 +186,11 @@
   特に $\mathbf{0}$ を空圏 (empty category) といい，
   $\mathbf{1}$ を終圏 (terminal category) または
   自明な圏 (trivial category) という．
+\end{definition}
+
+\begin{definition}[区間圏]\label{def:interval-category}
+  2 つの対象 $0,1$ および唯一の非自明な射 $0\to1$ からなる圏を
+  区間圏 (interval category) といい，$\interval$ と表記する．
 \end{definition}
 
 前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
@@ -1066,6 +1073,60 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
     によって得られ，
     \cref{yepl-4} の同型は \cref{thm:yepl-lemma} による．
   \end{proof}
+}
+
+{
+
+  \def\C{\cat{C}}%
+  \def\D{\cat{D}}%
+  \def\E{\cat{E}}%
+  \def\c{\obj{c}}%
+  \def\d{\obj{d}}%
+  \def\F{F}%
+  \def\G{G}%
+  \def\eval{\operatorname{ev}}%
+
+  \subsection{コンマ圏}
+
+  \begin{definition}[コンマ圏]
+    圏 $\C,\D,\E$ と
+    区間圏 (\cref{def:interval-category}) $\interval=\{0\to1\}$ および
+    函手 $\mrp{\F}{\C}{\E},\mrp{\G}{\D}{\E}$ について，
+    $\mrp{\F\times\G}{\C\times\D}{\E\times\E}$ と
+    $\eval_0\times\eval_1:\Fun{\interval}{\E}\to\E$ の
+    $\Cat$ における引き戻し対象をコンマ圏 (comma category) といい，
+    $\Comma{\F}{\G}$ と表記する．
+    \begin{center}
+      \begin{tikzcd}
+        \Comma{\F}{\G}\arrow{r}{}\arrow{d}{}
+        & \Fun{\interval}{\E}\arrow{d}{\eval_0\times\eval_1} \\
+        \C\times\D\arrow{r}[swap]{\F\times\G}
+        & \E\times\E
+      \end{tikzcd}
+      \begin{tikzcd}
+        (\c,\d,\alpha)\arrow[mapsto]{r}\arrow[mapsto]{d}
+        & \alpha\arrow[mapsto]{d}{\eval_0\times\eval_1} \\
+        (\c,\d)\arrow[mapsto]{r}[swap]{\F\times\G}
+        & (\F(\c),\G(\d))
+      \end{tikzcd}
+    \end{center}
+    \begin{center}
+      \begin{tikzcd}[column sep=10pt]
+        \C\arrow{rrr}{\F}
+        &&& \E
+        &&& \D\arrow{lll}[swap]{\G} \\
+        \c\arrow{d}[swap]{f}
+        && \F(\c)\arrow{rr}{\alpha}\arrow{d}[swap]{\F(f)}
+        && \G(\d)\arrow{d}{\G(g)}
+        && \d\arrow{d}{g} \\
+        \c'
+        && \F(\c')\arrow{rr}[swap]{\alpha'}
+        && \G(\d')
+        && \d'
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
+
 }
 
 \chapter{随伴}
