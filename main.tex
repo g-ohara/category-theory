@@ -1206,7 +1206,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
   \section{モナド}
 
-  \begin{definition}[モノイド圏]
+  \begin{definition}[モノイド圏]\label{def:monoidal-category}
     圏 $\C$ ，双函手 $\mrp{\otimes}{\C\times\C}{\C}$ ，対象 $\i\in\objs{\C}$
     および以下の 3 つの自然同型
     \begin{align}
@@ -1701,6 +1701,91 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
     \sob\simeq\sfrm^\mathrm{op}.
   \end{equation}
 \end{theorem}
+
+{
+
+\chapter{豊穣圏}
+
+豊穣圏は，ここまで用いてきた普通の圏の概念の抽象化である．
+本章以降では前章までの定義や表記を一切用いず，
+全ての概念をより一般的に再定義する．
+
+\section{豊穣圏}
+
+\def\C{\cat{C}}%
+\def\mcat{\cat{V}}%
+\newcommand\tprod{\otimes}%
+\newcommand\tunit{1}%
+\newcommand\assoc{\alpha}%
+\newcommand\lunit{\lambda}%
+\newcommand\runit{\rho}%
+\def\a{\obj{a}}%
+\def\b{\obj{b}}%
+\def\c{\obj{c}}%
+\def\d{\obj{d}}%
+
+普通の圏においては，
+任意の対象のペアの間に射の集合 (または集まり) が与えられていた．
+豊穣圏では，その「射の集合」はモノイド圏の対象として与えられる．
+
+\begin{definition}[豊穣圏]
+  モノイド圏 (\cref{def:monoidal-category})
+  $(\mcat,\tprod,\tunit,\assoc,\lunit,\runit)$ について，
+  $\mcat$-豊穣圏 ($\mcat$-enriched category) $\C$ は以下の条件を満たす:
+  \begin{itemize}
+    \item 対象の集まりをもつ．
+    \item 任意の対象 $\a,\b\in\objs{\C}$ に対して
+          $\mrps{\C}{\a}{\b}\in\mcat$ が存在する．
+    \item 任意の対象 $\a,\b,\c\in\objs{\C}$ に対して $\mcat$ の射
+          \begin{equation}
+            \mrp{{m}_{\a,\b,\c}}{
+              \mrps{\C}{\b}{\c}\tprod\mrps{\C}{\a}{\b}
+            }{\mrps{\C}{\a}{\c}}
+          \end{equation}
+          が存在し，
+          任意の対象 $\a,\b,\c\in\objs{\C}$ に対して以下の図式を可換にする:
+          \begin{center}
+            \begin{tikzcd}
+              (\mrps{\C}{\c}{\d}\tprod\mrps{\C}{\b}{\c})\tprod\mrps{\C}{\a}{\b}
+              \arrow{rr}{
+                \assoc_{\mrps{\C}{\c}{\d},\mrps{\C}{\b}{\c},\mrps{\C}{\a}{\b}}
+              }
+              \arrow{d}[swap]{m_{\b,\c,\d}\tprod\id{\mrps{\C}{\a}{\b}}}
+              &&
+              \mrps{\C}{\c}{\d}\tprod(\mrps{\C}{\b}{\c}\tprod\mrps{\C}{\a}{\b})
+              \arrow{d}{\id{\mrps{\C}{\c}{\d}}\tprod{m}_{\a,\b,\c}} \\
+              \mrps{\C}{\b}{\d}\tprod\mrps{\C}{\a}{\b}
+              \arrow{r}[swap]{m_{\a,\b,\d}}
+              & \mrps{\C}{\a}{\d}
+              & \mrps{\C}{\c}{\d}\tprod\mrps{\C}{\a}{\c}
+              \arrow{l}{m_{\a,\c,\d}}
+            \end{tikzcd}
+          \end{center}
+    \item 任意の対象 $\a\in\objs{\C}$ に対して $\mcat$ の射
+          \begin{equation}
+            \mrp{{j}_{\a}}{\tunit}{\mrps{\C}{\a}{\a}}
+          \end{equation}
+          が存在し，
+          任意の対象 $\a,\b\in\objs{\C}$ に対して以下の図式を可換にする:
+          \begin{center}
+            \begin{tikzcd}
+              \tunit\tprod\mrps{\C}{\a}{\b}
+              \arrow{r}{\lunit_{\mrps{\C}{\a}{\b}}}
+              \arrow{d}[swap]{j_{\b}\tprod\id{\mrps{\C}{\a}{\b}}}
+              & \mrps{\C}{\a}{\b}
+              & \mrps{\C}{\a}{\b}\tprod\tunit%
+              \arrow{l}[swap]{\runit_{\mrps{\C}{\a}{\b}}}
+              \arrow{d}{\id{\mrps{\C}{\a}{\b}}\tprod{j_{\a}}} \\
+              \mrps{\C}{\b}{\b}\tprod\mrps{\C}{\a}{\b}
+              \arrow{ru}[swap]{m_{\a,\b,\b}}
+              && \mrps{\C}{\a}{\b}\tprod\mrps{\C}{\a}{\a}
+              \arrow{lu}{m_{\a,\a,\b}}
+            \end{tikzcd}
+          \end{center}
+  \end{itemize}
+\end{definition}
+
+}
 
 \appendix
 
