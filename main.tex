@@ -24,22 +24,25 @@
 \usepackage{cleveref}
 \crefname{equation}{式}{式}
 \usepackage{thmtools}
-\declaretheorem[
+\declaretheoremstyle[
   thmbox=S,
+]{mystyle}
+\declaretheorem[
+  style=mystyle,
   name=定理,
   refname={定理,定理},
   Refname={定理,定理},
   numberwithin=chapter,
 ]{theorem}
 \declaretheorem[
-  thmbox=S,
+  style=mystyle,
   name=定義,
   refname={定義,定義},
   Refname={定義,定義},
   numberlike=theorem,
 ]{definition}
 \declaretheorem[
-  thmbox=S,
+  style=mystyle,
   name=例,
   refname={例,例},
   Refname={例,例},
@@ -1086,9 +1089,9 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \def\G{G}%
   \def\eval{\operatorname{ev}}%
 
-  \subsection{コンマ圏}
+  \section{コンマ圏}
 
-  \begin{definition}[コンマ圏]
+  \begin{definition}[コンマ圏\cite{nlab:comma_category}]
     圏 $\C,\D,\E$ と
     区間圏 (\cref{def:interval-category}) $\interval=\{0\to1\}$ および
     函手 $\mrp{\F}{\C}{\E},\mrp{\G}{\D}{\E}$ について，
@@ -1847,6 +1850,9 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \end{definition}
 
 }
+
+\bibliography{main}
+\bibliographystyle{unsrt}
 
 \appendix
 
