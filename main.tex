@@ -568,20 +568,22 @@ hom 函手に同型な前層のことである．
   \end{center}
 \end{definition}
 
+{
+
 \subsection{米田の補題}
 
-所与の集合値函手 $\mrp{K}{\cat{D}}{\set}$ に対して
-表現可能函手 $\mrps{\cat{D}}{r}{-}$ からの自然変換 $\alpha$ を与えることは，
-コンポーネント $\alpha_r$ が恒等射 $\id{r}$
-をどこに写すかを決めることと等価である．
-以下で紹介する米田の補題 (Yoneda lemma) はその事実を主張しており，
-$\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
-
-{
 \def\C{\cat{C}}%
 \def\opC{\op{\C}}%
 \def\c{\obj{c}}%
 \def\K{K}%
+
+所与の前層 $\mrp{\K}{\C}{\set}$ に対して
+表現可能函手 $\yoneda(\c)$ からの自然変換 $\alpha$ を与えることは，
+コンポーネント ${\alpha}_{\c}$ が恒等射 $\id{\c}$
+をどこに写すかを決めることと等価である．
+以下で紹介する米田の補題 (Yoneda lemma) はその事実を主張しており，
+${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
+
 \begin{theorem}[米田の補題]
   $\C$ を局所小圏とする．
   任意の前層 $\mrp{\K}{\opC}{\set}$ と $\c\in\objs{\C}$ について
@@ -627,6 +629,7 @@ $\alpha_r(\id{r})$ の値ひとつから自然変換 $\alpha$ を構成する方
   \end{center}
   よって $y$ は全単射であることが示された．
 \end{proof}
+
 }
 
 \subsection{米田の補題の系}
