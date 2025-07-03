@@ -7,6 +7,8 @@
   positioning,
 }
 
+% Tables
+\usepackage{booktabs}
 
 % Text
 \usepackage{ascmac}   % for \itembox
@@ -1526,7 +1528,9 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 本節では，極限や随伴がカン拡張として表現されることを確認する．
 
-\begin{theorem}[極限は右カン拡張である]\label{thm:limit-is-right-kan-extension}
+\begin{theorem}[%
+    極限は右カン拡張である\cite{maclane:kan-extensions}%
+  ]\label{thm:limit-is-right-kan-extension}
   函手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
   \begin{itemize}
     \item $T$ が極限をもつ，
@@ -1581,7 +1585,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \end{minipage}
 \end{center}
 
-\begin{theorem}[余極限は左カン拡張である]
+\begin{theorem}[余極限は左カン拡張である\cite{maclane:kan-extensions}]
   函手 $T:\cat{M}\to\cat{A}$ について以下の2つは同値である:
   \begin{itemize}
     \item $T$ が余極限をもつ，
@@ -1878,6 +1882,67 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \end{definition}
 
 \chapter{代数学の知識}
+
+ {
+
+  \section{群論}
+
+  \def\x{x}%
+  \def\y{y}%
+  \def\z{z}%
+  \def\munit{1}%
+
+  \begin{definition}[マグマ\cite{wiki:magma}]
+    \def\magma{M}%
+    集合 $\magma$ と二項演算 $\cdot:\magma\times\magma\to\magma$ の組
+    $(\magma,\cdot)$ をマグマ (magma) という．
+  \end{definition}
+
+  \begin{definition}[半群\cite{wiki:semigroup}]
+    \def\semigroup{S}%
+    マグマ $(\semigroup,\cdot)$ が結合律
+    \begin{equation}
+      \forall\x,\y,\z\in\semigroup;\ (\x\cdot\y)\cdot\z=\x\cdot(\y\cdot\z)
+    \end{equation}
+    を満たすとき，$(\semigroup,\cdot)$ を半群 (semigroup) という．
+  \end{definition}
+
+  \begin{definition}[モノイド\cite{wiki:monoid}]
+    \def\monoid{M}%
+    半群 $(\monoid,\cdot)$ の元 $\munit\in\monoid$ が単位律
+    \begin{equation}
+      \forall\x\in\monoid;\ \munit\cdot\x=\x\cdot\munit=\x
+    \end{equation}
+    を満たすとき，$(\monoid,\cdot,\munit)$ をモノイド (monoid) という．
+    また $\munit$ を単位元 (unit) という．
+  \end{definition}
+
+  \begin{definition}[群\cite{wiki:group}]
+    \def\group{G}%
+    モノイド $(\group,\cdot,\munit)$ の任意の元 $\x\in\group$ に対して
+    $\x^{-1}\in\group$ が存在して
+    \begin{equation}
+      \x\cdot\x^{-1}=\x^{-1}\cdot\x=\munit
+    \end{equation}
+    が成り立つとき，$(\group,\cdot)$ を群 (group) という．
+    また $\x^{-1}$ を $\x$ の逆元 (inverse) という．
+  \end{definition}
+
+  \begin{table}
+    \centering
+    \caption{代数的構造の階層}
+    \begin{tabular}{cccc}
+      \toprule
+           & 結合律          & 単位元の存在       & 逆元の存在        \\
+      \midrule
+      マグマ  & {-}          & {-}          & {-}          \\
+      半群   & \checkmark{} & {-}          & {-}          \\
+      モノイド & \checkmark{} & \checkmark{} & {-}          \\
+      群    & \checkmark{} & \checkmark{} & \checkmark{} \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+ }
 
 \section{束論}
 
