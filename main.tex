@@ -412,274 +412,6 @@
   $\sigma\circ\theta$ と表記する．
 \end{definition}
 
-\chapter{表現可能函手}
-
-\section{表現可能函手}
-
-\subsection{hom 函手}
-
-はじめに hom 函手の概念を導入する．
-hom 函手は，あるひとつの対象に着目して
-そこから見た「主観的な」圏を与える函手である．
-共変 hom 函手は他の対象を「そこへの」射の集合と同一視し，
-反変 hom 函手は他の対象を「そこからの」射の集合と同一視する．
-\begin{definition}[hom 双函手]
-  \def\C{\cat{C}}%
-  局所小圏 $\C$ について，
-  双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$
-  を hom 双函手 (hom-bifunctor) という．
-  ただし $\mrps{\C}{-}{-}$ は
-  \begin{itemize}
-    \item $a,b\in\C$ を集合 $\mrps{\C}{a}{b}\in\set$ に写し，
-    \item $\psi\in\mrps{\C}{a}{a'},\phi\in\mrps{\C}{b}{b'}$
-          を以下の写像に写す．
-          \begin{equation}
-            \mrps{\C}{a'}{b}\in f\mapsto\phi\circ f\circ\psi\in\mrps{\C}{a}{b'}
-          \end{equation}
-  \end{itemize}
-\end{definition}
-\begin{definition}[共変 hom 函手]\label{def:covariant-hom-functor}
-  \def\C{\cat{C}}%
-  \def\c{\obj{c}}%
-  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
-  hom 双函手の部分適用 $\mrp{\mrps{\C}{\c}{-}}{\C}{\set}$ を
-  $\c$ に関する共変 hom 函手 (covariant hom-functor) という．
-\end{definition}
-\begin{definition}[反変 hom 函手]
-  \def\C{\cat{C}}%
-  \def\c{\obj{c}}%
-  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
-  hom 双函手の部分適用 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
-  $\c$ に関する反変 hom 函手 (contravariant hom-functor) という．
-\end{definition}
-
-\subsection{表現可能函手}
-
-\begin{definition}[前層]
-  \def\C{\cat{C}}%
-  小圏 $\C$ 上の反変函手 $\op{\C}\to\set$ を
-  $\C$ の前層 (presheaf) という．
-\end{definition}
-
-表現可能函手とは，
-hom 函手に同型な前層のことである．
-
-\begin{definition}[表現可能函手]
-  \def\C{\cat{C}}%
-  \def\c{\obj{c}}%
-  \def\F{F}%
-  \def\iso{\phi}%
-  小圏 $\C$ の前層 $\F$ と対象 $\c\in\objs{\C}$
-  に関する反変 hom 函手 $\mrps{\C}{-}{\c}$ について自然同型
-  \begin{equation}
-    \iso:\F\cong\mrps{\C}{-}{\c}
-  \end{equation}
-  が存在するとき，
-  $\F$ は表現可能 (representable) であるという．
-  このとき $\iso$ を $\F$ の表現 (representation) といい，
-  $\c$ を $\F$ の表現対象 (representing object) という．
-\end{definition}
-
-\section{米田の補題}
-
-\subsection{米田埋め込み}
-
-\begin{definition}[米田埋め込み]
-  \def\C{\cat{C}}%
-  局所小圏 $\C$ について，
-  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
-  $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
-  \begin{center}
-    \begin{tikzpicture}
-      % Set
-      \node (s) {$\set$};
-      \node [below right=0.1cm and -1.5cm of s] (scom) {
-        \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
-          \mrps{\cat{C}}{x}{a}\arrow{d}{\psi\circ-}[swap]{\mrps{\cat{C}}{x}{\psi}}
-          & \mrps{\cat{C}}{y}{a}\arrow{l}{-\circ\phi}[swap]{\mrps{\cat{C}}{\phi}{a}}
-          \arrow{d}{\mrps{\cat{C}}{y}{\psi}}[swap]{\psi\circ-} \\
-          \mrps{\cat{C}}{x}{b}
-          & \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{\phi}{b}}[swap]{-\circ\phi}
-        \end{tikzcd}
-      };
-      \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
-      \node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
-      \draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
-
-      % source category
-      \node [left=4.0cm of s]     (opc) {$\op{\C}$};
-      \node [above=1.2cm of opc]  (c)   {$\C$};
-      \node [above=0.5cm of c]    (y)   {$y$};
-      \node [left =0.4cm of y]    (x)   {$x$};
-      \node [below=0.1cm of x]    (a)   {$a$};
-      \node [below=0.3cm of a]    (b)   {$b$};
-      \draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
-      \draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
-      \node [above left =0.2cm and 0.1cm of x] (crec1) {};
-      \node [below right=0.2cm and 0.1cm of c] (crec2) {};
-      \draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
-
-      % functor category
-      \node [right=1.7cm of c] (f) {${\set}^{\op{\C}}$};
-      \draw [->, bend left =20] (opc) to node (ya) [above] {$\mrps{\C}{-}{a}$} (s);
-      \draw [->, bend right=20] (opc) to node (yb) [below] {$\mrps{\C}{-}{b}$} (s);
-      \draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{-}{\psi}$} (yb);
-      \draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
-      \draw [->] (c) to node [above left=0cm and -0.1cm] {$\textbf{よ}$} (f);
-      \node [above left =0.0cm and 0.5cm of f] (frec1) {};
-      \node [below right=0.0cm and 0.4cm of yb] (frec2) {};
-      \draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
-    \end{tikzpicture}
-  \end{center}
-\end{definition}
-\begin{definition}[余米田埋め込み]
-  \def\C{\cat{C}}%
-  局所小圏 $\C$ について，
-  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
-  $\mrp{\yoneda'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
-  \begin{center}
-    \begin{tikzpicture}
-      % Set
-      \node (s) {$\set$};
-      \node [below right=0.1cm and -1.5cm of s] (scom) {
-        \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
-          \mrps{\cat{C}}{a}{x}\arrow{r}{\mrps{\cat{C}}{a}{\psi}}[swap]{-\circ\phi}
-          & \mrps{\cat{C}}{a}{y} \\
-          \mrps{\cat{C}}{b}{x}\arrow{r}{\phi\circ-}[swap]{\mrps{\cat{C}}{b}{\phi}}\arrow{u}{\mrps{\cat{C}}{\psi}{x}}[swap]{\psi\circ-}
-          & \mrps{\cat{C}}{b}{y}\arrow{u}{-\circ\psi}[swap]{\mrps{\cat{C}}{\psi}{y}}
-        \end{tikzcd}
-      };
-      \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
-      \node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
-      \draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
-
-      % source category
-      \node [left =4.0cm of s] (c)   {$\C$};
-      \node [above=1.2cm of c] (opc) {$\op{\C}$};
-      \node [below=0.7cm of c] (y)   {$y$};
-      \node [left =0.4cm of y] (x)   {$x$};
-      \node [above=0.1cm of x] (b)   {$b$};
-      \node [above=0.3cm of b] (a)   {$a$};
-      \draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
-      \draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
-      \node [above left =0.0cm and 0.1cm of a] (crec1) {};
-      \node [below right=0.0cm and 0.1cm of y] (crec2) {};
-      \draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
-
-      % functor category
-      \node [right=1.5cm of opc] (f) {$\set^\C$};
-      \draw [->, bend left =20] (c) to node (ya) [above] {$\mrps{\C}{a}{-}$} (s);
-      \draw [->, bend right=20] (c) to node (yb) [below] {$\mrps{\C}{b}{-}$} (s);
-      \draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{\psi}{-}$} (yb);
-      \draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
-      \draw [->] (opc) to node [above left=0cm and -0.1cm] {$\textbf{よ}'$} (f);
-      \node [above left =0.0cm and 0.5cm of f] (frec1) {};
-      \node [below right=0.0cm and 0.4cm of yb] (frec2) {};
-      \draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
-    \end{tikzpicture}
-  \end{center}
-\end{definition}
-
-{
-
-\subsection{米田の補題}
-
-\def\C{\cat{C}}%
-\def\opC{\op{\C}}%
-\def\c{\obj{c}}%
-\def\K{K}%
-
-所与の前層 $\mrp{\K}{\C}{\set}$ に対して
-表現可能函手 $\yoneda(\c)$ からの自然変換 $\alpha$ を与えることは，
-コンポーネント ${\alpha}_{\c}$ が恒等射 $\id{\c}$
-をどこに写すかを決めることと等価である．
-以下で紹介する米田の補題 (Yoneda lemma) はその事実を主張しており，
-${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
-
-\begin{theorem}[米田の補題]
-  $\C$ を局所小圏とする．
-  任意の前層 $\mrp{\K}{\opC}{\set}$ と $\c\in\objs{\C}$ について
-  \begin{equation}
-    y:\set^{\opC}(\yoneda(\c),\K)\ni\alpha\mapsto\alpha_{\c}(\id{\c})\in\K(\c)
-  \end{equation}
-  は全単射である．
-\end{theorem}
-\begin{proof}
-  \def\a{\obj{a}}%
-  \def\d{\obj{c}'}%
-  $\mrp{x}{K(\c)}{\set^\C(\mrps{\C}{\c}{-},K)}$ を考え，
-  $x$ が $\set$ における $y$ の逆射であることを示す．
-  ただし $x$ は任意の $\a\in K(\c)$ を以下のコンポーネントで構成される自然変換
-  $x(\a)$ に写す:
-  \begin{equation}
-    {x(\a)}_{\d}:f\mapsto K(f)(\a).
-  \end{equation}
-  $y\circ x=\id{K(\c)}$ を示す．任意の $\a\in K(\c)$ について
-  \begin{align*}
-    y(x(\a)) & ={x(\a)}_{\c}(\id{\c}) \\
-             & =K(\id{\c})(\a)        \\
-             & =\id{K(\c)}(\a)        \\
-             & =\a.
-  \end{align*}
-  $x\circ y=\id{\set^\C(\mrps{\cat{D}}{\c}{-},K)}$ を示す．
-  任意の $\alpha:\mrps{\C}{\c}{\d}\to K$，$\d\in\objs{\C}$，
-  $\mrp{f}{\c}{\d}$ について
-  \begin{align*}
-    {x(y(\alpha))}_{\d}(f) & =K(f)(y(\alpha))                        \\
-                           & =K(f)(\alpha_{\c}(\id{\c}))             \\
-                           & =\alpha_{\d}(\mrps{\C}{\c}{f}(\id{\c})) \\
-                           & =\alpha_{\d}(f).
-  \end{align*}
-  ここで 3 行目の変換には，以下の図式が可換である事実を用いた．
-  \begin{center}
-    \begin{tikzcd}
-      \mrps{\C}{\c}{\c}\arrow{r}{\mrps{\C}{\c}{f}}\arrow{d}[swap]{\alpha_{\c}}
-      & \mrps{\C}{\c}{\d}
-      \arrow{d}{\alpha_{\d}} \\
-      \K(\c)\arrow{r}[swap]{\K(f)} & \K(\d)
-    \end{tikzcd}
-  \end{center}
-  よって $y$ は全単射であることが示された．
-\end{proof}
-
-}
-
-\subsection{米田の補題の系}
-
-{
-  \def\C{\cat{C}}%
-  \begin{theorem}[米田埋め込みは充満忠実]
-    任意の局所小圏 $\C$ において
-    米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実
-    (\cref{def:full-faithful}) である．
-  \end{theorem}
-  \begin{proof}
-    \def\x{\obj{x}}%
-    \def\y{\obj{y}}%
-    米田の補題より，任意の $\x,\y\in\objs{\C}$ について
-    \begin{equation}
-      \set^{\op{\C}}(\yoneda(\x),\yoneda(\y))
-      \simeq\yoneda(\y)(\x)
-      \simeq\mrps{\C}{\x}{\y}.
-    \end{equation}
-  \end{proof}
-
-}
-
-\begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
-  \def\C{\cat{C}}%
-  \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
-  任意の小圏 $\C$ について
-  \begin{equation}
-    \forall\c,\d\in\objs{\C};\ \c\simeq\d\iff\yoneda(\c)\simeq\yoneda(\d).
-  \end{equation}
-\end{theorem}
-
-\begin{theorem}[Cayley の定理]
-  任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
-\end{theorem}
-
 \chapter{極限}
 
 \section{普遍射}
@@ -1018,6 +750,128 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   を満たすとき，$\f$ は極限を保存する (preserves limits) という．
 \end{definition}
 
+{
+
+\def\C{\cat{C}}%
+\def\D{\cat{D}}%
+\def\E{\cat{E}}%
+\def\c{\obj{c}}%
+\def\d{\obj{d}}%
+\def\F{F}%
+\def\G{G}%
+\def\eval{\operatorname{ev}}%
+
+\section{コンマ圏}
+
+\begin{definition}[コンマ圏\cite{nlab:comma_category}]
+  圏 $\C,\D,\E$ と
+  区間圏 (\cref{def:interval-category}) $\interval=\{0\to1\}$ および
+  函手 $\mrp{\F}{\C}{\E},\mrp{\G}{\D}{\E}$ について，
+  $\mrp{\F\times\G}{\C\times\D}{\E\times\E}$ と
+  $\eval_0\times\eval_1:\Fun{\interval}{\E}\to\E$ の
+  $\Cat$ における引き戻し対象をコンマ圏 (comma category) といい，
+  $\Comma{\F}{\G}$ と表記する．
+  \begin{center}
+    \begin{tikzcd}
+      \Comma{\F}{\G}\arrow{r}{}\arrow{d}{}
+      & \Fun{\interval}{\E}\arrow{d}{\eval_0\times\eval_1} \\
+      \C\times\D\arrow{r}[swap]{\F\times\G}
+      & \E\times\E
+    \end{tikzcd}
+    \begin{tikzcd}
+      (\c,\d,\alpha)\arrow[mapsto]{r}\arrow[mapsto]{d}
+      & \alpha\arrow[mapsto]{d}{\eval_0\times\eval_1} \\
+      (\c,\d)\arrow[mapsto]{r}[swap]{\F\times\G}
+      & (\F(\c),\G(\d))
+    \end{tikzcd}
+  \end{center}
+  \begin{center}
+    \begin{tikzcd}[column sep=10pt]
+      \C\arrow{rrr}{\F}
+      &&& \E
+      &&& \D\arrow{lll}[swap]{\G} \\
+      \c\arrow{d}[swap]{f}
+      && \F(\c)\arrow{rr}{\alpha}\arrow{d}[swap]{\F(f)}
+      && \G(\d)\arrow{d}{\G(g)}
+      && \d\arrow{d}{g} \\
+      \c'
+      && \F(\c')\arrow{rr}[swap]{\alpha'}
+      && \G(\d')
+      && \d'
+    \end{tikzcd}
+  \end{center}
+\end{definition}
+
+}
+
+\chapter{表現可能函手}
+
+\section{表現可能函手}
+
+\subsection{hom 函手}
+
+はじめに hom 函手の概念を導入する．
+hom 函手は，あるひとつの対象に着目して
+そこから見た「主観的な」圏を与える函手である．
+共変 hom 函手は他の対象を「そこへの」射の集合と同一視し，
+反変 hom 函手は他の対象を「そこからの」射の集合と同一視する．
+\begin{definition}[hom 双函手]
+  \def\C{\cat{C}}%
+  局所小圏 $\C$ について，
+  双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$
+  を hom 双函手 (hom-bifunctor) という．
+  ただし $\mrps{\C}{-}{-}$ は
+  \begin{itemize}
+    \item $a,b\in\C$ を集合 $\mrps{\C}{a}{b}\in\set$ に写し，
+    \item $\psi\in\mrps{\C}{a}{a'},\phi\in\mrps{\C}{b}{b'}$
+          を以下の写像に写す．
+          \begin{equation}
+            \mrps{\C}{a'}{b}\in f\mapsto\phi\circ f\circ\psi\in\mrps{\C}{a}{b'}
+          \end{equation}
+  \end{itemize}
+\end{definition}
+\begin{definition}[共変 hom 函手]\label{def:covariant-hom-functor}
+  \def\C{\cat{C}}%
+  \def\c{\obj{c}}%
+  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
+  hom 双函手の部分適用 $\mrp{\mrps{\C}{\c}{-}}{\C}{\set}$ を
+  $\c$ に関する共変 hom 函手 (covariant hom-functor) という．
+\end{definition}
+\begin{definition}[反変 hom 函手]
+  \def\C{\cat{C}}%
+  \def\c{\obj{c}}%
+  局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
+  hom 双函手の部分適用 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
+  $\c$ に関する反変 hom 函手 (contravariant hom-functor) という．
+\end{definition}
+
+\subsection{表現可能函手}
+
+\begin{definition}[前層]
+  \def\C{\cat{C}}%
+  小圏 $\C$ 上の反変函手 $\op{\C}\to\set$ を
+  $\C$ の前層 (presheaf) という．
+\end{definition}
+
+表現可能函手とは，
+hom 函手に同型な前層のことである．
+
+\begin{definition}[表現可能函手]
+  \def\C{\cat{C}}%
+  \def\c{\obj{c}}%
+  \def\F{F}%
+  \def\iso{\phi}%
+  小圏 $\C$ の前層 $\F$ と対象 $\c\in\objs{\C}$
+  に関する反変 hom 函手 $\mrps{\C}{-}{\c}$ について自然同型
+  \begin{equation}
+    \iso:\F\cong\mrps{\C}{-}{\c}
+  \end{equation}
+  が存在するとき，
+  $\F$ は表現可能 (representable) であるという．
+  このとき $\iso$ を $\F$ の表現 (representation) といい，
+  $\c$ を $\F$ の表現対象 (representing object) という．
+\end{definition}
+
 \begin{theorem}[hom 函手は極限を保存する]\label{thm:hom-functor-preserves-limits}
   任意の共変 hom 函手 (\cref{def:covariant-hom-functor}) は極限を保存する．
 \end{theorem}
@@ -1038,101 +892,247 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   $\c$ から $\diagram$ への錐の全体を表す．
 \end{proof}
 
-\subsection{米田埋め込みは極限を保存する}
-{
+\section{米田の補題}
+
+\subsection{米田埋め込み}
+
+\begin{definition}[米田埋め込み]
   \def\C{\cat{C}}%
-  \def\diagram{D}%
-  \def\c{\obj{c}}%
-  \def\eval{\operatorname{ev}}%
+  局所小圏 $\C$ について，
+  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
+  $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
+  \begin{center}
+    \begin{tikzpicture}
+      % Set
+      \node (s) {$\set$};
+      \node [below right=0.1cm and -1.5cm of s] (scom) {
+        \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
+          \mrps{\cat{C}}{x}{a}\arrow{d}{\psi\circ-}[swap]{\mrps{\cat{C}}{x}{\psi}}
+          & \mrps{\cat{C}}{y}{a}\arrow{l}{-\circ\phi}[swap]{\mrps{\cat{C}}{\phi}{a}}
+          \arrow{d}{\mrps{\cat{C}}{y}{\psi}}[swap]{\psi\circ-} \\
+          \mrps{\cat{C}}{x}{b}
+          & \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{\phi}{b}}[swap]{-\circ\phi}
+        \end{tikzcd}
+      };
+      \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
+      \node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
+      \draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
 
-  \begin{theorem}\label{thm:yepl-lemma}%
-    \def\J{\cat{J}}%
-    \def\D{\cat{D}}%
-    任意の小圏 $\C,\J$ ，局所小圏 $\D$ および函手
-    $\mrp{\diagram}{\J}{\Fun{\C}{\D}}$ を考える．
-    各 $\c\in\objs{\C}$ における評価函手 $\eval_{\c}:\Fun{\C}{\D}\to\D$
-    について極限 $\lim(\eval_{\c}\circ\diagram)$ が存在するならば，
-    極限 $\lim(\diagram)$ が存在し，
-    \begin{equation}
-      \forall\c\in\objs{\C};
-      \ (\lim\diagram)(c)\simeq\lim(\eval_{\c}\circ\diagram).
-    \end{equation}
-  \end{theorem}
+      % source category
+      \node [left=4.0cm of s]     (opc) {$\op{\C}$};
+      \node [above=1.2cm of opc]  (c)   {$\C$};
+      \node [above=0.5cm of c]    (y)   {$y$};
+      \node [left =0.4cm of y]    (x)   {$x$};
+      \node [below=0.1cm of x]    (a)   {$a$};
+      \node [below=0.3cm of a]    (b)   {$b$};
+      \draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
+      \draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
+      \node [above left =0.2cm and 0.1cm of x] (crec1) {};
+      \node [below right=0.2cm and 0.1cm of c] (crec2) {};
+      \draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
 
-  \begin{theorem}[米田埋め込みは極限を保存する]
-    任意の局所小圏 $\C$ について，
-    米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は極限を保存する．
-  \end{theorem}
+      % functor category
+      \node [right=1.7cm of c] (f) {${\set}^{\op{\C}}$};
+      \draw [->, bend left =20] (opc) to node (ya) [above] {$\mrps{\C}{-}{a}$} (s);
+      \draw [->, bend right=20] (opc) to node (yb) [below] {$\mrps{\C}{-}{b}$} (s);
+      \draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{-}{\psi}$} (yb);
+      \draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
+      \draw [->] (c) to node [above left=0cm and -0.1cm] {$\textbf{よ}$} (f);
+      \node [above left =0.0cm and 0.5cm of f] (frec1) {};
+      \node [below right=0.0cm and 0.4cm of yb] (frec2) {};
+      \draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
+    \end{tikzpicture}
+  \end{center}
+\end{definition}
+\begin{definition}[余米田埋め込み]
+  \def\C{\cat{C}}%
+  局所小圏 $\C$ について，
+  hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
+  $\mrp{\yoneda'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
+  \begin{center}
+    \begin{tikzpicture}
+      % Set
+      \node (s) {$\set$};
+      \node [below right=0.1cm and -1.5cm of s] (scom) {
+        \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
+          \mrps{\cat{C}}{a}{x}\arrow{r}{\mrps{\cat{C}}{a}{\psi}}[swap]{-\circ\phi}
+          & \mrps{\cat{C}}{a}{y} \\
+          \mrps{\cat{C}}{b}{x}\arrow{r}{\phi\circ-}[swap]{\mrps{\cat{C}}{b}{\phi}}\arrow{u}{\mrps{\cat{C}}{\psi}{x}}[swap]{\psi\circ-}
+          & \mrps{\cat{C}}{b}{y}\arrow{u}{-\circ\psi}[swap]{\mrps{\cat{C}}{\psi}{y}}
+        \end{tikzcd}
+      };
+      \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
+      \node [below right=-0.1cm and -0.2cm of scom] (srec2) {};
+      \draw [draw=blue!70,rounded corners=10] (srec1) rectangle (srec2);
 
-  \begin{proof}
-    \begin{align}
-      \yoneda(\lim\diagram)(\c)
-       & \simeq\mrps{\C}{\c}{\lim\diagram}                             \\
-       & \simeq\lim(\yoneda'(c)\circ\diagram)\label{yepl-2}            \\
-       & \simeq\lim(\eval_{\c}\circ\yoneda\circ\diagram)\label{yepl-3} \\
-       & \simeq\lim(\yoneda\circ\diagram)(\c)\label{yepl-4}.
-    \end{align}
-    ただし \cref{yepl-2} の同型は \cref{thm:hom-functor-preserves-limits} による．
-    また \cref{yepl-3} の同型は
-    $\yoneda'(\c)=\mrps{\C}{\c}{-}=\eval_{\c}\circ\yoneda$
-    によって得られ，
-    \cref{yepl-4} の同型は \cref{thm:yepl-lemma} による．
-  \end{proof}
+      % source category
+      \node [left =4.0cm of s] (c)   {$\C$};
+      \node [above=1.2cm of c] (opc) {$\op{\C}$};
+      \node [below=0.7cm of c] (y)   {$y$};
+      \node [left =0.4cm of y] (x)   {$x$};
+      \node [above=0.1cm of x] (b)   {$b$};
+      \node [above=0.3cm of b] (a)   {$a$};
+      \draw [->] (a) to node [right] {\scriptsize$\psi$} (b);
+      \draw [->] (x) to node [above] {\scriptsize$\phi$} (y);
+      \node [above left =0.0cm and 0.1cm of a] (crec1) {};
+      \node [below right=0.0cm and 0.1cm of y] (crec2) {};
+      \draw [draw=gray,rounded corners=10] (crec1) rectangle (crec2);
+
+      % functor category
+      \node [right=1.5cm of opc] (f) {$\set^\C$};
+      \draw [->, bend left =20] (c) to node (ya) [above] {$\mrps{\C}{a}{-}$} (s);
+      \draw [->, bend right=20] (c) to node (yb) [below] {$\mrps{\C}{b}{-}$} (s);
+      \draw [->, double] (ya) to node [right] {\scriptsize$\mrps{\C}{\psi}{-}$} (yb);
+      \draw [->] (c) to node [right] {$\mathrm{id}^\mathrm{op}_\C$} (opc);
+      \draw [->] (opc) to node [above left=0cm and -0.1cm] {$\textbf{よ}'$} (f);
+      \node [above left =0.0cm and 0.5cm of f] (frec1) {};
+      \node [below right=0.0cm and 0.4cm of yb] (frec2) {};
+      \draw [draw=red!60,rounded corners=10] (frec1) rectangle (frec2);
+    \end{tikzpicture}
+  \end{center}
+\end{definition}
+
+{
+
+\def\C{\cat{C}}%
+\def\diagram{D}%
+\def\c{\obj{c}}%
+\def\eval{\operatorname{ev}}%
+
+\begin{theorem}\label{thm:yepl-lemma}%
+  \def\J{\cat{J}}%
+  \def\D{\cat{D}}%
+  任意の小圏 $\C,\J$ ，局所小圏 $\D$ および函手
+  $\mrp{\diagram}{\J}{\Fun{\C}{\D}}$ を考える．
+  各 $\c\in\objs{\C}$ における評価函手 $\eval_{\c}:\Fun{\C}{\D}\to\D$
+  について極限 $\lim(\eval_{\c}\circ\diagram)$ が存在するならば，
+  極限 $\lim(\diagram)$ が存在し，
+  \begin{equation}
+    \forall\c\in\objs{\C};
+    \ (\lim\diagram)(c)\simeq\lim(\eval_{\c}\circ\diagram).
+  \end{equation}
+\end{theorem}
+
+\begin{theorem}[米田埋め込みは極限を保存する]
+  任意の局所小圏 $\C$ について，
+  米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は極限を保存する．
+\end{theorem}
+
+\begin{proof}
+  \begin{align}
+    \yoneda(\lim\diagram)(\c)
+     & \simeq\mrps{\C}{\c}{\lim\diagram}                             \\
+     & \simeq\lim(\yoneda'(c)\circ\diagram)\label{yepl-2}            \\
+     & \simeq\lim(\eval_{\c}\circ\yoneda\circ\diagram)\label{yepl-3} \\
+     & \simeq\lim(\yoneda\circ\diagram)(\c)\label{yepl-4}.
+  \end{align}
+  ただし \cref{yepl-2} の同型は \cref{thm:hom-functor-preserves-limits} による．
+  また \cref{yepl-3} の同型は
+  $\yoneda'(\c)=\mrps{\C}{\c}{-}=\eval_{\c}\circ\yoneda$
+  によって得られ，
+  \cref{yepl-4} の同型は \cref{thm:yepl-lemma} による．
+\end{proof}
 }
 
 {
 
+\subsection{米田の補題}
+
+\def\C{\cat{C}}%
+\def\opC{\op{\C}}%
+\def\c{\obj{c}}%
+\def\K{K}%
+
+所与の前層 $\mrp{\K}{\C}{\set}$ に対して
+表現可能函手 $\yoneda(\c)$ からの自然変換 $\alpha$ を与えることは，
+コンポーネント ${\alpha}_{\c}$ が恒等射 $\id{\c}$
+をどこに写すかを決めることと等価である．
+以下で紹介する米田の補題 (Yoneda lemma) はその事実を主張しており，
+${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成する方法を提供する．
+
+\begin{theorem}[米田の補題]
+  $\C$ を局所小圏とする．
+  任意の前層 $\mrp{\K}{\opC}{\set}$ と $\c\in\objs{\C}$ について
+  \begin{equation}
+    y:\set^{\opC}(\yoneda(\c),\K)\ni\alpha\mapsto\alpha_{\c}(\id{\c})\in\K(\c)
+  \end{equation}
+  は全単射である．
+\end{theorem}
+\begin{proof}
+  \def\a{\obj{a}}%
+  \def\d{\obj{c}'}%
+  $\mrp{x}{K(\c)}{\set^\C(\mrps{\C}{\c}{-},K)}$ を考え，
+  $x$ が $\set$ における $y$ の逆射であることを示す．
+  ただし $x$ は任意の $\a\in K(\c)$ を以下のコンポーネントで構成される自然変換
+  $x(\a)$ に写す:
+  \begin{equation}
+    {x(\a)}_{\d}:f\mapsto K(f)(\a).
+  \end{equation}
+  $y\circ x=\id{K(\c)}$ を示す．任意の $\a\in K(\c)$ について
+  \begin{align*}
+    y(x(\a)) & ={x(\a)}_{\c}(\id{\c}) \\
+             & =K(\id{\c})(\a)        \\
+             & =\id{K(\c)}(\a)        \\
+             & =\a.
+  \end{align*}
+  $x\circ y=\id{\set^\C(\mrps{\cat{D}}{\c}{-},K)}$ を示す．
+  任意の $\alpha:\mrps{\C}{\c}{\d}\to K$，$\d\in\objs{\C}$，
+  $\mrp{f}{\c}{\d}$ について
+  \begin{align*}
+    {x(y(\alpha))}_{\d}(f) & =K(f)(y(\alpha))                        \\
+                           & =K(f)(\alpha_{\c}(\id{\c}))             \\
+                           & =\alpha_{\d}(\mrps{\C}{\c}{f}(\id{\c})) \\
+                           & =\alpha_{\d}(f).
+  \end{align*}
+  ここで 3 行目の変換には，以下の図式が可換である事実を用いた．
+  \begin{center}
+    \begin{tikzcd}
+      \mrps{\C}{\c}{\c}\arrow{r}{\mrps{\C}{\c}{f}}\arrow{d}[swap]{\alpha_{\c}}
+      & \mrps{\C}{\c}{\d}
+      \arrow{d}{\alpha_{\d}} \\
+      \K(\c)\arrow{r}[swap]{\K(f)} & \K(\d)
+    \end{tikzcd}
+  \end{center}
+  よって $y$ は全単射であることが示された．
+\end{proof}
+
+}
+
+\subsection{米田の補題の系}
+
+{
   \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
-  \def\E{\cat{E}}%
+  \begin{theorem}[米田埋め込みは充満忠実]
+    任意の局所小圏 $\C$ において
+    米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実
+    (\cref{def:full-faithful}) である．
+  \end{theorem}
+  \begin{proof}
+    \def\x{\obj{x}}%
+    \def\y{\obj{y}}%
+    米田の補題より，任意の $\x,\y\in\objs{\C}$ について
+    \begin{equation}
+      \set^{\op{\C}}(\yoneda(\x),\yoneda(\y))
+      \simeq\yoneda(\y)(\x)
+      \simeq\mrps{\C}{\x}{\y}.
+    \end{equation}
+  \end{proof}
+
+}
+
+\begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
+  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   \def\d{\obj{d}}%
-  \def\F{F}%
-  \def\G{G}%
-  \def\eval{\operatorname{ev}}%
+  任意の小圏 $\C$ について
+  \begin{equation}
+    \forall\c,\d\in\objs{\C};\ \c\simeq\d\iff\yoneda(\c)\simeq\yoneda(\d).
+  \end{equation}
+\end{theorem}
 
-  \section{コンマ圏}
-
-  \begin{definition}[コンマ圏\cite{nlab:comma_category}]
-    圏 $\C,\D,\E$ と
-    区間圏 (\cref{def:interval-category}) $\interval=\{0\to1\}$ および
-    函手 $\mrp{\F}{\C}{\E},\mrp{\G}{\D}{\E}$ について，
-    $\mrp{\F\times\G}{\C\times\D}{\E\times\E}$ と
-    $\eval_0\times\eval_1:\Fun{\interval}{\E}\to\E$ の
-    $\Cat$ における引き戻し対象をコンマ圏 (comma category) といい，
-    $\Comma{\F}{\G}$ と表記する．
-    \begin{center}
-      \begin{tikzcd}
-        \Comma{\F}{\G}\arrow{r}{}\arrow{d}{}
-        & \Fun{\interval}{\E}\arrow{d}{\eval_0\times\eval_1} \\
-        \C\times\D\arrow{r}[swap]{\F\times\G}
-        & \E\times\E
-      \end{tikzcd}
-      \begin{tikzcd}
-        (\c,\d,\alpha)\arrow[mapsto]{r}\arrow[mapsto]{d}
-        & \alpha\arrow[mapsto]{d}{\eval_0\times\eval_1} \\
-        (\c,\d)\arrow[mapsto]{r}[swap]{\F\times\G}
-        & (\F(\c),\G(\d))
-      \end{tikzcd}
-    \end{center}
-    \begin{center}
-      \begin{tikzcd}[column sep=10pt]
-        \C\arrow{rrr}{\F}
-        &&& \E
-        &&& \D\arrow{lll}[swap]{\G} \\
-        \c\arrow{d}[swap]{f}
-        && \F(\c)\arrow{rr}{\alpha}\arrow{d}[swap]{\F(f)}
-        && \G(\d)\arrow{d}{\G(g)}
-        && \d\arrow{d}{g} \\
-        \c'
-        && \F(\c')\arrow{rr}[swap]{\alpha'}
-        && \G(\d')
-        && \d'
-      \end{tikzcd}
-    \end{center}
-  \end{definition}
-
-}
+\begin{theorem}[Cayley の定理]
+  任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
+\end{theorem}
 
 \chapter{随伴}
 
