@@ -63,6 +63,7 @@
 \newcommand{\Cat}{\mathbf{Cat}}
 \newcommand{\Fun}[2]{{#2}^{#1}}
 \newcommand{\Comma}[2]{\left({#1}\downarrow{#2}\right)}
+\newcommand{\Elem}[2]{\operatorname{\mathrm{el}}{(#2)}}
 \newcommand{\Top}{\mathsf{Top}}
 \newcommand{\blat}{\mathsf{BLat}}
 \newcommand{\stone}{\mathsf{Stone}}
@@ -763,7 +764,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \section{コンマ圏}
 
-\begin{definition}[コンマ圏\cite{nlab:comma_category}]
+\begin{definition}[コンマ圏\cite{nlab:comma_category}]\label{def:comma-category}
   圏 $\C,\D,\E$ と
   区間圏 (\cref{def:interval-category}) $\interval=\{0\to1\}$ および
   函手 $\mrp{\F}{\C}{\E},\mrp{\G}{\D}{\E}$ について，
@@ -1041,6 +1042,7 @@ hom 函手に同型な前層のことである．
 \def\C{\cat{C}}%
 \def\opC{\op{\C}}%
 \def\c{\obj{c}}%
+\def\d{\obj{c}'}%
 \def\K{K}%
 
 所与の前層 $\mrp{\K}{\C}{\set}$ に対して
@@ -1060,7 +1062,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \end{theorem}
 \begin{proof}
   \def\a{\obj{a}}%
-  \def\d{\obj{c}'}%
   $\mrp{x}{K(\c)}{\set^\C(\mrps{\C}{\c}{-},K)}$ を考え，
   $x$ が $\set$ における $y$ の逆射であることを示す．
   ただし $x$ は任意の $\a\in K(\c)$ を以下のコンポーネントで構成される自然変換
@@ -1096,34 +1097,25 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
   よって $y$ は全単射であることが示された．
 \end{proof}
 
-}
-
 \subsection{米田の補題の系}
 
-{
-  \def\C{\cat{C}}%
-  \begin{theorem}[米田埋め込みは充満忠実]
-    任意の局所小圏 $\C$ において
-    米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実
-    (\cref{def:full-faithful}) である．
-  \end{theorem}
-  \begin{proof}
-    \def\x{\obj{x}}%
-    \def\y{\obj{y}}%
-    米田の補題より，任意の $\x,\y\in\objs{\C}$ について
-    \begin{equation}
-      \set^{\op{\C}}(\yoneda(\x),\yoneda(\y))
-      \simeq\yoneda(\y)(\x)
-      \simeq\mrps{\C}{\x}{\y}.
-    \end{equation}
-  \end{proof}
-
-}
+\begin{theorem}[米田埋め込みは充満忠実]
+  任意の局所小圏 $\C$ において
+  米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実
+  (\cref{def:full-faithful}) である．
+\end{theorem}
+\begin{proof}
+  \def\x{\obj{x}}%
+  \def\y{\obj{y}}%
+  米田の補題より，任意の $\x,\y\in\objs{\C}$ について
+  \begin{equation}
+    \set^{\op{\C}}(\yoneda(\x),\yoneda(\y))
+    \simeq\yoneda(\y)(\x)
+    \simeq\mrps{\C}{\x}{\y}.
+  \end{equation}
+\end{proof}
 
 \begin{theorem}[表現対象の一意性]\label{thm:unique-representable-object}
-  \def\C{\cat{C}}%
-  \def\c{\obj{c}}%
-  \def\d{\obj{d}}%
   任意の小圏 $\C$ について
   \begin{equation}
     \forall\c,\d\in\objs{\C};\ \c\simeq\d\iff\yoneda(\c)\simeq\yoneda(\d).
@@ -1133,6 +1125,110 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \begin{theorem}[Cayley の定理]
   任意の群 $G$ は，対称群 $\operatorname{Sym}(G)$ の部分群と同型である．
 \end{theorem}
+
+\subsection{任意の前層は表現可能函手の余極限として書ける}
+
+\def\psh{P}%
+
+\begin{definition}[要素の圏]
+  前層 $\mrp{\psh}{\op{\C}}{\set}$ および
+  $\C$ の終対象 $\mrp{1}{\mathbf{1}}{\set}$ について，
+  コンマ圏 (\cref{def:comma-category}) $\op{\Comma{1}{\psh}}$ を
+  $\psh$ の要素の圏 (category of elements) といい，
+  $\Elem{\C}{\psh}$ と表記する．
+  \begin{center}
+    \begin{tikzcd}[column sep=8pt]
+      &
+      \set
+      &
+      &
+      & \Elem{\C}{\psh} \\
+      1\arrow[equal]{d}\arrow{rr}{x}
+      &
+      & \psh(c)
+      &
+      & \langle c,x\rangle\arrow{d}{f} \\
+      1\arrow{rr}[swap]{x'}
+      &
+      & \psh(c')\arrow{u}[swap]{\psh(f)}
+      &
+      & \langle c',x'\rangle
+    \end{tikzcd}
+  \end{center}
+\end{definition}
+
+\begin{theorem}[任意の前層は表現可能函手の余極限として書ける]
+  任意の前層 $\mrp{\psh}{\op{\C}}{\set}$ について，
+  表現可能函手 $\mrp{F}{\Elem{\C}{\psh}}{\set}$ が存在して
+  \begin{equation}
+    \psh\simeq\colim(F).
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  米田の補題より，
+  任意の $\langle c,x\rangle\in\objs{\Elem{\C}{\psh}}$ について，
+  $x\in\psh(c)$ に対応する自然変換 $\phi_{\langle c,x\rangle}$ が存在する．
+
+  (i) 各 $\langle c,x\rangle\in\objs{\Elem{\C}{\psh}}$ について
+  $\phi_{\langle c,x\rangle}$ をコンポーネントとする $\phi$ が
+  自然変換であることを示す．
+  すなわち，
+  任意の $\mrp{f}{\langle c,x\rangle}{\langle c',x'\rangle}$ および
+  $d\in\objs{\C}$ について以下の図式が可換であることを示す:
+  \begin{center}
+    \begin{tikzcd}
+      \psh(d)\arrow[equal]{r}
+      & \psh(d) \\
+      \mrps{\C}{d}{c}
+      \arrow{u}{\left(\phi_{\langle c,x\rangle}\right)_{d}}\arrow{r}{\yoneda(f)}
+      & \mrps{\C}{d}{c'}\arrow{u}[swap]{\left(\phi_{\langle c',x'\rangle}\right)_{d}}.
+    \end{tikzcd}
+  \end{center}
+  任意の $\mrp{g}{d}{c}$ について
+  \begin{align*}
+    {\left(\phi_{\langle c',x'\rangle}\right)}_{d}(\yoneda(f)(g))
+     & ={\left(\phi_{\langle c',x'\rangle}\right)}_{d}(f\circ g) \\
+     & =\psh(f\circ g)(x')                                       \\
+     & =\psh(g)(\psh(f)(x'))                                     \\
+     & =\psh(g)(x)                                               \\
+     & ={\left(\phi_{\langle c,x\rangle}\right)}_{d}(g).
+  \end{align*}
+  よって自然変換 $\mrp{\phi}{F}{\Delta(\psh)}$ が得られ，
+  $(\Delta(\psh),\phi)$ は $F$ からの余錐であることが示された．
+
+  (ii) $(\Delta(\psh),\phi)$ が $F$ の余極限であることを示す．
+  まず，$F$ からの任意の余錐 $(\Delta(Q),\psi)$ に対して，
+  以下に定められる写像の族
+  ${\{\mu_{c}\}}_{c\in\objs{\C}}$
+  が自然変換であることを示す:
+  \begin{equation}
+    \mu_{c}:\psh(c)\ni x\mapsto
+    {\left(\psi_{\langle c,x\rangle}\right)}_{c}(\id{c})\in Q(c).
+  \end{equation}
+  任意の $\mrp{f}{\langle c,x\rangle}{\langle c',x'\rangle}$ について
+  \begin{align*}
+    \mu_{c}(\psh(f)(x'))
+     & =\mu_{c}(x)                                                                \\
+     & ={\left(\psi_{\langle c,x\rangle}\right)}_{c}(\id{c})                      \\
+     & ={\left(\psi_{\langle c',x'\rangle}\right)}_c(f)                           \\
+     & =Q(f)\left({\left(\psi_{\langle c',x'\rangle}\right)}_{c'}(\id{c'})\right) \\
+     & =Q(f)(\mu_{c'}(x')).
+  \end{align*}
+  次に，$\psi=\mu\circ\phi$ であることを示せばよい．
+  任意の
+  $\langle c,x\rangle\in\objs{\Elem{\C}{\psh}},d\in\objs{\C},\mrp{g}{d}{c}$
+  について
+  \begin{align*}
+    \mu_{d}\circ{\left(\phi_{\langle c,x\rangle}\right)}_{d}(g)
+     & =\mu_{d}(\psh(g)(x))                                                   \\
+     & =Q(g)(\mu_{c}(x))                                                      \\
+     & =Q(g)\left({\left(\psi_{\langle c,x\rangle}\right)}_{c}(\id{c})\right) \\
+     & ={\left(\psi_{\langle c,x\rangle}\right)}_{d}(g).
+  \end{align*}
+\end{proof}
+
+}
 
 \chapter{随伴}
 
