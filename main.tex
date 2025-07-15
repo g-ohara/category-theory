@@ -761,17 +761,27 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \section{極限の保存}
 
-\begin{definition}[極限の保存]
-  \def\f{F}%
-  \def\J{\cat{J}}%
-  \def\diagram{D}%
-  函手 $\mrp{\f}{\C}{\D}$ が
+{
+\def\f{F}%
+\def\J{\cat{J}}%
+\def\diagram{D}%
+\begin{definition}[極限の保存\cite{bradley:limits}]
+  函手 $\mrp{\f}{\C}{\D}$ が任意の図式 $\mrp{\diagram}{\J}{\C}$ について
   \begin{equation}
-    \forall\J\in\objs{\Cat}\ \forall\diagram\in\Fun{\J}{\C};
-    \ \f(\lim(\diagram))\simeq\lim(\f\circ\diagram)
+    \f(\lim(\diagram))\simeq\lim(\f\circ\diagram)
   \end{equation}
-  を満たすとき，$\f$ は極限を保存する (preserves limits) という．
+  を満たすとき，$\f$ は極限を保存する (preserves limits) ，
+  または連続 (continuous) であるという．
 \end{definition}
+\begin{definition}[余極限の保存\cite{bradley:limits}]
+  函手 $\mrp{\f}{\C}{\D}$ が任意の図式 $\mrp{\diagram}{\J}{\C}$ について
+  \begin{equation}
+    \f(\colim(\diagram))\simeq\colim(\f\circ\diagram)
+  \end{equation}
+  を満たすとき，$\f$ は余極限を保存する (preserves colimits) ，
+  または余連続 (cocontinuous) であるという．
+\end{definition}
+}
 
 {
 
