@@ -64,7 +64,9 @@
 \newcommand{\Fun}[2]{{#2}^{#1}}
 \newcommand{\Comma}[2]{\left({#1}\downarrow{#2}\right)}
 \newcommand{\Elem}[2]{\operatorname{\mathrm{el}}{(#2)}}
-\newcommand{\Top}{\mathsf{Top}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Grp}{\mathbf{Grp}}
+\newcommand{\Vect}[1]{#1\mathbf{-Vect}}
 \newcommand{\blat}{\mathsf{BLat}}
 \newcommand{\stone}{\mathsf{Stone}}
 \newcommand{\interval}{\mathscr{I}}
@@ -199,16 +201,23 @@
   区間圏 (interval category) といい，$\interval$ と表記する．
 \end{definition}
 
-前述のとおり，圏論では対象そのものが既に何らかの性質を備えているとは考えない．
-むしろ対象の「性質」とは他の対象との関係性によって初めて問題にできるものだ．
-
-素朴な集合論においては，
-まず集合が要素をもち，それらの対応づけとして集合間の写像が定義される．
-圏論はその逆をいく．「集合」という何かの間に写像を定めてしまい，
-それによって初めて集合の要素を定義する．
-
 \begin{definition}[集合圏]
-  集合圏は，任意の集合を対象とし，それらの間の任意の写像を射とする圏である．
+  小さい集合 (\cref{def:small-set}) を対象とし，
+  それらの間の写像を射とする圏を集合圏 (set category) といい，
+  $\set$ と表記する．
+\end{definition}
+
+\begin{definition}[位相空間の圏]
+  位相空間を対象とし，それらの間の連続写像を射とする圏を $\Top$ と表記する．
+\end{definition}
+
+\begin{definition}[群の圏]
+  群を対象とし，それらの間の群準同型を射とする圏を $\Grp$ と表記する．
+\end{definition}
+
+\begin{definition}[ベクトル空間の圏]
+  体 $K$ 上のベクトル空間を対象とし，それらの間の線形写像を射とする圏を
+  $\Vect{K}$ と表記する．
 \end{definition}
 
 \section{函手}
