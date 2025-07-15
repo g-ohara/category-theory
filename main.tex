@@ -1490,6 +1490,47 @@ $\Grp$ の対象 (群) を $\set$ の対象 (集合) に写す函手を忘却函
     任意の随伴 $(\mrp{F}{\C}{\D},\mrp{\G}{\D}{\C},\eta,\epsilon)$ について，
     $(\G\circ\F,\eta,\G\circ\epsilon\circ\F)$ は $\C$ 上のモナドである．
   \end{theorem}
+
+  \section{モナドと代数}
+
+  \def\A{A}%
+  \def\a{a}%
+
+  \begin{definition}[$\monad$-代数\cite{nlab:algebra_over_a_monad}]
+    圏 $\cat{C}$ におけるモナド $(\monad,\eta,\mu)$ について，
+    対象 $\A\in\objs{\cat{C}}$ と射 $\mrp{\a}{\monad(\A)}{\A}$ が
+    以下の図式を可換にするとき，
+    $(\A,\a)$ を $\monad$-代数 ($\monad$-algebra) または
+    $\monad$ 上の代数 (algebra over $\monad$) という．
+    \begin{center}
+      \begin{tikzcd}
+        \A\arrow{r}{\eta_{\A}}\arrow[equal]{rd}&\monad(\A)\arrow{d}{\a}
+        &\monad\monad(\A)\arrow{r}{\monad(\A)}\arrow{d}[swap]{\mu_{\A}}
+        &\monad(\A)\arrow{d}{\a} \\
+        &\A
+        &\monad(\A)\arrow{r}[swap]{\a}&\A
+      \end{tikzcd}
+      \begin{tikzcd}
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
+
+  \begin{definition}[$\monad$-代数準同型\cite{nlab:algebra_over_a_monad}]
+    \def\B{B}%
+    \def\b{b}%
+    \def\f{f}%
+    2つの $\monad$-代数 $(\A,\a)$, $(\B,\b)$ について，
+    射 $\mrp{\f}{A}{B}$ が右の図式を可換にするとき，
+    $\f$ を $\monad$-代数準同型 ($\monad$-algebra homomorphism) という．
+    \begin{center}
+      \begin{tikzcd}
+        \monad(\A)\arrow{r}{\a}\arrow{d}[swap]{\monad(\f)}
+        & \A \arrow{d}{\f} \\
+        \monad(\B)\arrow{r}[swap]{\b}
+        & \B
+      \end{tikzcd}
+    \end{center}
+  \end{definition}
 }
 
 \chapter{カン拡張}
