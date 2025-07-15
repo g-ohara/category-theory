@@ -9,6 +9,7 @@
 
 % Tables
 \usepackage{booktabs}
+\usepackage[hypcap=false]{caption}
 
 % Text
 \usepackage{ascmac}   % for \itembox
@@ -499,22 +500,39 @@
 \end{definition}
 
 \begin{center}
-  \begin{tikzpicture}
-    \node (A) {$\obj{a}$};
-    \node [below=0.5cm of A] (B) {$\obj{b}$};
-    \node [below=0.5cm of B] (C) {$\obj{c}$};
-    \node [below=0.2cm of C] (D) {$\vdots$};
-    \node [below left =0.0cm and 1.0cm of B] (I) {$\obj{i}$};
-    \node [below right=0.0cm and 1.0cm of B] (T) {$\obj{t}$};
-    \draw [->] (I) to (A);
-    \draw [->] (I) to (B);
-    \draw [->] (I) to (C);
-    \draw [->] (I) to (D.west);
-    \draw [->] (A) to (T);
-    \draw [->] (B) to (T);
-    \draw [->] (C) to (T);
-    \draw [->] (D.east) to (T);
-  \end{tikzpicture}
+  \begin{minipage}{0.35\textwidth}
+    \centering
+    \begin{tikzpicture}
+      \node (A) {$\obj{a}$};
+      \node [below=0.5cm of A] (B) {$\obj{b}$};
+      \node [below=0.5cm of B] (C) {$\obj{c}$};
+      \node [below=0.2cm of C] (D) {$\vdots$};
+      \node [below left =0.0cm and 1.0cm of B] (I) {$\obj{i}$};
+      \node [below right=0.0cm and 1.0cm of B] (T) {$\obj{t}$};
+      \draw [->] (I) to (A);
+      \draw [->] (I) to (B);
+      \draw [->] (I) to (C);
+      \draw [->] (I) to (D.west);
+      \draw [->] (A) to (T);
+      \draw [->] (B) to (T);
+      \draw [->] (C) to (T);
+      \draw [->] (D.east) to (T);
+    \end{tikzpicture}
+  \end{minipage}
+  \begin{minipage}{0.60\textwidth}
+    \centering
+    \captionof{table}{終対象と始対象の例\cite{bradley:limits}}
+    \begin{tabular}{ccc}
+      \toprule
+                 & \textbf{終対象} & \textbf{始対象} \\
+      \midrule
+      $\set$     & 一点集合         & 空集合          \\
+      $\Top$     & 一点空間         & 空集合の空間       \\
+      $\Grp$     & 自明な群         & 自明な群         \\
+      $\Vect{K}$ & 0 次元ベクトル空間   & 0 次元ベクトル空間   \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
 \end{center}
 
 \begin{definition}[定函手]
