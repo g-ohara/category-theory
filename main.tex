@@ -2050,6 +2050,20 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 例えば交わりと結びは積と余積として，最大元と最小限は終対象と始対象として,
 相対擬補元は冪として表現することができる．
 
+\begin{definition}[擬順序集合]
+  \def\S{S}%
+  \def\x{x}%
+  \def\y{y}%
+  \def\z{z}%
+  集合 $S$ と二項関係 $\le$ が
+  \begin{align}
+    \forall\x\in\S       & ;\ \x\le\x,                           \\
+    \forall\x,\y,\z\in\S & ;\ \x\le\y\land\y\le\z\implies\x\le\z
+  \end{align}
+  を満たすとき，$(\S,\le)$ を擬順序集合 (quasi-ordered set) または
+  前順序集合 (preordered set) という．
+\end{definition}
+
 \begin{definition}[半順序集合]
   圏 $\cat{C}$ について
   \begin{equation}
