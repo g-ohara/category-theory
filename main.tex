@@ -759,9 +759,10 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   \end{center}
 \end{definition}
 
+{
+
 \section{極限の保存}
 
-{
 \def\f{F}%
 \def\J{\cat{J}}%
 \def\diagram{D}%
@@ -781,6 +782,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
   を満たすとき，$\f$ は余極限を保存する (preserves colimits) ，
   または余連続 (cocontinuous) であるという．
 \end{definition}
+
 }
 
 {
@@ -1250,6 +1252,15 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 }
 
 \chapter{随伴}
+
+2 つの圏 $\C,\D$ を比較して，何らかの意味での「等しさ」を議論したいとする．
+最も厳しい「等しさ」は，$\Cat$ において $\C$ と $\D$ が同型 ($\C\simeq\D$)
+であること，すなわちある函手の組 $L:\C\rightleftarrows\D:R$ が存在して
+$R\circ L=\id{\C},L\circ R=\id{\D}$ が成り立つこととして表現される．
+これでは使いづらいというので条件を少し緩めたのが圏同値だ．
+これは $R\circ L\simeq\id{\C},L\circ R\simeq\id{\D}$ でさえあればよい．
+しかしこれでも窮屈だというのでさらに緩めてみると，
+途端に難解で豊かな概念を手にすることができる\cite{bradley:adjoint}．
 
 \section{随伴}
 
