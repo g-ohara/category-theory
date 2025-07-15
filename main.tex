@@ -54,6 +54,8 @@
 \renewcommand{\proofname}{\textbf{証明}}
 
 \newcommand{\cat}[1]{\mathscr{#1}}
+\newcommand{\C}{\cat{C}}
+\newcommand{\D}{\cat{D}}
 \newcommand{\obj}[1]{\lowercase{#1}}
 \newcommand{\objs}[1]{#1}
 \newcommand{\mrp}[3]{{#1}:{#2}\to{#3}}
@@ -117,14 +119,14 @@
           任意の射 $\mrp{f}{\a}{\b},\mrp{g}{\b}{\c}$ について
           $\id{\b}\circ f=f$ かつ $g\circ\id{\b}=g$ が成り立つ．
   \end{itemize}
-  また，圏 $\cat{C}$ の対象の集まりを $\objs{\cat{C}}$，
-  射 $\a\to\b$ の集まりを $\mrps{\cat{C}}{\a}{\b}$ と表記する．
+  また，圏 $\C$ の対象の集まりを $\objs{\C}$，
+  射 $\a\to\b$ の集まりを $\mrps{\C}{\a}{\b}$ と表記する．
   \begin{center}
     \begin{tikzpicture}
       \node (A) {$\a$};
       \node [right=1cm of A] (B) {$\b$};
       \node [right=1cm of B] (C) {$\c$};
-      \node [above=1.5cm of B] (catc) {$\cat{C}$};
+      \node [above=1.5cm of B] (catc) {$\C$};
       \draw [->] (A) to [edge label=$f$] (B);
       \draw [->] (B) to [edge label=$g$] (C);
       \draw [->, bend right] (A) to node [below] {$g\circ f$} (C);
@@ -171,14 +173,13 @@
 \begin{definition}[同型]
   \def\a{\obj{a}}%
   \def\b{\obj{b}}%
-  圏 $\cat{C}$ の対象 $\a,\b$ について同型射 $\a\to\b$ が存在するとき，
+  圏 $\C$ の対象 $\a,\b$ について同型射 $\a\to\b$ が存在するとき，
   $\a$ と $\b$ は同型 (isomorphic) であるといい，$\a\simeq\b$ と表記する．
 \end{definition}
 
 \subsection{圏の大きさ}
 
 \begin{definition}[局所小圏]
-  \def\C{\cat{C}}%
   \def\a{\obj{a}}%
   \def\b{\obj{b}}%
   圏 $\C$ の任意の対象 $\a,\b\in\C$ について
@@ -227,8 +228,6 @@
 それらの関係性に着目するとなんとなく似ている気がしてくることがある．
 函手はそのようなアナロジーを表現する矢印である．
 \begin{definition}[函手]\label{def:functor}
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\x{\obj{x}}%
   \def\y{\obj{y}}%
   \def\z{\obj{z}}%
@@ -274,8 +273,6 @@
 \end{definition}
 
 \begin{shadebox}
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\c{\obj{c}}%
   \def\d{\obj{d}}%
   \def\e{e}%
@@ -295,8 +292,6 @@
 \end{shadebox}
 
 \begin{definition}[充満，忠実，充満忠実]\label{def:full-faithful}
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\x{\obj{x}}%
   \def\y{\obj{y}}%
   函手 $\mrp{F}{\C}{\D}$ および任意の対象 $\x,\y\in\objs{\C}$ に対して，
@@ -313,8 +308,6 @@
 
 \subsection{圏の圏 $\Cat$}
 
-\def\C{\cat{C}}%
-\def\D{\cat{D}}%
 \def\E{\cat{E}}%
 \def\F{F}%
 \def\G{G}%
@@ -372,8 +365,8 @@
 \begin{definition}[自然変換]
   \def\x{\obj{x}}%
   \def\y{\obj{y}}%
-  2つの函手 $F:\cat{C}\to\cat{D},G:\cat{C}\to\cat{D}$ について，
-  $\cat{C}$ の対象 $\x$ を $\cat{D}$ の射 $t_{\x}:F(\x)\to G(\x)$ に対応づける
+  2つの函手 $F:\C\to\D,G:\C\to\D$ について，
+  $\C$ の対象 $\x$ を $\D$ の射 $t_{\x}:F(\x)\to G(\x)$ に対応づける
   写像 $t$ が
   \begin{equation}
     \forall\x,\y\ \forall\mrp{f}{\x}{\y}\ G(f)\circ t_{\x}=t_{\y}\circ F(f)
@@ -382,10 +375,10 @@
   $\mrp{t}{F}{G}$ と表記する．
   \begin{center}
     \begin{tikzpicture}
-      \node (catc) {$\cat{C}$};
+      \node (catc) {$\C$};
       \node [below left=2cm and 0.5cm of catc.center] (A) {$\x$};
       \node [right=1.0cm of A] (B) {$\y$};
-      \node [right=4.0cm of catc] (catd) {$\cat{D}$};
+      \node [right=4.0cm of catc] (catd) {$\D$};
       \node [below left=1cm and 0.6cm of catd.center] (FA) {$F(\x)$};
       \node [right=1.2cm of FA] (FB) {$F(\y)$};
       \node [below=1.8cm of FA.center] (GA) {$G(\y)$};
@@ -408,8 +401,6 @@
 \end{definition}
 
 \begin{definition}[垂直合成]
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\F{F}%
   \def\G{G}%
   \def\h{H}%
@@ -428,8 +419,6 @@
 \section{普遍射}
 
  {
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\c{\obj{c}}%
   \def\d{\obj{d}}%
   \def\r{\obj{r}}%
@@ -482,21 +471,21 @@
 \section{極限と余極限}
 
 \begin{definition}[終対象]
-  圏 $\cat{C}$ および対象 $\obj{t}\in\objs{\cat{C}}$ が
+  圏 $\C$ および対象 $\obj{t}\in\objs{\C}$ が
   \begin{equation}
-    \forall\obj{x}\in\objs{\cat{C}};\ |\mrps{\cat{C}}{\obj{x}}{\obj{t}}|=1
+    \forall\obj{x}\in\objs{\C};\ |\mrps{\C}{\obj{x}}{\obj{t}}|=1
   \end{equation}
   を満たすとき，
-  $\obj{t}$ を $\cat{C}$ の終対象 (terminal object) という．
+  $\obj{t}$ を $\C$ の終対象 (terminal object) という．
 \end{definition}
 
 \begin{definition}[始対象]
-  圏 $\cat{C}$ および対象 $\obj{i}\in\objs{\cat{C}}$ が
+  圏 $\C$ および対象 $\obj{i}\in\objs{\C}$ が
   \begin{equation}
-    \forall\obj{x}\in\objs{\cat{C}};\ |\mrps{\cat{C}}{\obj{i}}{\obj{x}}|=1
+    \forall\obj{x}\in\objs{\C};\ |\mrps{\C}{\obj{i}}{\obj{x}}|=1
   \end{equation}
   を満たすとき，
-  $\obj{i}$ を $\cat{C}$ の始対象 (initial object) という．
+  $\obj{i}$ を $\C$ の始対象 (initial object) という．
 \end{definition}
 
 \begin{center}
@@ -536,30 +525,30 @@
 \end{center}
 
 \begin{definition}[定函手]
-  圏 $\cat{C},\cat{D}$ および対象 $\obj{d}\in\objs{\cat{D}}$ について，
-  $\cat{C}$ の任意の対象を $\obj{d}$ に写し，
-  $\cat{C}$ の任意の射を $\id{\obj{d}}$ に写す函手を
+  圏 $\C,\D$ および対象 $\obj{d}\in\objs{\D}$ について，
+  $\C$ の任意の対象を $\obj{d}$ に写し，
+  $\C$ の任意の射を $\id{\obj{d}}$ に写す函手を
   $\obj{d}$ の定函手 (constant functor) という．
 \end{definition}
 
 \begin{definition}[対角函手]
-  圏 $\cat{C},\cat{D}$ について，
-  任意の対象 $\obj{d}\in\objs{\cat{D}}$ を $\obj{d}$ の定函手に写す函手
-  $\mrp{\Delta}{\cat{D}}{\cat{D}^{\cat{C}}}$ を対角函手 (diagonal functor) という．
-  ただし $\Delta$ は射 $f\in\mrps{\cat{D}}{a}{b}$ を，
+  圏 $\C,\D$ について，
+  任意の対象 $\obj{d}\in\objs{\D}$ を $\obj{d}$ の定函手に写す函手
+  $\mrp{\Delta}{\D}{\D^{\C}}$ を対角函手 (diagonal functor) という．
+  ただし $\Delta$ は射 $f\in\mrps{\D}{a}{b}$ を，
   任意のコンポーネントが $f$ であるような自然変換
   $\mrp{\Delta(f)}{\Delta(a)}{\Delta(b)}$ に写す．
 \end{definition}
 
 \begin{definition}[錐]
-  圏 $\cat{C},\cat{D}$ および函手 $\mrp{F}{\cat{C}}{\cat{D}}$ について，
-  対象 $\obj{d}\in\objs{\cat{D}}$ および自然変換 $\mrp{\psi}{\id{\obj{d}}}{F}$
+  圏 $\C,\D$ および函手 $\mrp{F}{\C}{\D}$ について，
+  対象 $\obj{d}\in\objs{\D}$ および自然変換 $\mrp{\psi}{\id{\obj{d}}}{F}$
   の組 $(\obj{d},\psi)$ を $F$ への錐 (cone) という．
 \end{definition}
 
 \begin{definition}[余錐]
-  圏 $\cat{C},\cat{D}$ および函手 $\mrp{F}{\cat{C}}{\cat{D}}$ について，
-  対象 $\obj{d}\in\objs{\cat{D}}$ および自然変換 $\mrp{\phi}{F}{\id{\obj{d}}}$
+  圏 $\C,\D$ および函手 $\mrp{F}{\C}{\D}$ について，
+  対象 $\obj{d}\in\objs{\D}$ および自然変換 $\mrp{\phi}{F}{\id{\obj{d}}}$
   の組 $(\obj{d},\phi)$ を $F$ からの余錐 (cocone) という．
 \end{definition}
 
@@ -614,14 +603,14 @@
 (余) 極限の定義に用いた終対象と始対象は，
 実はそれぞれ最も単純な極限と余極限として記述できる．
 \begin{theorem}[極限としての終対象]
-  任意の圏 $\cat{C}$ および空圏 $\cat{J}$ について，
-  自明な図式 $\cat{J}\to\cat{C}$ の極限は
-  $\cat{C}$ の終対象に同型である．
+  任意の圏 $\C$ および空圏 $\cat{J}$ について，
+  自明な図式 $\cat{J}\to\C$ の極限は
+  $\C$ の終対象に同型である．
 \end{theorem}
 \begin{theorem}[余極限としての始対象]
-  任意の圏 $\cat{C}$ および空圏 $\cat{J}$ について，
-  自明な図式 $\cat{J}\to\cat{C}$ の余極限は
-  $\cat{C}$ の始対象に同型である．
+  任意の圏 $\C$ および空圏 $\cat{J}$ について，
+  自明な図式 $\cat{J}\to\C$ の余極限は
+  $\C$ の始対象に同型である．
 \end{theorem}
 終対象や始対象の具体的な例をみてみよう．
 例えば集合圏 $\set$ における終対象と始対象は，それぞれ一点集合と空集合に対応する．
@@ -635,7 +624,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{definition}[積]
   離散圏 $\cat{J}=\{1,2\}$ について，
-  函手 $F:\cat{J}\to\cat{C}$ の極限を積 (product) といい，
+  函手 $F:\cat{J}\to\C$ の極限を積 (product) といい，
   $F(1)=A,F(2)=B$ のとき $A\times B$ と表記する．
   \begin{center}
     \begin{tikzpicture}
@@ -654,7 +643,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{definition}[余積]
   離散圏 $\cat{J}=\{1,2\}$ について，
-  函手 $F:\cat{J}\to\cat{C}$ の余極限を余積 (coproduct) といい，
+  函手 $F:\cat{J}\to\C$ の余極限を余積 (coproduct) といい，
   $F(1)=A,F(2)=B$ のとき $A+B$ と表記する．
   \begin{center}
     \begin{tikzpicture}
@@ -675,14 +664,14 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{definition}[引き戻し]
   圏 $\cat{J}=(1\rightarrow3\leftarrow2)$ について，
-  函手 $F:\cat{J}\to\cat{C}$ の極限を
+  函手 $F:\cat{J}\to\C$ の極限を
   引き戻し (pullback) またはファイバー積 (fiber product) といい，
   $F(1)=A,F(2)=B,F(3)=C$ のとき極限対象を $A{\times}_{C}B$ と表記する．
 \end{definition}
 
 \begin{definition}[押し出し]
   圏 $\cat{J}=(1\leftarrow3\rightarrow2)$ について，
-  函手 $F:\cat{J}\to\cat{C}$ の余極限を
+  函手 $F:\cat{J}\to\C$ の余極限を
   押し出し (pushout) またはファイバー和 (fiber sum) といい，
   $F(1)=A,F(2)=B,F(3)=C$ のとき余極限対象を $A{+}_{C}B$ と表記する．
 \end{definition}
@@ -691,7 +680,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{definition}[等化子]
   圏 $\cat{J}=\{\cdot\rightrightarrows\cdot\}$ について，
-  函手 $F:\cat{J}\to\cat{C}$ の極限を等化子 (equalizer) という．
+  函手 $F:\cat{J}\to\C$ の極限を等化子 (equalizer) という．
   \begin{center}
     \begin{tikzpicture}
       \node (X) {$X$};
@@ -709,7 +698,7 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 \begin{definition}[余等化子]
   圏 $\cat{J}=\{\cdot\rightrightarrows\cdot\}$ について，
-  函手 $F:\cat{J}\to\cat{C}$ の余極限を余等化子 (coequalizer) という．
+  函手 $F:\cat{J}\to\C$ の余極限を余等化子 (coequalizer) という．
   \begin{center}
     \begin{tikzpicture}
       \node (X) {$X$};
@@ -728,19 +717,27 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \section{完備}
 
 \begin{definition}[有限完備]
-  圏 $\cat{C}$ について任意の有限圏 $\cat{J}$ および函手 $F:\cat{J}\to\cat{C}$
-  が極限をもつとき，$\cat{C}$ は有限完備であるという．
+  圏 $\C$ について任意の有限圏 $\cat{J}$ および函手 $F:\cat{J}\to\C$
+  が極限をもつとき，$\C$ は有限完備 (finitely complete) であるという．
 \end{definition}
 
 \begin{definition}[完備]
-  圏 $\cat{C}$ について任意の小圏 $\cat{J}$ および函手 $F:\cat{J}\to\cat{C}$
-  が極限をもつとき，$\cat{C}$ は完備であるという．
+  圏 $\C$ について任意の小圏 $\cat{J}$ および函手 $F:\cat{J}\to\C$
+  が極限をもつとき，$\C$ は完備 (complete) であるという．
 \end{definition}
+
+\begin{definition}[余完備]
+  圏 $\C$ について任意の小圏 $\cat{J}$ および函手 $F:\cat{J}\to\C$
+  が余極限をもつとき，$\C$ は余完備 (cocomplete) であるという．
+\end{definition}
+
+\begin{theorem}[完備性の必要条件]
+  圏 $\C$ が積と等化子をもつならば $\C$ は完備である．
+\end{theorem}
 
 \section{冪}
 
 \begin{definition}[冪]
-  \def\C{\cat{C}}%
   \def\a{X}%
   \def\b{Y}%
   \def\c{Z}%
@@ -765,8 +762,6 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 \section{極限の保存}
 
 \begin{definition}[極限の保存]
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\f{F}%
   \def\J{\cat{J}}%
   \def\diagram{D}%
@@ -780,8 +775,6 @@ $S$ から $1$ への写像が $S$ の全ての要素を集合 $1$ の唯一の�
 
 {
 
-\def\C{\cat{C}}%
-\def\D{\cat{D}}%
 \def\E{\cat{E}}%
 \def\c{\obj{c}}%
 \def\d{\obj{d}}%
@@ -844,7 +837,6 @@ hom 函手は，あるひとつの対象に着目して
 共変 hom 函手は他の対象を「そこへの」射の集合と同一視し，
 反変 hom 函手は他の対象を「そこからの」射の集合と同一視する．
 \begin{definition}[hom 双函手]
-  \def\C{\cat{C}}%
   局所小圏 $\C$ について，
   双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$
   を hom 双函手 (hom-bifunctor) という．
@@ -859,14 +851,12 @@ hom 函手は，あるひとつの対象に着目して
   \end{itemize}
 \end{definition}
 \begin{definition}[共変 hom 函手]\label{def:covariant-hom-functor}
-  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
   hom 双函手の部分適用 $\mrp{\mrps{\C}{\c}{-}}{\C}{\set}$ を
   $\c$ に関する共変 hom 函手 (covariant hom-functor) という．
 \end{definition}
 \begin{definition}[反変 hom 函手]
-  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   局所小圏 $\C$ と対象 $\c\in\objs{\C}$ について，
   hom 双函手の部分適用 $\mrp{\mrps{\C}{-}{\c}}{\op{\C}}{\set}$ を
@@ -876,7 +866,6 @@ hom 函手は，あるひとつの対象に着目して
 \subsection{表現可能函手}
 
 \begin{definition}[前層]
-  \def\C{\cat{C}}%
   小圏 $\C$ 上の反変函手 $\op{\C}\to\set$ を
   $\C$ の前層 (presheaf) という．
 \end{definition}
@@ -885,7 +874,6 @@ hom 函手は，あるひとつの対象に着目して
 hom 函手に同型な前層のことである．
 
 \begin{definition}[表現可能函手]
-  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   \def\F{F}%
   \def\iso{\phi}%
@@ -904,7 +892,6 @@ hom 函手に同型な前層のことである．
   任意の共変 hom 函手 (\cref{def:covariant-hom-functor}) は極限を保存する．
 \end{theorem}
 \begin{proof}
-  \def\C{\cat{C}}%
   \def\c{\obj{c}}%
   \def\f{F}%
   \def\J{\cat{J}}%
@@ -925,7 +912,6 @@ hom 函手に同型な前層のことである．
 \subsection{米田埋め込み}
 
 \begin{definition}[米田埋め込み]
-  \def\C{\cat{C}}%
   局所小圏 $\C$ について，
   hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
   $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
@@ -935,11 +921,11 @@ hom 函手に同型な前層のことである．
       \node (s) {$\set$};
       \node [below right=0.1cm and -1.5cm of s] (scom) {
         \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
-          \mrps{\cat{C}}{x}{a}\arrow{d}{\psi\circ-}[swap]{\mrps{\cat{C}}{x}{\psi}}
-          & \mrps{\cat{C}}{y}{a}\arrow{l}{-\circ\phi}[swap]{\mrps{\cat{C}}{\phi}{a}}
-          \arrow{d}{\mrps{\cat{C}}{y}{\psi}}[swap]{\psi\circ-} \\
-          \mrps{\cat{C}}{x}{b}
-          & \mrps{\cat{C}}{y}{b}\arrow{l}{\mrps{\cat{C}}{\phi}{b}}[swap]{-\circ\phi}
+          \mrps{\C}{x}{a}\arrow{d}{\psi\circ-}[swap]{\mrps{\C}{x}{\psi}}
+          & \mrps{\C}{y}{a}\arrow{l}{-\circ\phi}[swap]{\mrps{\C}{\phi}{a}}
+          \arrow{d}{\mrps{\C}{y}{\psi}}[swap]{\psi\circ-} \\
+          \mrps{\C}{x}{b}
+          & \mrps{\C}{y}{b}\arrow{l}{\mrps{\C}{\phi}{b}}[swap]{-\circ\phi}
         \end{tikzcd}
       };
       \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
@@ -973,7 +959,6 @@ hom 函手に同型な前層のことである．
   \end{center}
 \end{definition}
 \begin{definition}[余米田埋め込み]
-  \def\C{\cat{C}}%
   局所小圏 $\C$ について，
   hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の右カリー化
   $\mrp{\yoneda'}{\op{\C}}{\set^{\C}}$ を余米田埋め込み (coYoneda embedding) という．
@@ -983,10 +968,10 @@ hom 函手に同型な前層のことである．
       \node (s) {$\set$};
       \node [below right=0.1cm and -1.5cm of s] (scom) {
         \begin{tikzcd}[row sep=1.0cm, column sep=1.5cm]
-          \mrps{\cat{C}}{a}{x}\arrow{r}{\mrps{\cat{C}}{a}{\psi}}[swap]{-\circ\phi}
-          & \mrps{\cat{C}}{a}{y} \\
-          \mrps{\cat{C}}{b}{x}\arrow{r}{\phi\circ-}[swap]{\mrps{\cat{C}}{b}{\phi}}\arrow{u}{\mrps{\cat{C}}{\psi}{x}}[swap]{\psi\circ-}
-          & \mrps{\cat{C}}{b}{y}\arrow{u}{-\circ\psi}[swap]{\mrps{\cat{C}}{\psi}{y}}
+          \mrps{\C}{a}{x}\arrow{r}{\mrps{\C}{a}{\psi}}[swap]{-\circ\phi}
+          & \mrps{\C}{a}{y} \\
+          \mrps{\C}{b}{x}\arrow{r}{\phi\circ-}[swap]{\mrps{\C}{b}{\phi}}\arrow{u}{\mrps{\C}{\psi}{x}}[swap]{\psi\circ-}
+          & \mrps{\C}{b}{y}\arrow{u}{-\circ\psi}[swap]{\mrps{\C}{\psi}{y}}
         \end{tikzcd}
       };
       \node [above left = 0.1cm and  0.5cm of s]    (srec1) {};
@@ -1022,14 +1007,12 @@ hom 函手に同型な前層のことである．
 
 {
 
-\def\C{\cat{C}}%
 \def\diagram{D}%
 \def\c{\obj{c}}%
 \def\eval{\operatorname{ev}}%
 
 \begin{theorem}\label{thm:yepl-lemma}%
   \def\J{\cat{J}}%
-  \def\D{\cat{D}}%
   任意の小圏 $\C,\J$ ，局所小圏 $\D$ および函手
   $\mrp{\diagram}{\J}{\Fun{\C}{\D}}$ を考える．
   各 $\c\in\objs{\C}$ における評価函手 $\eval_{\c}:\Fun{\C}{\D}\to\D$
@@ -1066,7 +1049,6 @@ hom 函手に同型な前層のことである．
 
 \subsection{米田の補題}
 
-\def\C{\cat{C}}%
 \def\opC{\op{\C}}%
 \def\c{\obj{c}}%
 \def\d{\obj{c}'}%
@@ -1103,7 +1085,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
              & =\id{K(\c)}(\a)        \\
              & =\a.
   \end{align*}
-  $x\circ y=\id{\set^\C(\mrps{\cat{D}}{\c}{-},K)}$ を示す．
+  $x\circ y=\id{\set^\C(\mrps{\D}{\c}{-},K)}$ を示す．
   任意の $\alpha:\mrps{\C}{\c}{\d}\to K$，$\d\in\objs{\C}$，
   $\mrp{f}{\c}{\d}$ について
   \begin{align*}
@@ -1262,8 +1244,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \section{随伴}
 
 \begin{definition}[随伴]
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\L{L}%
   \def\R{R}%
   函手 $\mrp{\L}{\C}{\D},\mrp{\R}{\D}{\C}$ について自然同型
@@ -1277,12 +1257,12 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \end{definition}
 
 \begin{theorem}[随伴函手の並列定義]\label{thm:adjoint-functor-definitions}
-  函手 $F:\cat{C}\rightleftarrows\cat{D}:G$ について以下の命題は全て同値である:
+  函手 $F:\C\rightleftarrows\D:G$ について以下の命題は全て同値である:
   \begin{enumerate}
     \item $F\dashv G$．
-    \item 自然変換 $\eta:\id{\cat{C}}\to GF$ が存在し，
+    \item 自然変換 $\eta:\id{\C}\to GF$ が存在し，
           各 $\eta_c:c\to GF(c)$ が $c$ から $G$ への普遍射である．
-    \item 自然変換 $\epsilon:FG\to\id{\cat{D}}$ が存在し，
+    \item 自然変換 $\epsilon:FG\to\id{\D}$ が存在し，
           各 $\epsilon_d:FG(d)\to d$ が $F$ から $d$ への普遍射である．
   \end{enumerate}
 \end{theorem}
@@ -1290,7 +1270,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \subsection{随伴函手の例}
 
 {
-  \def\C{\cat{C}}%
   \begin{theorem}[終対象]
     任意の圏 $\C$ において以下は同値である:
     \begin{enumerate}[label=(\roman*)] % chktex 36
@@ -1326,7 +1305,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 
   \begin{enumerate}[label=(\roman*)] % chktex 36
     \item 自然性を示す．
-          冪函手の定義より，任意の $C,D\in\objs{\cat{C}}$ と射 $f:C\to D$ について
+          冪函手の定義より，任意の $C,D\in\objs{\C}$ と射 $f:C\to D$ について
           \begin{align*}
             f\circ\epsilon_C
              & =\epsilon_D\circ(\widetilde{(f\circ\epsilon_C)}\times\id{A}) \\
@@ -1334,7 +1313,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
           \end{align*}
           よって自然性は示された．
     \item 普遍性を示す．
-          冪函手の定義より，任意の $X\in\objs{\cat{C}}$ と $g:X\times A\to C$
+          冪函手の定義より，任意の $X\in\objs{\C}$ と $g:X\times A\to C$
           について以下を満たす$\tilde{g}:X\to C^A$ がただ一つ存在する:
           \begin{equation*}
             \epsilon_C\circ(\tilde{g}\times\id{A})=g.
@@ -1346,8 +1325,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \subsection{随伴は極限を保存する}
 
 {
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\E{\cat{E}}%
   \def\L{L}%
   \def\R{R}%
@@ -1379,8 +1356,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 
 {
 
-  \def\C{\cat{C}}%
-  \def\D{\cat{D}}%
   \def\E{\cat{E}}%
   \def\i{1}%
   \def\F{F}%
@@ -1498,9 +1473,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 最初に，大域的なカン拡張の定義を与える．
 
 \begin{definition}[函手の誘導]
-  \def\C{\cat{C}}%
   \def\A{\cat{C'}}%
-  \def\D{\cat{D}}%
   \def\K{K}%
   \def\h{H}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ について，
@@ -1514,9 +1487,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
   \end{align}
 \end{definition}
 \begin{definition}[(大域的な) 左カン拡張]
-  \def\C{\cat{C}}%
   \def\A{\cat{C'}}%
-  \def\D{\cat{D}}%
   \def\K{K}%
   \def\L{\K_!}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
@@ -1525,9 +1496,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
   $\L=\lan_{\K}$ と表記する．
 \end{definition}
 \begin{definition}[(大域的な) 右カン拡張]
-  \def\C{\cat{C}}%
   \def\A{\cat{C'}}%
-  \def\D{\cat{D}}%
   \def\K{K}%
   \def\R{\K_*}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
@@ -1539,9 +1508,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \subsection{局所的なカン拡張}
 
 \begin{definition}[(局所的な) 左カン拡張]
-  \def\C{\cat{C}}%
   \def\A{\cat{C'}}%
-  \def\D{\cat{D}}%
   \def\K{K}%
   \def\f{F}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
@@ -1573,9 +1540,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \end{definition}
 
 \begin{definition}[(局所的な) 右カン拡張]
-  \def\C{\cat{C}}%
   \def\A{\cat{C'}}%
-  \def\D{\cat{D}}%
   \def\K{K}%
   \def\f{F}%
   函手 $\mrp{\K}{\C}{\A}$ および圏 $\D$ によって誘導される函手
@@ -1609,7 +1574,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \subsection{カン拡張の例}
 
 \begin{theorem}[米田埋め込みのカン拡張]
-  \def\C{\cat{C}}%
   \def\A{\C'}%
   \def\K{K}%
   \def\x{\obj{x}}%
@@ -1622,9 +1586,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \subsection{絶対カン拡張}
 
 {
-  \def\C{\cat{C}}%
   \def\A{\cat{C'}}%
-  \def\D{\cat{D}}%
   \def\E{\cat{E}}%
   \def\K{K}%
   \def\F{F}%
@@ -1903,7 +1865,6 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 
 \section{豊穣圏}
 
-\def\C{\cat{C}}%
 \def\mcat{\cat{V}}%
 \newcommand\tprod{\otimes}%
 \newcommand\tunit{1}%
@@ -2092,19 +2053,19 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \end{definition}
 
 \begin{definition}[半順序集合]
-  圏 $\cat{C}$ について
+  圏 $\C$ について
   \begin{equation}
-    \forall x,y\in\objs{\cat{C}};|\mrps{\cat{C}}{x}{y}|\le1
+    \forall x,y\in\objs{\C};|\mrps{\C}{x}{y}|\le1
   \end{equation}
   が成り立つとき，
-  $\cat{C}$ は半順序集合 (partially ordered set, poset)
+  $\C$ は半順序集合 (partially ordered set, poset)
   であるという．
 \end{definition}
 
 \begin{definition}[束]
-  半順序集合 $\cat{C}$ が
+  半順序集合 $\C$ が
   有限積と有限余積をもつとき，
-  $\cat{C}$ は束 (lattice) であるという．
+  $\C$ は束 (lattice) であるという．
 \end{definition}
 
 \begin{definition}[完備束]\label{def:complete-lattice}%
@@ -2115,13 +2076,13 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \end{definition}
 
 \begin{definition}[有界束]
-  束 $\cat{C}$ が終対象と始対象をもつとき，
-  $\cat{C}$ は有界束 (bounded lattice) であるという．
+  束 $\C$ が終対象と始対象をもつとき，
+  $\C$ は有界束 (bounded lattice) であるという．
 \end{definition}
 
 \begin{definition}[ハイティング代数]\label{def:heyting-algebra}%
-  有界束 $\cat{C}$ が任意の対象の組について冪をもつとき,
-  $\cat{C}$ はハイティング代数 (Heyting algebra) であるという．
+  有界束 $\C$ が任意の対象の組について冪をもつとき,
+  $\C$ はハイティング代数 (Heyting algebra) であるという．
 \end{definition}
 
 \begin{theorem}
@@ -2130,12 +2091,12 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 \end{theorem}
 
 \begin{definition}[ブール代数]\label{def:boolean-algebra}
-  ハイティング代数 $\cat{C}$ について
+  ハイティング代数 $\C$ について
   \begin{equation}
-    \forall x\in\objs{\cat{C}};\ \neg\neg x=x
+    \forall x\in\objs{\C};\ \neg\neg x=x
   \end{equation}
   が成り立つとき，
-  $\cat{C}$ は ブール代数 (Boolean algebra) であるという．
+  $\C$ は ブール代数 (Boolean algebra) であるという．
 \end{definition}
 
 \chapter{位相幾何学の知識}
