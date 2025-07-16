@@ -66,6 +66,7 @@
 \newcommand{\Cat}{\mathbf{Cat}}
 \newcommand{\Fun}[2]{{#2}^{#1}}
 \newcommand{\Comma}[2]{\left({#1}\downarrow{#2}\right)}
+\newcommand{\Psh}[1]{\set^{\op{#1}}}
 \newcommand{\Elem}[2]{\operatorname{\mathrm{el}}{(#2)}}
 \newcommand{\Top}{\mathbf{Top}}
 \newcommand{\Grp}{\mathbf{Grp}}
@@ -926,7 +927,7 @@ hom 函手に同型な前層のことである．
 \begin{definition}[米田埋め込み]
   局所小圏 $\C$ について，
   hom 双函手 $\mrp{\C(-,-)}{\op{\C}\times\C}{\set}$ の左カリー化
-  $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ を米田埋め込み (Yoneda embedding) という．
+  $\mrp{\yoneda}{\C}{\Psh{\C}}$ を米田埋め込み (Yoneda embedding) という．
   \begin{center}
     \begin{tikzpicture}
       % Set
@@ -1038,7 +1039,7 @@ hom 函手に同型な前層のことである．
 
 \begin{theorem}[米田埋め込みは極限を保存する]
   任意の局所小圏 $\C$ について，
-  米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は極限を保存する．
+  米田埋め込み $\mrp{\yoneda}{\C}{\Psh{\C}}$ は極限を保存する．
 \end{theorem}
 
 \begin{proof}
@@ -1077,7 +1078,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
   $\C$ を局所小圏とする．
   任意の前層 $\mrp{\K}{\opC}{\set}$ と $\c\in\objs{\C}$ について
   \begin{equation}
-    y:\set^{\opC}(\yoneda(\c),\K)\ni\alpha\mapsto\alpha_{\c}(\id{\c})\in\K(\c)
+    y:\Psh{\C}(\yoneda(\c),\K)\ni\alpha\mapsto\alpha_{\c}(\id{\c})\in\K(\c)
   \end{equation}
   は全単射である．
 \end{theorem}
@@ -1122,7 +1123,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
 
 \begin{theorem}[米田埋め込みは充満忠実]
   任意の局所小圏 $\C$ において
-  米田埋め込み $\mrp{\yoneda}{\C}{\set^{\op{\C}}}$ は充満忠実
+  米田埋め込み $\mrp{\yoneda}{\C}{\Psh{\C}}$ は充満忠実
   (\cref{def:full-faithful}) である．
 \end{theorem}
 \begin{proof}
@@ -1130,7 +1131,7 @@ ${\alpha}_{\c}(\id{\c})$ の値ひとつから自然変換 $\alpha$ を構成す
   \def\y{\obj{y}}%
   米田の補題より，任意の $\x,\y\in\objs{\C}$ について
   \begin{equation}
-    \set^{\op{\C}}(\yoneda(\x),\yoneda(\y))
+    \Psh{\C}(\yoneda(\x),\yoneda(\y))
     \simeq\yoneda(\y)(\x)
     \simeq\mrps{\C}{\x}{\y}.
   \end{equation}
@@ -1644,7 +1645,63 @@ $\Grp$ の対象 (群) を $\set$ の対象 (集合) に写す函手を忘却函
   \end{center}
 \end{definition}
 
-\subsection{カン拡張の例}
+\section{カン拡張の例}
+
+\subsection{米田拡張}
+
+\begin{definition}[米田拡張\cite{nlab:yoneda_extension}]
+  \def\f{F}%
+  函手 $\mrp{\f}{\C}{\D}$ および米田埋め込み
+  $\mrp{\yoneda_{\C}}{\C}{\Psh{\C}}$ について，
+  左カン拡張 $\lan_{\yoneda_{\C}}\f$ が存在するとき，
+  これを米田拡張 (Yoneda extension) という．
+  \begin{center}
+    \begin{tikzpicture}
+      \def\A{\Psh{\C}}%
+      \def\K{\yoneda_{\C}}%
+      \def\g{G}%
+      \node (C) {$\A$};
+      \node [below=2cm of C] (M) {$\C$};
+      \node [right=2cm of M] (A) {$\D$};
+      \draw [->] (M) to node [left]         {$\K$}      (C);
+      \draw [->] (M) to node [below]        {$\f$}      (A);
+      \draw [->] (C) to node [right=0.1cm]  {$\lan_{\K}\f$} (A);
+      \node [above right=0.6cm of C] (astart) {};
+      \node [below right=2.1cm and 2.2cm of astart] (aend) {};
+      \draw [->] (astart) to node [above right] {$\g$} (aend);
+      \node [below right=0.65cm and 0.2cm of C] (eend) {};
+      \node [below=1.2cm of eend] (estart) {};
+      \draw [->,double] (estart) to node [left] {$\mu$} (eend);
+      \node [above right=1.1cm and 0.6cm of M] (sstart) {};
+      \node [above right=1.2cm of sstart] (send) {};
+      \draw [->,double] (sstart) to node [above left] {$\tau$} (send);
+    \end{tikzpicture}
+  \end{center}
+\end{definition}
+
+$\C$ の前層の圏 $\Psh{\C}$ は余完備であった．
+ここで，米田埋め込み $\yoneda_{\C}$ は $\C$ の自由余完備化 (free cocompletion)
+であるといわれる．
+この言明は，前層の圏 $\Psh{\C}$ に限らない任意の余完備な圏 $\D$ への函手
+$\C\to\D$ のなかで，米田埋め込みが普遍的であることを意味している．
+
+\begin{theorem}[米田埋め込みは自由余完備化である]
+  任意の圏 $\C$ ，米田埋め込み $\mrp{\yoneda_{\C}}{\C}{\Psh{\C}}$ ，
+  任意の余完備な圏 $\D$ および函手 $\mrp{F}{\C}{\D}$ について，
+  以下の図式を可換にする余連続な函手 $\mrp{\hat{F}}{\Psh{\C}}{\D}$
+  が一意に存在し，
+  \begin{equation}
+    \hat{F}\simeq\lan_{\yoneda_{\C}}F.
+  \end{equation}
+  \begin{center}
+    \begin{tikzcd}
+      \Psh{\C}\arrow{rd}{\hat{F}} \\
+      \C\arrow{u}{\yoneda_{\C}}\arrow{r}[swap]{F} & \D
+    \end{tikzcd}
+  \end{center}
+\end{theorem}
+
+\subsection{米田埋め込みのカン拡張}
 
 \begin{theorem}[米田埋め込みのカン拡張]
   \def\A{\C'}%
@@ -1656,9 +1713,9 @@ $\Grp$ の対象 (群) を $\set$ の対象 (集合) に写す函手を忘却函
   \end{equation}
 \end{theorem}
 
-\subsection{絶対カン拡張}
+\section{絶対カン拡張}
 
-{
+ {
   \def\A{\cat{C'}}%
   \def\E{\cat{E}}%
   \def\K{K}%
@@ -1680,7 +1737,7 @@ $\Grp$ の対象 (群) を $\set$ の対象 (集合) に写す函手を忘却函
     $\lan_{\K}\F$ と交換するとき，
     $\lan_{\K}\F$ を絶対左カン拡張 (absolute left Kan extension) という．
   \end{definition}
-}
+ }
 
 \section{すべての概念はカン拡張である}
 
